@@ -1,0 +1,2920 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GENESIS Encyclopaedia</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=IM+Fell+English+SC:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08080f;
+      --surface: #0f0f1a;
+      --surface2: #151525;
+      --border: rgba(255, 255, 255, .07);
+      --border2: rgba(255, 255, 255, .12);
+      --text: #c9cdd4;
+      --text-dim: #5a6070;
+      --text-bright: #eef0f3;
+      --common: #9ca3af;
+      --rare: #60a5fa;
+      --epic: #c084fc;
+      --legendary: #fbbf24;
+      --limited: #f87171;
+      --accent: #fbbf24;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Crimson Pro', serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse 80% 60% at 15% 20%, rgba(15, 6, 40, .8) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 85% 80%, rgba(6, 13, 31, .6) 0%, transparent 70%), var(--bg);
+    }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 255px;
+      flex-shrink: 0;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, .1);
+    }
+
+    .sidebar-logo {
+      padding: 1.3rem 1.1rem .9rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-logo h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: .95rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #f59e0b, #fde68a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+    }
+
+    .sidebar-logo p {
+      color: var(--text-dim);
+      font-size: .62rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: .2rem;
+    }
+
+    .sidebar-search {
+      padding: .7rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      padding: .4rem .65rem;
+      color: var(--text-bright);
+      font-family: 'Cinzel', serif;
+      font-size: .68rem;
+      letter-spacing: 1px;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-dim);
+    }
+
+    .search-input:focus {
+      border-color: rgba(251, 191, 36, .4);
+    }
+
+    .sidebar-nav {
+      padding: .5rem 0;
+    }
+
+    .sidebar-nav-item {
+      padding: .3rem 1.1rem;
+      font-size: .68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all .15s;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .sidebar-nav-item:hover {
+      color: var(--text-bright);
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .sidebar-nav-item.active {
+      color: var(--accent);
+      border-left: 2px solid var(--accent);
+      padding-left: .9rem;
+    }
+
+    .sidebar-section-title {
+      padding: .5rem 1.1rem .25rem;
+      font-size: .55rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .sidebar-list {
+      list-style: none;
+    }
+
+    .sidebar-item {
+      padding: .28rem 1.1rem;
+      cursor: pointer;
+      transition: all .15s;
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .75rem;
+      color: var(--text);
+    }
+
+    .sidebar-item:hover {
+      background: rgba(255, 255, 255, .05);
+      color: var(--text-bright);
+    }
+
+    .sidebar-item.active {
+      background: rgba(251, 191, 36, .08);
+      color: var(--accent);
+      border-left: 2px solid var(--accent);
+      padding-left: .9rem;
+    }
+
+    .sidebar-item .s-icon {
+      font-size: .95rem;
+      width: 1.3rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-item .s-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    /* MAIN */
+    .main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .page {
+      padding: 2rem 2.5rem 4rem;
+      max-width: 960px;
+    }
+
+    .page.hidden {
+      display: none;
+    }
+
+    /* HOME */
+    .home-hero {
+      padding: 2.5rem 2.5rem 1.2rem;
+    }
+
+    .home-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #f59e0b, #fde68a, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .home-sub {
+      color: var(--text-dim);
+      font-size: .78rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: .3rem;
+    }
+
+    .home-desc {
+      color: var(--text);
+      font-size: .98rem;
+      margin-top: 1rem;
+      max-width: 620px;
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    .home-filters {
+      padding: .5rem 2.5rem .8rem;
+      display: flex;
+      gap: .35rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .fl {
+      font-size: .58rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-right: .2rem;
+    }
+
+    .fb {
+      font-family: 'Cinzel', serif;
+      font-size: .6rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: 1px solid var(--border2);
+      background: rgba(255, 255, 255, .04);
+      color: var(--text-dim);
+      padding: .26rem .7rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all .18s;
+    }
+
+    .fb:hover,
+    .fb.active {
+      background: rgba(255, 255, 255, .08);
+      color: var(--text-bright);
+    }
+
+    .fb[data-f="Common"].active {
+      border-color: var(--common);
+      color: var(--common);
+    }
+
+    .fb[data-f="Rare"].active {
+      border-color: var(--rare);
+      color: var(--rare);
+    }
+
+    .fb[data-f="Epic"].active {
+      border-color: var(--epic);
+      color: var(--epic);
+    }
+
+    .fb[data-f="Legendary"].active {
+      border-color: var(--legendary);
+      color: var(--legendary);
+    }
+
+    .fb[data-f="Limited"].active {
+      border-color: var(--limited);
+      color: var(--limited);
+    }
+
+    .home-grid-label {
+      padding: 0 2.5rem .6rem;
+      font-size: .6rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+      gap: .7rem;
+      padding: 0 2.5rem 2.5rem;
+    }
+
+    .card-thumb {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .85rem;
+      cursor: pointer;
+      transition: all .2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-thumb:hover {
+      border-color: var(--border2);
+      transform: translateY(-3px);
+      background: var(--surface2);
+    }
+
+    .card-thumb.hidden {
+      display: none;
+    }
+
+    .card-thumb-badge {
+      position: absolute;
+      top: .4rem;
+      right: .4rem;
+      font-size: .48rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: .1rem .32rem;
+      border-radius: 2px;
+      border: 1px solid currentColor;
+      font-family: 'Cinzel', serif;
+    }
+
+    .card-thumb-icon {
+      font-size: 1.7rem;
+      margin-bottom: .35rem;
+    }
+
+    .card-thumb-name {
+      font-family: 'Cinzel', serif;
+      font-size: .62rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: .3rem;
+    }
+
+    .card-thumb-types {
+      display: flex;
+      gap: .18rem;
+      flex-wrap: wrap;
+    }
+
+    .tp {
+      font-size: .52rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: .12rem .38rem;
+      border-radius: 20px;
+    }
+
+    /* RULE PAGE */
+    .rule-page {
+      padding: 2rem 2.5rem 4rem;
+      max-width: 860px;
+    }
+
+    .rule-page.hidden {
+      display: none;
+    }
+
+    .rule-page-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: .4rem;
+    }
+
+    .rule-page-sub {
+      color: var(--text-dim);
+      font-size: .75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .rule-section {
+      margin-bottom: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .rule-section-header {
+      padding: .9rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
+
+    .rule-num {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .rule-section-title {
+      font-family: 'Cinzel', serif;
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-bright);
+    }
+
+    .rule-body {
+      padding: 1rem 1.2rem;
+    }
+
+    .rule-body p {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: .6rem;
+    }
+
+    .rule-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .rule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .8rem;
+      margin: .7rem 0;
+    }
+
+    .rule-table th {
+      background: rgba(255, 255, 255, .04);
+      color: var(--text-dim);
+      font-family: 'Cinzel', serif;
+      font-size: .6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: .5rem .7rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border2);
+    }
+
+    .rule-table td {
+      padding: .45rem .7rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      color: var(--text);
+      vertical-align: top;
+    }
+
+    .rule-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .rule-pills {
+      display: flex;
+      gap: .35rem;
+      flex-wrap: wrap;
+      margin: .6rem 0;
+    }
+
+    .rule-pill {
+      font-size: .65rem;
+      padding: .22rem .6rem;
+      border-radius: 4px;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+
+    .example-box {
+      background: rgba(251, 191, 36, .05);
+      border: 1px solid rgba(251, 191, 36, .2);
+      border-radius: 6px;
+      padding: .7rem 1rem;
+      margin: .6rem 0;
+      font-size: .88rem;
+      font-style: italic;
+      color: #fde68a;
+    }
+
+    .example-box strong {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    /* WIKI ARTICLE */
+    .wiki-breadcrumb {
+      font-size: .7rem;
+      color: var(--text-dim);
+      margin-bottom: 1.1rem;
+      letter-spacing: 1px;
+    }
+
+    .wiki-breadcrumb a {
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    .wiki-breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .wiki-header {
+      display: flex;
+      gap: 1.8rem;
+      align-items: flex-start;
+      margin-bottom: 1.4rem;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wiki-icon-box {
+      flex-shrink: 0;
+      width: 84px;
+      height: 84px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      border: 1px solid var(--border2);
+      background: var(--surface2);
+    }
+
+    .wiki-card-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.45rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: .45rem;
+    }
+
+    .wiki-card-sub {
+      font-size: .72rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: .55rem;
+    }
+
+    .wiki-type-row {
+      display: flex;
+      gap: .35rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: .45rem;
+    }
+
+    .wiki-rarity-badge {
+      font-family: 'Cinzel', serif;
+      font-size: .62rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: .22rem .65rem;
+      border-radius: 3px;
+      border: 1px solid currentColor;
+      font-weight: 600;
+    }
+
+    .wiki-layout {
+      display: grid;
+      grid-template-columns: 1fr 230px;
+      gap: 1.8rem;
+      align-items: start;
+    }
+
+    .wiki-section {
+      margin-bottom: 1.6rem;
+    }
+
+    .wiki-section-title {
+      font-family: 'Cinzel', serif;
+      font-size: .78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: .38rem;
+      margin-bottom: .75rem;
+    }
+
+    .wiki-section p {
+      font-size: .98rem;
+      line-height: 1.75;
+      color: var(--text);
+    }
+
+    .wiki-section p+p {
+      margin-top: .65rem;
+    }
+
+    /* Infobox */
+    .wiki-infobox {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .9rem;
+      font-size: .82rem;
+      position: sticky;
+      top: 1rem;
+    }
+
+    .ib-title {
+      font-family: 'Cinzel', serif;
+      font-size: .62rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-align: center;
+      padding-bottom: .55rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: .75rem;
+    }
+
+    .ib-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .28rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+    }
+
+    .ib-row:last-child {
+      border-bottom: none;
+    }
+
+    .ib-label {
+      color: var(--text-dim);
+      font-size: .68rem;
+      letter-spacing: .5px;
+    }
+
+    .ib-val {
+      color: var(--text-bright);
+      font-size: .75rem;
+      text-align: right;
+    }
+
+    .sb-row {
+      margin: .45rem 0;
+    }
+
+    .sb-lbl {
+      display: flex;
+      justify-content: space-between;
+      font-size: .65rem;
+      margin-bottom: .18rem;
+    }
+
+    .sb-lbl span:first-child {
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .sb-track {
+      height: 5px;
+      background: rgba(255, 255, 255, .06);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .sb-fill {
+      height: 100%;
+      border-radius: 3px;
+    }
+
+    .ib-sep {
+      height: 1px;
+      background: var(--border);
+      margin: .6rem 0;
+    }
+
+    .ib-section-title {
+      font-size: .58rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: .5rem;
+      font-family: 'Cinzel', serif;
+    }
+
+    /* Eff boxes */
+    .eff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem;
+    }
+
+    .eff-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .7rem;
+    }
+
+    .eff-box-title {
+      font-size: .57rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+      font-family: 'Cinzel', serif;
+    }
+
+    .eff-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .25rem;
+    }
+
+    .ep {
+      font-size: .57rem;
+      font-weight: 700;
+      padding: .14rem .42rem;
+      border-radius: 20px;
+      letter-spacing: .8px;
+    }
+
+    .eff-none {
+      color: var(--text-dim);
+      font-size: .72rem;
+      font-style: italic;
+    }
+
+    /* Battle stats section */
+    .bstat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem;
+    }
+
+    .bstat-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .75rem;
+    }
+
+    .bstat-title {
+      font-size: .6rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-family: 'Cinzel', serif;
+      margin-bottom: .5rem;
+    }
+
+    .bstat-val {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: .2rem;
+    }
+
+    .bstat-desc {
+      font-size: .72rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+
+    .cooldown-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      background: rgba(251, 191, 36, .08);
+      border: 1px solid rgba(251, 191, 36, .3);
+      border-radius: 4px;
+      padding: .3rem .6rem;
+      font-size: .7rem;
+      color: #fde68a;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+      margin: .5rem 0;
+    }
+
+    .debuff-list {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+      margin: .5rem 0;
+    }
+
+    .debuff-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .8rem;
+      padding: .3rem .5rem;
+      background: rgba(239, 68, 68, .06);
+      border: 1px solid rgba(239, 68, 68, .15);
+      border-radius: 4px;
+    }
+
+    .counter-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .78rem;
+      margin: .5rem 0;
+    }
+
+    .counter-table th {
+      font-family: 'Cinzel', serif;
+      font-size: .58rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: .4rem .6rem;
+      border-bottom: 1px solid var(--border2);
+      text-align: left;
+    }
+
+    .counter-table td {
+      padding: .38rem .6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      color: var(--text);
+    }
+
+    .counter-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ── BATTLE ARENA SIMULATION ── */
+    .arena-page {
+      padding: 1.5rem 2rem 4rem;
+      max-width: 1100px;
+    }
+
+    .arena-page.hidden {
+      display: none;
+    }
+
+    .arena-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: .25rem;
+    }
+
+    .arena-sub {
+      color: var(--text-dim);
+      font-size: .72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Deck builder — 1v1 */
+    .deck-builder {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .deck-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .deck-panel-header {
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .deck-panel-title {
+      font-family: 'Cinzel', serif;
+      font-size: .75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .deck-panel .name-input {
+      width: 100%;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      padding: .35rem .6rem;
+      color: var(--text-bright);
+      font-family: 'Cinzel', serif;
+      font-size: .7rem;
+      letter-spacing: 1px;
+      outline: none;
+      margin-top: .5rem;
+      transition: border-color .2s;
+    }
+
+    .deck-panel .name-input::placeholder {
+      color: var(--text-dim);
+    }
+
+    .deck-panel .name-input:focus {
+      border-color: rgba(251, 191, 36, .4);
+    }
+
+    .deck-slots {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      padding: .7rem;
+    }
+
+    .deck-slot {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      background: rgba(255, 255, 255, .03);
+      border: 1px dashed rgba(255, 255, 255, .1);
+      border-radius: 7px;
+      padding: .55rem .7rem;
+      min-height: 52px;
+      cursor: pointer;
+      transition: all .2s;
+      position: relative;
+    }
+
+    .deck-slot.filled {
+      border-style: solid;
+      background: rgba(255, 255, 255, .05);
+    }
+
+    .deck-slot:hover {
+      border-color: rgba(255, 255, 255, .2);
+      background: rgba(255, 255, 255, .07);
+    }
+
+    .deck-slot .slot-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .deck-slot .slot-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .deck-slot .slot-name {
+      font-family: 'Cinzel', serif;
+      font-size: .7rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .deck-slot .slot-stats {
+      font-size: .6rem;
+      color: var(--text-dim);
+      margin-top: .15rem;
+    }
+
+    .deck-slot .slot-types {
+      display: flex;
+      gap: .2rem;
+      margin-top: .18rem;
+      flex-wrap: nowrap;
+    }
+
+    .deck-slot .remove-btn {
+      position: absolute;
+      right: .4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #4b5563;
+      cursor: pointer;
+      font-size: .7rem;
+      padding: .1rem .2rem;
+      transition: color .2s;
+      font-family: 'Cinzel', serif;
+    }
+
+    .deck-slot .remove-btn:hover {
+      color: #ef4444;
+    }
+
+    .deck-slot .slot-hint {
+      font-size: .6rem;
+      color: #374151;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* Battle section */
+    .sim-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+    }
+
+    .sim-header {
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sim-header-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: .85rem;
+      color: var(--accent);
+    }
+
+    .battle-start-btn {
+      font-family: 'Cinzel', serif;
+      font-size: .72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      border: none;
+      color: #000;
+      font-weight: 700;
+      padding: .5rem 1.4rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .battle-start-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 16px rgba(245, 158, 11, .4);
+    }
+
+    .battle-start-btn:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .reset-btn {
+      font-family: 'Cinzel', serif;
+      font-size: .65rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: none;
+      border: 1px solid var(--border2);
+      color: var(--text-dim);
+      padding: .4rem .9rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .reset-btn:hover {
+      color: #ef4444;
+      border-color: #ef444466;
+    }
+
+    /* Scoreboard */
+    .sim-scoreboard {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1rem;
+      align-items: center;
+      padding: 1rem 1.2rem;
+      background: rgba(0, 0, 0, .2);
+    }
+
+    .sim-score-side {
+      text-align: center;
+    }
+
+    .sim-score-name {
+      font-family: 'Cinzel', serif;
+      font-size: .72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: .2rem;
+    }
+
+    .sim-score-card {
+      font-size: .6rem;
+      color: var(--text-dim);
+      margin-bottom: .35rem;
+    }
+
+    .sim-score-points {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+    }
+
+    .sim-score-dots {
+      display: flex;
+      gap: .4rem;
+      justify-content: center;
+      margin-top: .35rem;
+    }
+
+    .sim-score-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .15);
+      transition: all .4s;
+    }
+
+    .sim-score-dot.won {
+      background: currentColor;
+      box-shadow: 0 0 10px currentColor;
+    }
+
+    .sim-vs {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    /* HP Status Bars */
+    .sim-status {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      padding: .8rem 1rem;
+    }
+
+    .sim-player-status {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .7rem .9rem;
+    }
+
+    .sim-ps-header {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-bottom: .5rem;
+    }
+
+    .sim-ps-icon {
+      font-size: 1.3rem;
+    }
+
+    .sim-ps-name {
+      font-family: 'Cinzel', serif;
+      font-size: .72rem;
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .sim-ps-hp-text {
+      font-family: 'Cinzel', serif;
+      font-size: .8rem;
+      font-weight: 700;
+    }
+
+    .sim-hp-bar {
+      height: 10px;
+      background: rgba(255, 255, 255, .06);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: .3rem;
+    }
+
+    .sim-hp-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width .5s ease, background .3s;
+    }
+
+    .sim-ps-info {
+      font-size: .6rem;
+      color: var(--text-dim);
+      display: flex;
+      gap: .6rem;
+    }
+
+    .sim-ps-badge {
+      font-size: .55rem;
+      padding: .12rem .4rem;
+      border-radius: 3px;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+
+    /* Turn indicator */
+    .sim-turn-indicator {
+      text-align: center;
+      padding: .6rem;
+      font-family: 'Cinzel', serif;
+      font-size: .85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(251, 191, 36, .04);
+    }
+
+    .sim-turn-indicator.p1-turn {
+      background: rgba(96, 165, 250, .06);
+      border-color: rgba(96, 165, 250, .2);
+    }
+
+    .sim-turn-indicator.p2-turn {
+      background: rgba(248, 113, 113, .06);
+      border-color: rgba(248, 113, 113, .2);
+    }
+
+    /* Action buttons */
+    .sim-actions {
+      display: flex;
+      gap: .6rem;
+      justify-content: center;
+      padding: .9rem 1rem;
+      flex-wrap: wrap;
+    }
+
+    .sim-action-btn {
+      font-family: 'Cinzel', serif;
+      font-size: .75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: .6rem 1.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all .2s;
+      font-weight: 700;
+      border: 1px solid;
+    }
+
+    .sim-action-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+    }
+
+    .sim-action-btn:disabled {
+      opacity: .3;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .sim-action-btn.atk-btn {
+      background: rgba(239, 68, 68, .15);
+      border-color: rgba(239, 68, 68, .4);
+      color: #f87171;
+    }
+
+    .sim-action-btn.atk-btn:hover:not(:disabled) {
+      background: rgba(239, 68, 68, .25);
+      border-color: #f87171;
+    }
+
+    .sim-action-btn.skill-btn {
+      background: rgba(192, 132, 252, .15);
+      border-color: rgba(192, 132, 252, .4);
+      color: #c084fc;
+    }
+
+    .sim-action-btn.skill-btn:hover:not(:disabled) {
+      background: rgba(192, 132, 252, .25);
+      border-color: #c084fc;
+    }
+
+    .sim-action-btn.def-btn {
+      background: rgba(96, 165, 250, .15);
+      border-color: rgba(96, 165, 250, .4);
+      color: #60a5fa;
+    }
+
+    .sim-action-btn.def-btn:hover:not(:disabled) {
+      background: rgba(96, 165, 250, .25);
+      border-color: #60a5fa;
+    }
+
+    /* Combat Log */
+    .sim-log {
+      padding: .5rem .8rem;
+      max-height: 350px;
+      overflow-y: auto;
+      border-top: 1px solid var(--border);
+    }
+
+    .sim-log::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .sim-log::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, .1);
+      border-radius: 2px;
+    }
+
+    .sim-log-entry {
+      padding: .4rem .6rem;
+      margin-bottom: .3rem;
+      border-radius: 5px;
+      font-size: .78rem;
+      line-height: 1.6;
+      animation: fadeIn .3s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .sim-log-entry.log-p1 {
+      border-left-color: #60a5fa;
+      background: rgba(96, 165, 250, .04);
+    }
+
+    .sim-log-entry.log-p2 {
+      border-left-color: #f87171;
+      background: rgba(248, 113, 113, .04);
+    }
+
+    .sim-log-entry.log-system {
+      border-left-color: #fbbf24;
+      background: rgba(251, 191, 36, .05);
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+      font-size: .72rem;
+    }
+
+    .sim-log-entry.log-round {
+      border-left-color: #c084fc;
+      background: rgba(192, 132, 252, .06);
+      text-align: center;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: .82rem;
+      color: #c084fc;
+      padding: .5rem;
+    }
+
+    .sim-log-entry.log-winner {
+      border-left-color: #fbbf24;
+      background: rgba(251, 191, 36, .08);
+      text-align: center;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: #fbbf24;
+      padding: .7rem;
+    }
+
+    .sim-log-dmg {
+      color: #f87171;
+      font-weight: 700;
+    }
+
+    .sim-log-heal {
+      color: #34d399;
+      font-weight: 700;
+    }
+
+    .sim-log-shield {
+      color: #60a5fa;
+      font-weight: 700;
+    }
+
+    .sim-log-skill {
+      color: #c084fc;
+      font-weight: 700;
+    }
+
+    /* Winner banner */
+    .winner-banner {
+      display: none;
+      padding: 1.2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .winner-banner.show {
+      display: block;
+      animation: fadeIn .5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .winner-text {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.2rem;
+      margin-bottom: .3rem;
+    }
+
+    .winner-sub {
+      font-size: .75rem;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .formula-box {
+      background: rgba(0, 0, 0, .3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .6rem 1rem;
+      font-family: 'IM Fell English SC', serif;
+      font-size: .82rem;
+      color: var(--text-dim);
+      text-align: center;
+      margin: .6rem 0;
+    }
+
+    @media(max-width:720px) {
+      .deck-builder {
+        grid-template-columns: 1fr;
+      }
+
+      .arena-page {
+        padding: 1rem .9rem 3rem;
+      }
+
+      .sim-status {
+        grid-template-columns: 1fr;
+      }
+
+      .sim-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .sim-action-btn {
+        text-align: center;
+      }
+    }
+
+    @media(max-width:720px) {
+      .sidebar {
+        position: fixed;
+        left: -255px;
+        top: 0;
+        z-index: 150;
+        transition: left .3s;
+        height: 100vh;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .mob-toggle {
+        display: flex !important;
+      }
+
+      .page,
+      .rule-page {
+        padding: 1.2rem 1.1rem 3rem;
+      }
+
+      .home-hero {
+        padding: 1.5rem 1.1rem 1rem;
+      }
+
+      .card-grid,
+      .home-filters,
+      .home-grid-label {
+        padding-left: 1.1rem;
+        padding-right: 1.1rem;
+      }
+
+      .wiki-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .eff-grid,
+      .bstat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mob-toggle {
+      display: none;
+      position: fixed;
+      bottom: 1.4rem;
+      right: 1.4rem;
+      z-index: 200;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(251, 191, 36, .4);
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Type table enhancements */
+    .rule-table tr:nth-child(even) td,
+    .rule-table tr:nth-child(even) th {
+      background: rgba(255,255,255,.02);
+    }
+    .rule-table td:first-child {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ── CARD PICKER OVERLAY ── */
+    .picker-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.82);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .picker-overlay.open {
+      display: flex;
+    }
+    .picker-modal {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 860px;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.7);
+    }
+    .picker-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .85rem 1.1rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .picker-header h3 {
+      font-family: 'Cinzel', serif;
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .picker-close {
+      font-family: 'Cinzel', serif;
+      font-size: .65rem;
+      letter-spacing: 1px;
+      background: none;
+      border: 1px solid var(--border2);
+      color: var(--text-dim);
+      padding: .35rem .8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .picker-close:hover { color: #ef4444; border-color: #ef444466; }
+    .picker-search {
+      padding: .7rem 1rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .picker-search input {
+      width: 100%;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border2);
+      border-radius: 5px;
+      padding: .45rem .75rem;
+      color: var(--text-bright);
+      font-family: 'Cinzel', serif;
+      font-size: .72rem;
+      letter-spacing: 1px;
+      outline: none;
+    }
+    .picker-search input:focus { border-color: rgba(251,191,36,.4); }
+    .picker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: .6rem;
+      padding: .9rem 1rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .picker-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .65rem .5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all .18s;
+    }
+    .picker-card:hover {
+      background: rgba(255,255,255,.09);
+      border-color: rgba(251,191,36,.4);
+      transform: translateY(-2px);
+    }
+    .picker-card.used {
+      opacity: .28;
+      pointer-events: none;
+    }
+    .pc-icon { font-size: 1.7rem; margin-bottom: .3rem; }
+    .pc-name {
+      font-family: 'Cinzel', serif;
+      font-size: .58rem;
+      letter-spacing: .5px;
+      margin-bottom: .25rem;
+      line-height: 1.3;
+    }
+    .pc-power { font-size: .55rem; color: var(--text-dim); margin-bottom: .3rem; }
+    .pc-types { display: flex; gap: .2rem; justify-content: center; flex-wrap: wrap; }
+
+    /* Slot hint text fix */
+    .slot-hint {
+      font-size: .6rem;
+      color: #4b5563;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-layer"></div>
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <h2>GENESIS</h2>
+        <p>Card Encyclopaedia · Set I</p>
+      </div>
+      <div class="sidebar-search">
+        <input class="search-input" id="searchInput" placeholder="Cari kartu..." oninput="onSearch(this.value)">
+      </div>
+      <div class="sidebar-nav">
+        <div class="sidebar-nav-item active" id="nav-home" onclick="goHome()">🏠 Beranda</div>
+        <div class="sidebar-nav-item" id="nav-rules" onclick="goRules()">📖 Sistem Battle</div>
+        <div class="sidebar-nav-item" id="nav-arena" onclick="goArena()">⚔️ Battle Simulation</div>
+      </div>
+      <div class="sidebar-section-title">— Kartu (30) —</div>
+      <ul class="sidebar-list" id="sidebarList"></ul>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- HOME -->
+      <div id="homePage">
+        <div class="home-hero">
+          <div class="home-title">GENESIS</div>
+          <div class="home-sub">Set I · Card Encyclopaedia</div>
+          <div class="home-desc">Encyclopaedia resmi Set I — <em>GENESIS</em>. Pelajari setiap kartu: lore, statistik,
+            skill, sistem efektivitas, dan aturan battle lengkap. Klik kartu untuk membaca entri penuh, atau buka
+            <strong>Sistem Battle</strong> untuk memahami mekanik pertarungan.
+          </div>
+        </div>
+        <div class="home-filters" id="homeFilters">
+          <span class="fl">Filter:</span>
+          <button class="fb active" data-f="All" onclick="filterHome(this,'All')">Semua</button>
+          <button class="fb" data-f="Common" onclick="filterHome(this,'Common')">Common</button>
+          <button class="fb" data-f="Rare" onclick="filterHome(this,'Rare')">Rare</button>
+          <button class="fb" data-f="Epic" onclick="filterHome(this,'Epic')">Epic</button>
+          <button class="fb" data-f="Legendary" onclick="filterHome(this,'Legendary')">Legendary</button>
+          <button class="fb" data-f="Limited" onclick="filterHome(this,'Limited')">Limited</button>
+        </div>
+        <div class="home-grid-label" id="homeLabel">30 entri ditemukan</div>
+        <div class="card-grid" id="cardGrid"></div>
+      </div>
+
+      <!-- RULES PAGE -->\n      <div class="rule-page hidden" id="rulesPage">
+        <div class="rule-page-title">⚔ Sistem Battle</div>
+        <div class="rule-page-sub">GENESIS · Set I · Panduan Mekanik Pertarungan</div>
+
+        <!-- 1 -->
+        <div class="rule-section">
+          <div class="rule-section-header">
+            <span class="rule-num">①</span>
+            <span class="rule-section-title">Cara Bermain — 5 Kartu per Deck</span>
+          </div>
+          <div class="rule-body">
+            <p>Setiap pemain memilih <strong>5 kartu</strong> sebelum battle dimulai. Kartu bertarung satu per satu secara berurutan — kartu Slot 1 maju duluan, lalu Slot 2 ketika Slot 1 kalah, dan seterusnya. Pemain yang berhasil mengalahkan semua 5 kartu lawan adalah pemenangnya.</p>
+            <table class="rule-table">
+              <tr>
+                <th>Fase</th>
+                <th>Keterangan</th>
+              </tr>
+              <tr>
+                <td style="color:#60a5fa">🃏 Pilih Deck</td>
+                <td>Isi 5 slot kartu di panel Player 1 &amp; Player 2 sebelum menekan ▶ Mulai Battle</td>
+              </tr>
+              <tr>
+                <td style="color:#fbbf24">⚔ Battle</td>
+                <td>Kartu aktif bertarung bergantian. Setiap giliran, pilih satu dari 3 aksi</td>
+              </tr>
+              <tr>
+                <td style="color:#f87171">💀 Kartu Kalah</td>
+                <td>HP ≤ 0 → kartu berikutnya otomatis maju. Pemenang duel tetap giliran menyerang pertama</td>
+              </tr>
+              <tr>
+                <td style="color:#4ade80">🏆 Menang</td>
+                <td>Habiskan semua 5 kartu lawan untuk memenangkan pertandingan</td>
+              </tr>
+            </table>
+            <div class="example-box"><strong>Tips urutan slot:</strong> Tempatkan kartu pembuka (cepat / ATK tinggi) di Slot 1, kartu debuffer di Slot 2–3, dan kartu terkuat (Legendary/Limited) di Slot 4–5 sebagai finisher.</div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="rule-section">
+          <div class="rule-section-header">
+            <span class="rule-num">②</span>
+            <span class="rule-section-title">3 Aksi Battle — Attack, Skill, Defend</span>
+          </div>
+          <div class="rule-body">
+            <p>Setiap giliran kamu hanya bisa memilih <strong>satu aksi</strong>. Pilihan yang tepat di waktu yang tepat seringkali lebih menentukan daripada kekuatan kartu itu sendiri.</p>
+            <table class="rule-table">
+              <tr>
+                <th>Aksi</th>
+                <th>Damage / Efek</th>
+                <th>Batasan</th>
+                <th>Kapan Dipakai</th>
+              </tr>
+              <tr>
+                <td style="color:#fbbf24">1️⃣ Attack</td>
+                <td>20–30 base + bonus ATK kartu</td>
+                <td>Tak terbatas</td>
+                <td>Serangan andalan setiap giliran</td>
+              </tr>
+              <tr>
+                <td style="color:#c084fc">2️⃣ Skill</td>
+                <td>35–45 base + bonus ATK kartu (lebih besar)</td>
+                <td><strong style="color:#f87171">Hanya 1× per kartu</strong></td>
+                <td>Gunakan di momen krusial — saat lawan HP rendah atau tidak defend</td>
+              </tr>
+              <tr>
+                <td style="color:#60a5fa">3️⃣ Defend</td>
+                <td>Kurangi damage masuk 50% di giliran itu</td>
+                <td>Tak terbatas</td>
+                <td>Saat HP kritis atau membaca lawan akan pakai Skill</td>
+              </tr>
+            </table>
+            <div class="example-box"><strong>Perhatian:</strong> Skill hanya bisa dipakai <strong>sekali per kartu</strong> — tidak bisa disimpan untuk kartu berikutnya. Gunakan Skill selagi bisa, jangan buang sia-sia dengan defend lawan.</div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="rule-section">
+          <div class="rule-section-header">
+            <span class="rule-num">③</span>
+            <span class="rule-section-title">HP Kartu — 80 + DEF</span>
+          </div>
+          <div class="rule-body">
+            <p>HP setiap kartu dihitung otomatis dari formula <strong>HP = 80 + DEF</strong>. Artinya kartu dengan DEF tinggi jauh lebih sulit dikalahkan — bukan hanya karena mengurangi damage masuk, tapi juga karena HP awalnya lebih besar.</p>
+            <table class="rule-table">
+              <tr>
+                <th>Rarity</th>
+                <th>Rentang DEF</th>
+                <th>Rentang HP (80+DEF)</th>
+                <th>Karakter</th>
+              </tr>
+              <tr>
+                <td style="color:var(--common)">Common</td>
+                <td>6–28</td>
+                <td>86–108</td>
+                <td>HP rendah, mudah dikalahkan cepat</td>
+              </tr>
+              <tr>
+                <td style="color:var(--rare)">Rare</td>
+                <td>14–50</td>
+                <td>94–130</td>
+                <td>Seimbang, bisa jadi tank atau attacker</td>
+              </tr>
+              <tr>
+                <td style="color:var(--epic)">Epic</td>
+                <td>22–72</td>
+                <td>102–152</td>
+                <td>HP cukup tinggi, butuh beberapa giliran untuk dikalahkan</td>
+              </tr>
+              <tr>
+                <td style="color:var(--legendary)">Legendary</td>
+                <td>60–95</td>
+                <td>140–175</td>
+                <td>HP besar, ATK mematikan — harus dikepung dari tipe</td>
+              </tr>
+              <tr>
+                <td style="color:var(--limited)">Limited</td>
+                <td>75–130</td>
+                <td>155–210</td>
+                <td>HP tertinggi di semua rarity — butuh strategi tipe dan timing Defend</td>
+              </tr>
+            </table>
+            <div class="example-box"><strong>Contoh:</strong> Glacier Warden (Rare, DEF 50) punya HP 130. Primarch Titan (Epic, DEF 65) punya HP 145. Malgrath the Hollow King (Limited, DEF 130) punya HP 210 — butuh 7–10 giliran Attack biasa untuk mengalahkannya.</div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="rule-section">
+          <div class="rule-section-header">
+            <span class="rule-num">④</span>
+            <span class="rule-section-title">Damage Formula — ATK + Type Counter</span>
+          </div>
+          <div class="rule-body">
+            <p>Damage yang keluar bukan sekadar angka acak — ada komponen ATK kartu dan efektivitas tipe yang mempengaruhinya secara signifikan.</p>
+            <div class="bstat-grid" style="margin:.6rem 0">
+              <div class="bstat-box">
+                <div class="bstat-title">⚔ Attack</div>
+                <div class="bstat-val" style="color:#fbbf24">20–30 + (ATK × 0.15)</div>
+                <div class="bstat-desc">Serangan dasar. Kartu ATK tinggi menghasilkan damage jauh lebih konsisten</div>
+              </div>
+              <div class="bstat-box">
+                <div class="bstat-title">✨ Skill</div>
+                <div class="bstat-val" style="color:#c084fc">35–45 + (ATK × 0.25)</div>
+                <div class="bstat-desc">Multiplier ATK lebih besar. Kartu Legendary bisa menghasilkan 70–90+ damage dengan Skill</div>
+              </div>
+              <div class="bstat-box">
+                <div class="bstat-title">⚡ Super Efektif</div>
+                <div class="bstat-val" style="color:#fbbf24">×1.25</div>
+                <div class="bstat-desc">Tipe menyerang efektif terhadap tipe lawan — bonus damage signifikan</div>
+              </div>
+              <div class="bstat-box">
+                <div class="bstat-title">🛡️ DEF Reduction</div>
+                <div class="bstat-val" style="color:#9ca3af">−(DEF × 0.10)</div>
+                <div class="bstat-desc">DEF lawan mengurangi damage masuk secara flat setiap serangan</div>
+              </div>
+            </div>
+            <div class="example-box"><strong>Simulasi damage:</strong> Kartu ATK 90 menggunakan Skill → base 35–45 + (90×0.25) = 57–67 → kena Super Efektif ×1.25 = 71–84 → dikurangi DEF lawan 65×0.10 = 6 → <strong>total ~65–78 damage</strong>.</div>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="rule-section">
+          <div class="rule-section-header">
+            <span class="rule-num">⑤</span>
+            <span class="rule-section-title">Strategi Deck — Urutan & Komposisi</span>
+          </div>
+          <div class="rule-body">
+            <p>Dengan 5 slot kartu, susunan deck sangat menentukan. Kartu yang kalah digantikan oleh kartu berikutnya, dan <strong>pemenang duel tetap giliran menyerang lebih dulu</strong> — ini keuntungan besar yang bisa dimanfaatkan.</p>
+            <table class="rule-table">
+              <tr>
+                <th>Slot</th>
+                <th>Peran Ideal</th>
+                <th>Rarity Cocok</th>
+                <th>Tujuan</th>
+              </tr>
+              <tr>
+                <td style="color:#60a5fa">Slot 1</td>
+                <td>Opener / Scout</td>
+                <td>Common / Rare</td>
+                <td>Baca tipe lawan, habiskan HP awal, korbankan untuk info</td>
+              </tr>
+              <tr>
+                <td style="color:#60a5fa">Slot 2–3</td>
+                <td>Core Attacker</td>
+                <td>Rare / Epic</td>
+                <td>Tulang punggung damage, manfaatkan tipe counter</td>
+              </tr>
+              <tr>
+                <td style="color:#60a5fa">Slot 4</td>
+                <td>Wildcard / Counter</td>
+                <td>Epic</td>
+                <td>Keluar saat lawan sudah lemah atau untuk counter tipe spesifik</td>
+              </tr>
+              <tr>
+                <td style="color:#fbbf24">Slot 5</td>
+                <td>Finisher</td>
+                <td>Legendary / Limited</td>
+                <td>Kartu terkuat keluar terakhir saat lawan sudah habis kartu counter-nya</td>
+              </tr>
+            </table>
+            <div class="rule-pills">
+              <span class="rule-pill" style="background:rgba(96,165,250,.12);color:#60a5fa;border:1px solid #60a5fa44">✓ Opener cepat = info tipe gratis</span>
+              <span class="rule-pill" style="background:rgba(192,132,252,.12);color:#c084fc;border:1px solid #c084fc44">✓ Simpan Skill untuk HP lawan < 50%</span>
+              <span class="rule-pill" style="background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid #fbbf2444">✓ Legendary/Limited sebagai closers</span>
+              <span class="rule-pill" style="background:rgba(74,222,128,.12);color:#4ade80;border:1px solid #4ade8044">✓ Defend saat HP < 30%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="rule-section">
+          <div class="rule-section-header">
+            <span class="rule-num">⑥</span>
+            <span class="rule-section-title">Kelemahan Rarity — Cara Mengalahkan Kartu Kuat</span>
+          </div>
+          <div class="rule-body">
+            <p>Kartu Legendary dan Limited memang memiliki ATK dan HP jauh lebih tinggi — tapi mereka tetap punya celah yang bisa dieksploitasi dengan strategi tipe yang tepat.</p>
+            <table class="rule-table">
+              <tr>
+                <th>Rarity</th>
+                <th>ATK</th>
+                <th>HP (80+DEF)</th>
+                <th>Celah & Cara Counter</th>
+              </tr>
+              <tr>
+                <td style="color:var(--common)">Common</td>
+                <td>8–22</td>
+                <td>86–108</td>
+                <td>HP dan ATK rendah — gunakan sebagai opener/info atau buffer Skill kartu lain</td>
+              </tr>
+              <tr>
+                <td style="color:var(--rare)">Rare</td>
+                <td>30–50</td>
+                <td>94–130</td>
+                <td>Seimbang dan fleksibel — paling efektif di slot 2–3 sebagai core damage</td>
+              </tr>
+              <tr>
+                <td style="color:var(--epic)">Epic</td>
+                <td>60–88</td>
+                <td>102–152</td>
+                <td>Tangguh, tapi bisa dihabiskan dengan 2 kartu Rare + tipe counter</td>
+              </tr>
+              <tr>
+                <td style="color:var(--legendary)">Legendary</td>
+                <td>90–140</td>
+                <td>140–175</td>
+                <td>Gunakan tipe Super Efektif — tanpa tipe counter butuh 5–8 Attack biasa</td>
+              </tr>
+              <tr>
+                <td style="color:var(--limited)">Limited</td>
+                <td>100–160</td>
+                <td>155–210</td>
+                <td>HP terbesar — wajib tipe Super Efektif + Skill untuk efisiensi. Defend sering untuk kartu ini</td>
+              </tr>
+            </table>
+            <div class="example-box"><strong>Contoh mengalahkan Limited:</strong> Malgrath the Hollow King (Ghost, HP 210) → gunakan kartu Ghost atau Dark (Super Efektif ×1.25). Skill + tipe counter = ~80–100 damage per Skill. Butuh 3–4 kartu tapi sangat efisien dibanding Attack biasa yang hanya 20–30.</div>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="rule-section">
+          <div class="rule-section-header">
+            <span class="rule-num">⑦</span>
+            <span class="rule-section-title">Tips Memenangkan Battle</span>
+          </div>
+          <div class="rule-body">
+            <div class="debuff-list">
+              <div class="debuff-item">🎯 <strong style="color:#fbbf24;min-width:130px">Baca tipe lawan</strong> Sebelum menyerang, cek tipe kartu aktif lawan. Pilih kartu di deck-mu yang punya Super Efektif vs tipe tersebut.</div>
+              <div class="debuff-item">✨ <strong style="color:#c084fc;min-width:130px">Timing Skill</strong> Jangan langsung pakai Skill di awal — tunggu sampai lawan HP rendah atau tidak dalam posisi Defend. Satu Skill yang tepat bisa langsung mengakhiri kartu lawan.</div>
+              <div class="debuff-item">🛡️ <strong style="color:#60a5fa;min-width:130px">Kapan Defend</strong> Defend berguna saat HP kartu aktifmu di bawah 30%, atau saat kamu yakin lawan akan pakai Skill. Defend memblokir 50% damage — bisa menyelamatkan kartu dari satu serangan mematikan.</div>
+              <div class="debuff-item">⚡ <strong style="color:#4ade80;min-width:130px">Manfaatkan Momentum</strong> Pemenang duel tetap menyerang duluan saat kartu baru lawan masuk. Artinya satu kartu kuatmu bisa menghabiskan 2–3 kartu lawan berturut-turut jika HP-nya masih cukup.</div>
+              <div class="debuff-item">🃏 <strong style="color:#9ca3af;min-width:130px">Korbankan Opener</strong> Kartu Common di Slot 1 boleh dikorbankan — tugasnya bukan menang, tapi mengikis HP kartu awal lawan dan menghabiskan Skill-nya sebelum kartu utamamu masuk.</div>
+              <div class="debuff-item">🏆 <strong style="color:#f87171;min-width:130px">Simpan Finisher</strong> Legendary atau Limited di Slot 5 akan keluar saat lawan sudah kehabisan counter dan kartu terbaiknya. Di saat itu, finisher-mu bisa membersihkan 2–3 kartu terakhir lawan dengan mudah.</div>
+            </div>
+            <div class="example-box"><strong>Kombo Deck Efektif:</strong> Common (Slot 1, opener) → Rare Fire (Slot 2, counter Ice/Grass) → Rare Psychic (Slot 3, counter Fighting/Poison) → Epic Ghost (Slot 4, counter Psychic) → Legendary Dark (Slot 5, finisher Super Efektif vs Psychic/Ghost). Deck ini punya coverage tipe lebar dan finisher mematikan.</div>
+          </div>
+        </div>
+
+        <!-- TYPE EFF REFERENCE -->
+        <div class="rule-section">
+          <div class="rule-section-header">
+            <span class="rule-num">⊕</span>
+            <span class="rule-section-title">Referensi Efektivitas Tipe</span>
+          </div>
+          <div class="rule-body">
+            <p>Setiap serangan dihitung berdasarkan tipe penyerang vs tipe target. Multiplier ×1.25 untuk Super Efektif, ×0.75 untuk Tidak Efektif, ×0.00 untuk Immune.</p>
+            <table class="rule-table">
+              <tr>
+                <th>Efektivitas</th>
+                <th>Multiplier</th>
+                <th>Tampilan di Battle</th>
+                <th>Keterangan</th>
+              </tr>
+              <tr>
+                <td style="color:#fbbf24">⚡ Super Efektif</td>
+                <td style="color:#fbbf24">×1.25</td>
+                <td>Label kuning + bonus DMG</td>
+                <td>Tipe menyerang efektif vs tipe target — wajib dieksploitasi</td>
+              </tr>
+              <tr>
+                <td style="color:#60a5fa">💨 Tidak Efektif</td>
+                <td style="color:#60a5fa">×0.75</td>
+                <td>Label biru + penalty DMG</td>
+                <td>Hindari matchup ini — damage berkurang drastis</td>
+              </tr>
+              <tr>
+                <td style="color:#9ca3af">🛡️ Immune</td>
+                <td style="color:#9ca3af">×0.00</td>
+                <td>Label abu + 0 DMG</td>
+                <td>Damage tidak masuk sama sekali — ganti kartu jika bisa</td>
+              </tr>
+              <tr>
+                <td>Normal</td>
+                <td>×1.00</td>
+                <td>—</td>
+                <td>Tidak ada modifikasi — damage sesuai formula dasar</td>
+              </tr>
+            </table>
+            <div class="example-box"><strong>Combo tipe terkuat:</strong> Kartu dual-type Ghost/Dark menyerang Psychic → Super Efektif ganda ×1.25 × ×1.25 = total ×1.56 damage. Void Reaper of Genesis memanfaatkan ini secara penuh.</div>
+
+            <div style="margin-top:1.4rem;margin-bottom:.5rem;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent)">📋 Daftar Lengkap Efektivitas Tipe</div>
+            <p style="font-size:.82rem;color:var(--text-dim);margin-bottom:.9rem">Tabel berikut mencakup semua 18 tipe. Gunakan sebagai referensi saat membangun deck atau memilih kartu di Battle Simulation.</p>
+
+            <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--border)">
+            <table class="rule-table" style="min-width:680px;border:none;border-radius:0">
+              <tr>
+                <th style="width:90px">Tipe</th>
+                <th style="color:#fbbf24">⚡ Super Efektif vs</th>
+                <th style="color:#60a5fa">💨 Not Effective vs</th>
+                <th style="color:#f87171">💥 Lemah terhadap</th>
+                <th style="color:#4ade80">🛡️ Kuat terhadap</th>
+              </tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#9fa19f">Normal</span></td><td style="color:var(--text-dim)">—</td><td>Rock, Steel</td><td>Fighting</td><td style="color:var(--text-dim)">—</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#e8554e">Fire</span></td><td>Grass, Ice, Bug, Steel</td><td>Fire, Water, Rock, Dragon</td><td>Water, Rock, Ground</td><td>Grass, Ice, Bug, Steel</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#4d90d5">Water</span></td><td>Fire, Ground, Rock</td><td>Water, Grass, Dragon</td><td>Electric, Grass</td><td>Fire, Ground, Rock</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#f3d23b">Electric</span></td><td>Water, Flying</td><td>Electric, Grass, Dragon, <em style="color:#9ca3af">Ground (immune)</em></td><td>Ground</td><td>Water, Flying</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5fbd58">Grass</span></td><td>Water, Ground, Rock</td><td>Fire, Grass, Poison, Flying, Bug, Dragon, Steel</td><td>Fire, Ice, Poison, Flying, Bug</td><td>Water, Ground, Rock</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#75d0c1">Ice</span></td><td>Grass, Ground, Flying, Dragon</td><td>Fire, Water, Ice, Steel</td><td>Fire, Fighting, Rock, Steel</td><td>Grass, Ground, Flying, Dragon</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ce4265">Fighting</span></td><td>Normal, Ice, Rock, Dark, Steel</td><td>Poison, Flying, Psychic, Bug, Fairy</td><td>Psychic, Flying, Fairy</td><td>Normal, Ice, Rock, Dark, Steel</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ab6ac8">Poison</span></td><td>Grass, Fairy</td><td>Poison, Ground, Rock, Ghost</td><td>Ground, Psychic</td><td>Grass, Fairy</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#d97845">Ground</span></td><td>Fire, Electric, Poison, Rock, Steel</td><td>Grass, Bug</td><td>Water, Ice, Grass</td><td>Fire, Electric, Poison, Rock, Steel</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#8fa8dd">Flying</span></td><td>Grass, Fighting, Bug</td><td>Electric, Rock, Steel</td><td>Electric, Ice, Rock</td><td>Grass, Fighting, Bug</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#f97176">Psychic</span></td><td>Fighting, Poison</td><td>Psychic, Steel</td><td>Bug, Ghost, Dark</td><td>Fighting, Poison</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#91c12f">Bug</span></td><td>Grass, Psychic, Dark</td><td>Fire, Fighting, Flying, Ghost, Steel, Fairy</td><td>Fire, Flying, Rock</td><td>Grass, Psychic, Dark</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#c5b78c">Rock</span></td><td>Fire, Ice, Flying, Bug</td><td>Fighting, Ground, Steel</td><td>Water, Grass, Fighting, Ground, Steel</td><td>Fire, Ice, Flying, Bug</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5269ac">Ghost</span></td><td>Psychic, Ghost</td><td>Dark, <em style="color:#9ca3af">Normal (immune)</em></td><td>Ghost, Dark</td><td>Psychic, Ghost</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#0f6ac0">Dragon</span></td><td>Dragon</td><td>Steel</td><td>Ice, Dragon, Fairy</td><td>Dragon</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#595761">Dark</span></td><td>Psychic, Ghost</td><td>Fighting, Dark, Fairy</td><td>Fighting, Bug, Fairy</td><td>Psychic, Ghost</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5a8ea2">Steel</span></td><td>Ice, Rock, Fairy</td><td>Fire, Water, Electric, Steel</td><td>Fire, Fighting, Ground</td><td>Ice, Rock, Fairy</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ec8fe6">Fairy</span></td><td>Fighting, Dragon, Dark</td><td>Fire, Poison, Steel</td><td>Poison, Steel</td><td>Fighting, Dragon, Dark</td></tr>
+            </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- WIKI ARTICLE -->
+      <div class="page hidden" id="wikiPage"></div>
+
+      <!-- BATTLE ARENA SIMULATION -->
+      <div class="arena-page hidden" id="arenaPage">
+        <div class="arena-title">⚔ Battle Simulation</div>
+        <div class="arena-sub">5 Kartu per Player · Turn-Based · Eliminasi Semua Kartu Lawan</div>
+
+        <div class="formula-box">
+          Pilih 5 kartu per player &nbsp;|&nbsp; Kartu bertarung satu per satu &nbsp;|&nbsp; HP = 80 + DEF &nbsp;|&nbsp; ⚡ Type Counter System
+          &nbsp;|&nbsp; 1️⃣ Attack (20-30) &nbsp;|&nbsp; 2️⃣ Skill (35-45, 1×) &nbsp;|&nbsp; 3️⃣ Defend (−50%) &nbsp;|&nbsp; 🤖 AI Opponent
+        </div>
+
+        <!-- Deck Builder -->
+        <div class="deck-builder">
+          <!-- Player 1 -->
+          <div class="deck-panel">
+            <div class="deck-panel-header">
+              <span style="font-size:1rem">🔵</span>
+              <span class="deck-panel-title" style="color:#60a5fa">Player 1</span>
+              <span id="p1deckcount" style="margin-left:auto;font-size:.6rem;color:#4b5563;font-family:'Cinzel',serif;letter-spacing:1px">0 / 5</span>
+            </div>
+            <div style="padding:.5rem .7rem 0">
+              <input class="name-input" id="p1name" placeholder="Nama Player 1..." value="Player 1">
+            </div>
+            <div class="deck-slots" id="p1slots"></div>
+          </div>
+          <!-- Player 2 -->
+          <div class="deck-panel">
+            <div class="deck-panel-header">
+              <span style="font-size:1rem">🔴</span>
+              <span class="deck-panel-title" style="color:#f87171">Player 2</span>
+              <span id="p2deckcount" style="margin-left:auto;font-size:.6rem;color:#4b5563;font-family:'Cinzel',serif;letter-spacing:1px">0 / 5</span>
+            </div>
+            <div style="padding:.5rem .7rem 0">
+              <input class="name-input" id="p2name" placeholder="Nama Player 2..." value="Player 2">
+            </div>
+            <div class="deck-slots" id="p2slots"></div>
+          </div>
+        </div>
+
+        <!-- Simulation Section -->
+        <div class="sim-section">
+          <div class="sim-header">
+            <span class="sim-header-title">⚔ Battle Simulation</span>
+            <div style="display:flex;gap:.5rem;align-items:center">
+              <button class="reset-btn" onclick="resetArena()">↺ Reset</button>
+              <button class="battle-start-btn" id="startBtn" onclick="startBattle()" disabled>▶ Mulai Battle</button>
+            </div>
+          </div>
+
+          <!-- Scoreboard -->
+          <div class="sim-scoreboard">
+            <div class="sim-score-side">
+              <div class="sim-score-name" style="color:#60a5fa" id="sb-name1">Player 1</div>
+              <div class="sim-score-card" id="sb-card1">—</div>
+              <div class="sim-score-points" style="color:#60a5fa" id="sb-pts1">0</div>
+              <div style="font-size:.58rem;color:#374151;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem" id="sb-rem1">5 kartu tersisa</div>
+            </div>
+            <div class="sim-vs">VS</div>
+            <div class="sim-score-side">
+              <div class="sim-score-name" style="color:#f87171" id="sb-name2">Player 2</div>
+              <div class="sim-score-card" id="sb-card2">—</div>
+              <div class="sim-score-points" style="color:#f87171" id="sb-pts2">0</div>
+              <div style="font-size:.58rem;color:#374151;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem" id="sb-rem2">5 kartu tersisa</div>
+            </div>
+          </div>
+
+          <!-- HP Status -->
+          <div class="sim-status" id="simStatus" style="display:none">
+            <div class="sim-player-status" id="ps1">
+              <div class="sim-ps-header">
+                <span class="sim-ps-icon" id="ps1-icon">🔵</span>
+                <span class="sim-ps-name" style="color:#60a5fa" id="ps1-name">Player 1</span>
+                <span class="sim-ps-hp-text" style="color:#60a5fa" id="ps1-hp">100 / 100</span>
+              </div>
+              <div class="sim-hp-bar">
+                <div class="sim-hp-fill" id="ps1-bar" style="width:100%;background:#60a5fa"></div>
+              </div>
+              <div class="sim-ps-info" id="ps1-info"></div>
+            </div>
+            <div class="sim-player-status" id="ps2">
+              <div class="sim-ps-header">
+                <span class="sim-ps-icon" id="ps2-icon">🔴</span>
+                <span class="sim-ps-name" style="color:#f87171" id="ps2-name">Player 2</span>
+                <span class="sim-ps-hp-text" style="color:#f87171" id="ps2-hp">100 / 100</span>
+              </div>
+              <div class="sim-hp-bar">
+                <div class="sim-hp-fill" id="ps2-bar" style="width:100%;background:#f87171"></div>
+              </div>
+              <div class="sim-ps-info" id="ps2-info"></div>
+            </div>
+          </div>
+
+          <!-- Turn Indicator -->
+          <div class="sim-turn-indicator" id="turnIndicator" style="display:none">Menunggu...</div>
+
+          <!-- Action Buttons -->
+          <div class="sim-actions" id="simActions" style="display:none">
+            <button class="sim-action-btn atk-btn" id="btnAtk" onclick="doAction('attack')">1️⃣ Attack (20-30)</button>
+            <button class="sim-action-btn skill-btn" id="btnSkill" onclick="doAction('skill')">2️⃣ Skill (35-45,
+              1×)</button>
+            <button class="sim-action-btn def-btn" id="btnDef" onclick="doAction('defend')">3️⃣ Defend (−50%)</button>
+          </div>
+
+          <!-- Combat Log -->
+          <div class="sim-log" id="simLog"></div>
+
+          <!-- Winner Banner -->
+          <div class="winner-banner" id="winnerBanner">
+            <div class="winner-text" id="winnerText"></div>
+            <div class="winner-sub" id="winnerSub"></div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  </main>
+  </div>
+
+  <!-- CARD PICKER OVERLAY -->
+  <div class="picker-overlay" id="pickerOverlay">
+    <div class="picker-modal">
+      <div class="picker-header">
+        <h3 id="pickerTitle">Pilih Kartu</h3>
+        <button class="picker-close" onclick="closePicker()">✕ Tutup</button>
+      </div>
+      <div class="picker-search">
+        <input id="pickerSearch" placeholder="Cari nama, tipe, role..." oninput="filterPicker(this.value)">
+      </div>
+      <div class="picker-grid" id="pickerGrid"></div>
+    </div>
+  </div>
+
+  <button class="mob-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+  <script>
+    const RC = { Common: '#9ca3af', Rare: '#60a5fa', Epic: '#c084fc', Legendary: '#fbbf24', Limited: '#f87171' };
+    const RB = { Common: 'rgba(156,163,175,.1)', Rare: 'rgba(96,165,250,.1)', Epic: 'rgba(192,132,252,.1)', Legendary: 'rgba(251,191,36,.1)', Limited: 'rgba(248,113,113,.1)' };
+    const TC = { Normal: '#9fa19f', Fire: '#e8554e', Water: '#4d90d5', Electric: '#f3d23b', Grass: '#5fbd58', Ice: '#75d0c1', Fighting: '#ce4265', Poison: '#ab6ac8', Ground: '#d97845', Flying: '#8fa8dd', Psychic: '#f97176', Bug: '#91c12f', Rock: '#c5b78c', Ghost: '#5269ac', Dragon: '#0f6ac0', Dark: '#595761', Steel: '#5a8ea2', Fairy: '#ec8fe6' };
+    const TB = { Normal: 'rgba(159,161,159,.18)', Fire: 'rgba(232,85,78,.18)', Water: 'rgba(77,144,213,.18)', Electric: 'rgba(243,210,59,.18)', Grass: 'rgba(95,189,88,.18)', Ice: 'rgba(117,208,193,.18)', Fighting: 'rgba(206,66,101,.18)', Poison: 'rgba(171,106,200,.18)', Ground: 'rgba(217,120,69,.18)', Flying: 'rgba(143,168,221,.18)', Psychic: 'rgba(249,113,118,.18)', Bug: 'rgba(145,193,47,.18)', Rock: 'rgba(197,183,140,.18)', Ghost: 'rgba(82,105,172,.18)', Dragon: 'rgba(15,106,192,.18)', Dark: 'rgba(89,87,97,.18)', Steel: 'rgba(90,142,162,.18)', Fairy: 'rgba(236,143,230,.18)' };
+    const TD = { Normal: { superEff: [], notEff: ['Rock', 'Steel'], immune: ['Ghost'], weakTo: ['Fighting'] }, Fire: { superEff: ['Grass', 'Ice', 'Bug', 'Steel'], notEff: ['Fire', 'Water', 'Rock', 'Dragon'], immune: [], weakTo: ['Water', 'Rock', 'Ground'] }, Water: { superEff: ['Fire', 'Ground', 'Rock'], notEff: ['Water', 'Grass', 'Dragon'], immune: [], weakTo: ['Electric', 'Grass'] }, Electric: { superEff: ['Water', 'Flying'], notEff: ['Electric', 'Grass', 'Dragon'], immune: ['Ground'], weakTo: ['Ground'] }, Grass: { superEff: ['Water', 'Ground', 'Rock'], notEff: ['Fire', 'Grass', 'Poison', 'Flying', 'Bug', 'Dragon', 'Steel'], immune: [], weakTo: ['Fire', 'Ice', 'Poison', 'Flying', 'Bug'] }, Ice: { superEff: ['Grass', 'Ground', 'Flying', 'Dragon'], notEff: ['Water', 'Ice', 'Steel'], immune: [], weakTo: ['Fire', 'Fighting', 'Rock', 'Steel'] }, Fighting: { superEff: ['Normal', 'Ice', 'Rock', 'Dark', 'Steel'], notEff: ['Poison', 'Flying', 'Psychic', 'Bug', 'Fairy'], immune: ['Ghost'], weakTo: ['Psychic', 'Flying', 'Fairy'] }, Poison: { superEff: ['Grass', 'Fairy'], notEff: ['Poison', 'Ground', 'Rock', 'Ghost'], immune: ['Steel'], weakTo: ['Ground', 'Psychic'] }, Ground: { superEff: ['Fire', 'Electric', 'Poison', 'Rock', 'Steel'], notEff: ['Grass', 'Bug'], immune: ['Flying'], weakTo: ['Water', 'Ice', 'Grass'] }, Flying: { superEff: ['Grass', 'Fighting', 'Bug'], notEff: ['Electric', 'Rock', 'Steel'], immune: [], weakTo: ['Electric', 'Ice', 'Rock'] }, Psychic: { superEff: ['Fighting', 'Poison'], notEff: ['Psychic', 'Steel'], immune: ['Dark'], weakTo: ['Bug', 'Ghost', 'Dark'] }, Bug: { superEff: ['Grass', 'Psychic', 'Dark'], notEff: ['Fire', 'Fighting', 'Flying', 'Ghost', 'Steel', 'Fairy'], immune: [], weakTo: ['Fire', 'Flying', 'Rock'] }, Rock: { superEff: ['Fire', 'Ice', 'Flying', 'Bug'], notEff: ['Fighting', 'Ground', 'Steel'], immune: [], weakTo: ['Water', 'Grass', 'Fighting', 'Ground', 'Steel'] }, Ghost: { superEff: ['Psychic', 'Ghost'], notEff: ['Dark'], immune: ['Normal'], weakTo: ['Ghost', 'Dark'] }, Dragon: { superEff: ['Dragon'], notEff: ['Steel'], immune: ['Fairy'], weakTo: ['Ice', 'Dragon', 'Fairy'] }, Dark: { superEff: ['Psychic', 'Ghost'], notEff: ['Fighting', 'Dark', 'Fairy'], immune: [], weakTo: ['Fighting', 'Bug', 'Fairy'] }, Steel: { superEff: ['Ice', 'Rock', 'Fairy'], notEff: ['Fire', 'Water', 'Electric', 'Steel'], immune: [], weakTo: ['Fire', 'Fighting', 'Ground'] }, Fairy: { superEff: ['Fighting', 'Dragon', 'Dark'], notEff: ['Fire', 'Poison', 'Steel'], immune: [], weakTo: ['Poison', 'Steel'] } };
+
+    const COOLDOWN = { Common: 0, Rare: 1, Epic: 1, Legendary: 2, Limited: 3 };
+    const MISS_CHANCE = { Common: 0, Rare: 5, Epic: 8, Legendary: 10, Limited: 10 };
+    const CRIT_CHANCE = { Common: 20, Rare: 18, Epic: 15, Legendary: 12, Limited: 10 };
+    const COUNTER_BONUS = { Legendary: 10, Limited: 15 };
+
+    const LORE = { 1: ["Firstborn Soldier adalah entitas pertama yang muncul setelah fajar penciptaan. Terlahir dari tanah abu keabadian, ia mengenakan baju besi yang ditempa dari baja primordial — material yang dipercaya berasal dari inti bumi pertama.", "Dalam catatan kuno GENESIS, ia disebut sebagai <em>\"Penjaga Ambang\"</em> — sosok yang berdiri di perbatasan antara dunia yang belum ada dan dunia yang baru saja lahir."], 2: ["Eden's Arrow adalah pemanah yang konon menembakkan anak panah pertama dalam sejarah dunia. Panahnya tidak melukai — melainkan menandai batas antara surga dan bumi yang belum terbagi.", "Ia bergerak dengan kecepatan angin pagi, dan dikatakan bahwa setiap panahnya membawa potongan langit bersama ujungnya."], 3: ["Primordial Stone bukan sekadar batu biasa. Ia adalah fragmen dari benda langit pertama yang jatuh ke permukaan dunia GENESIS — membawa kepadatan gravitasi yang tidak dapat dijelaskan oleh hukum alam biasa.", "Para ilmuwan kartu menyebut statusnya sebagai anomali: makhluk tanpa kehendak, namun memiliki naluri bertahan yang luar biasa. Stone Skin-nya adalah kemampuan kumulatif — semakin lama ia bertahan, semakin sulit ditembus."], 4: ["Marshborn Toad lahir di rawa-rawa hitam di bawah bulan merah pertama. Racunnya bukan hasil evolusi — melainkan berasal dari air yang terkontaminasi saat langit dan bumi pertama kali berpisah.", "Meski lemah secara fisik, toksisitas alaminya menjadikannya ancaman yang tidak boleh diremehkan. Cooldown-nya nol — racun bisa diaplikasikan setiap turn tanpa jeda."], 5: ["Spark Weaver adalah penyulut api pertama. Sebelum ada matahari, dialah yang membawa cahaya kecil ke dalam kegelapan purba. Apinya bukan sekadar panas — ia adalah representasi dari kehendak pertama.", "Dalam mitologi GENESIS, ia dipercaya menjadi nenek moyang semua makhluk api. Skill-nya tidak membutuhkan cooldown, menjadikannya kartu Common paling ofensif."], 6: ["Ashen Warden adalah pelindung yang lahir dari abu perang pertama. Tidak ada yang tahu dari pihak mana ia berasal — ia hanya ada, berdiri di antara reruntuhan, siap menerima serangan berikutnya.", "Iron Wall-nya adalah mekanisme retaliasinya: setiap serangan yang datang sebagian dikembalikan kepada penyerang. Efektif terutama melawan musuh yang bergantung pada serangan berulang."], 7: ["Dawncrest Sentinel adalah reptil purba yang hidup di lapisan bumi terdalam. Kemampuan kamuflasenya sempurna — beberapa peneliti bahkan meragukan apakah ia benar-benar ada.", "Dengan tipe Ground, ia kebal terhadap serangan Electric — aset penting melawan kartu seperti Stormcaller Shaman. Dodge chance 20% membuatnya sulit dikenai secara konsisten."], 8: ["Lantern of Origin membawa lentera yang dinyalakan dari percikan bintang pertama. Cahayanya tidak menerangi — melainkan mengungkap hal tersembunyi.", "Ia bisa menghapus efek stealth lawan tanpa cooldown, menjadikannya counter alami terhadap Ghost dan Dark yang mengandalkan invisible mechanics."], 9: ["Vanguard of the New Age adalah kesatria baja pertama yang bersumpah melindungi era baru. Perisainya telah memblokir kekuatan yang cukup untuk meruntuhkan gunung, namun tidak pernah retak.", "Sebagai Rare dengan tipe Fighting/Steel, ia mendapatkan counter bonus +10% melawan Legendary dan berpotensi memblokir skill Legendary (30% chance) dengan DEF-nya yang kokoh."], 10: ["Skywarden Eagle menguasai langit sejak hari pertama angin berembus. Ia selalu menyerang pertama — seperti petir yang memilih targetnya sendiri.", "Keunggulan First Wind-nya paling terasa di ronde pertama: +15 ATK pada turn pertama menjadikannya opener terbaik di kelas Rare. Tipe Flying memberinya dodge bonus melawan serangan Ground."], 11: ["Tidecaller of the Deep muncul dari lautan sebelum lautan memiliki nama. Ia bukan penyihir yang mempelajari air — ia <em>adalah</em> air, dalam bentuk yang memilih untuk berjalan di darat.", "Primordial Flood menurunkan DEF lawan 10 poin — sinergi sempurna dengan kartu high-ATK di deck yang sama. Kartu debuffer paling efisien di tier Rare."], 12: ["Bloodpact Rogue lahir dari perjanjian terlarang. Ia mengikat dirinya dengan kegelapan primordial untuk mendapatkan kemampuan bergerak di balik bayangan.", "Origin Stab memberikan 2× damage dari belakang — mekanik unik yang menggandakan efektivitasnya. Tipe Dark/Poison membuatnya lemah terhadap Fighting dan Bug, namun sangat kuat melawan Psychic."], 13: ["Earthborn Cavalry bergerak seperti gemetar bumi — pelan, tak terbendung. Kuda yang ditungganginya dibesarkan dari tanah liat yang dibentuk oleh tangan raksasa pertama.", "First Charge memberikan bonus +10 ATK pada turn pertama. Dengan tipe Ground/Normal, ia kebal terhadap Electric dan mendapat bonus +10% counter melawan Legendary."], 14: ["Stormcaller Shaman adalah manusia pertama yang belajar berbicara kepada badai. Petirnya menyalurkan energi dari awan pertama yang terbentuk saat langit pertama kali terbelah.", "Genesis Thunder menyerang dua target sekaligus — kemampuan terbaik untuk situasi 2v2. Namun tipe Electric memiliki satu kelemahan besar: ground immunity — kartu Ground type kebal total."], 15: ["Serpent of Knowing memakan buah dari pohon pengetahuan pertama. Pengetahuan itu adalah kutukan yang membuatnya memahami kelemahan semua makhluk.", "Forbidden Coil adalah skill kontrol terbaik di tier Rare: memaksa lawan skip 1 turn. Cooldown 1 ronde membuatnya bisa digunakan dua kali dalam 3 ronde standar."], 16: ["Glacier Warden adalah penjaga gletser pertama yang terbentuk saat suhu bumi turun untuk pertama kalinya. Ia tidak menyerang — ia menunggu.", "Permafrost Veil memperlambat ATK lawan 20% — efek yang bertumpuk dengan debuff lain. DEF 50 menjadikannya tank terbaik di tier Rare, dengan potensi memblokir 30% skill Legendary."], 17: ["Void Reaper of Genesis bukan kematian — ia adalah yang datang <em>setelah</em> kematian. Ia muncul di celah antara dunia yang hidup dan yang telah tiada.", "Soul Harvest mencuri 15 HP — dual efek: menyerang sekaligus menyembuhkan diri. Tipe Ghost/Dark memberinya keunggulan ×1.32 melawan Psychic, namun lemah terhadap Fighting dan Bug."], 18: ["Primarch Titan adalah konstruksi mekanis pertama yang dibuat oleh peradaban kuno GENESIS — sebelum peradaban itu sendiri runtuh.", "Overload Protocol memberikan DEF+20 tapi ATK-10 selama 3 turn — trade-off strategis yang harus dipertimbangkan. Dengan DEF 65 base + 20 dari skill, ia menjadi pertahanan paling solid di tier Epic."], 19: ["Lunaris the First Dancer menari di bawah bulan pertama yang pernah terbit. Gerakannya adalah seni bertarung yang diwariskan dari bulan itu sendiri.", "Crescent Slash dengan crit rate +35% di malam hari menjadikannya kartu dengan probabilitas crit tertinggi dalam set. Tipe Psychic/Fairy menutup kelemahan Dragon dan Dark secara bersamaan."], 20: ["Ancient Wyvern of Creation adalah naga paling tua yang tercatat. Ia <em>muncul</em> ketika konsep langit pertama kali terbentuk dan membutuhkan penjaga.", "Primal Sweep adalah satu-satunya skill area di tier Epic yang menarget seluruh baris depan lawan. Dual tipe Dragon/Flying membuatnya kuat melawan banyak tipe namun rentan terhadap Ice."], 21: ["Phantom of the First Veil hidup di sisi lain realitas. Ia bukan hantu yang mati — ia adalah hantu yang tidak pernah hidup sejak awal.", "Veil Strike mengabaikan 50% DEF lawan — efektif melawan tank seperti Primarch Titan atau Glacier Warden. Cooldown 1 ronde membatasi frekuensinya, tapi efeknya tetap game-changing."], 22: ["Magmaborn Colossus lahir dari letusan gunung berapi pertama. Ia adalah lava yang mendapat kesadaran.", "World Forge memberikan damage area 10 DMG/turn selama 3 turn — total 30 DMG pasif yang sulit dihindari. DEF 72 tertinggi di tier Epic, namun lemah terhadap Water dan Ground."], 23: ["Solarius the Firstborn adalah representasi matahari pertama. Ia tidak hanya membawa cahaya — ia membawa <em>kehidupan kembali</em>. Cooldown kebangkitannya 2 ronde.", "Sebagai Legendary, ia kena counter bonus +10% dari Rare/Common. Namun Light of Creation-nya bisa membalik pertarungan yang sudah hampir kalah — manajemen cooldown menjadi kunci."], 24: ["Abyssal Sovereign Null datang dari kekosongan sebelum penciptaan. Ia adalah sesuatu yang <em>seharusnya tidak ada</em>, namun berhasil eksis karena celah dalam hukum realitas.", "Unmaking menghancurkan semua buff lawan — efektif melawan deck yang bergantung pada stacking DEF atau ATK. Cooldown 2 ronde. Tipe Dark/Ghost memberikannya double super-efektif melawan Psychic."], 25: ["Zerath the First Chronomancer menemukan waktu sebelum waktu itu sendiri menyadari keberadaannya. Ia adalah pengamat pertama yang mencatat bahwa waktu bergerak.", "Genesis Rewind adalah skill paling langka: mengembalikan HP ke kondisi awal turn. Cooldown 2 ronde membuatnya hanya bisa digunakan sekali per duel standar. Tipe Psychic/Steel memberikannya resistensi luar biasa."], 26: ["Valdris the Bloodfather adalah pemimpin pasukan pertama yang berperang untuk membuktikan bahwa kekuatan bisa tumbuh dari pengorbanan.", "Blood Covenant men-stack ATK +5 per kill — dalam 3 ronde, ia bisa mencapai ATK 155+ jika berhasil mengalahkan kartu lawan. Kelemahannya: DEF hanya 60, rentan terhadap debuff ATK/DEF Down."], 27: ["Stormgod of the First Sky adalah dewa badai yang menguasai langit bahkan sebelum ada yang menyebut dirinya dewa. Hanya 10 eksemplar diterbitkan.", "Divine Tempest menyerang semua musuh + stun — namun cooldown 3 ronde membuatnya hanya bisa dipakai sekali dalam duel standar. Lawan yang mempersiapkan Skill Disable bisa menetralisirnya."], 28: ["Malgrath the Hollow King memerintah kerajaan bawah tanah yang tidak tercatat. Ia tidak bisa mati selama bentengnya masih berdiri — dan bentengnya adalah dirinya sendiri.", "Undying Throne aktif selama DEF > 100. Dengan DEF 130, ia butuh 30 poin DEF Down sebelum kerentanan ini hilang. Namun tipe Ghost lemah terhadap Ghost dan Dark lain — counter sesama tipe."], 29: ["Eclipse of the First Age adalah fenomena kosmik dari tabrakan matahari dan bulan pertama. Entitas ini tidak memiliki afiliasi cahaya maupun kegelapan.", "Void Nova mengabaikan semua modifikasi sebelum dealing true damage 80. Cooldown 3 ronde. Sebagai kartu Limited, ia menerima counter bonus +15% dari serangan Rare/Common — satu-satunya celah nyata."], 30: ["Frostborn Queen Eternal memerintah dari singgasana es di puncak dunia pertama. Ia tidak menaklukkan — ia membekukan, dan membiarkan waktu melakukan sisanya.", "Glacial Genesis membekukan seluruh pasukan lawan 2 turn penuh — window kontrol terluas dalam set. Cooldown 3 ronde membuatnya senjata satu kali pakai. Tipe Ice/Fairy menutup Dragon dan Fighting."] };
+
+    const cards = [
+      { id: 1, name: "Firstborn Soldier", role: "Warrior", icon: "🗡️", rarity: "Common", types: ["Normal", "Steel"], atk: 18, def: 14, skill: "First Guard: Kurangi incoming damage 5%", minted: 9800, total_supply: null, serial: null },
+      { id: 2, name: "Eden's Arrow", role: "Ranger", icon: "🏹", rarity: "Common", types: ["Normal", "Flying"], atk: 22, def: 8, skill: "Swiftshot: Tembak 2x jika musuh belum bergerak", minted: 8500, total_supply: null, serial: null },
+      { id: 3, name: "Primordial Stone", role: "Construct", icon: "🪨", rarity: "Common", types: ["Rock"], atk: 12, def: 28, skill: "Stone Skin: Setiap 3 turn DEF+8 permanen (max +24)", minted: 11200, total_supply: null, serial: null },
+      { id: 4, name: "Marshborn Toad", role: "Beast", icon: "🐸", rarity: "Common", types: ["Poison", "Water"], atk: 10, def: 10, skill: "Primal Venom: 3 DMG/turn selama 2 turn", minted: 9100, total_supply: null, serial: null },
+      { id: 5, name: "Spark Weaver", role: "Mage", icon: "🔮", rarity: "Common", types: ["Fire"], atk: 20, def: 6, skill: "First Flame: +5 bonus DMG sekali", minted: 7700, total_supply: null, serial: null },
+      { id: 6, name: "Ashen Warden", role: "Warrior", icon: "🛡️", rarity: "Common", types: ["Fighting", "Steel"], atk: 15, def: 20, skill: "Iron Wall: Jika diserang balik 5 DMG ke penyerang", minted: 10300, total_supply: null, serial: null },
+      { id: 7, name: "Dawncrest Sentinel", role: "Beast", icon: "🦎", rarity: "Common", types: ["Ground"], atk: 8, def: 16, skill: "Camouflage: 20% chance hindari serangan", minted: 12400, total_supply: null, serial: null },
+      { id: 8, name: "Lantern of Origin", role: "Support", icon: "🔦", rarity: "Common", types: ["Normal", "Electric"], atk: 14, def: 12, skill: "First Light: Hapus efek stealth lawan", minted: 9600, total_supply: null, serial: null },
+      { id: 9, name: "Vanguard of the New Age", role: "Paladin", icon: "⚔️", rarity: "Rare", types: ["Fighting", "Steel"], atk: 38, def: 32, skill: "Genesis Shield: Blokir 1 serangan fatal", minted: 3200, total_supply: null, serial: null },
+      { id: 10, name: "Skywarden Eagle", role: "Avian", icon: "🦅", rarity: "Rare", types: ["Flying", "Normal"], atk: 45, def: 20, skill: "First Wind: +15 ATK jika menyerang duluan", minted: 2800, total_supply: null, serial: null },
+      { id: 11, name: "Tidecaller of the Deep", role: "Mage", icon: "🌊", rarity: "Rare", types: ["Water"], atk: 42, def: 18, skill: "Primordial Flood: Kurangi DEF lawan 10", minted: 3500, total_supply: null, serial: null },
+      { id: 12, name: "Bloodpact Rogue", role: "Assassin", icon: "🗡️", rarity: "Rare", types: ["Dark", "Poison"], atk: 50, def: 14, skill: "Origin Stab: 2x DMG dari belakang", minted: 2100, total_supply: null, serial: null },
+      { id: 13, name: "Earthborn Cavalry", role: "Mounted", icon: "🐴", rarity: "Rare", types: ["Ground", "Normal"], atk: 40, def: 35, skill: "First Charge: +10 ATK saat first turn", minted: 4000, total_supply: null, serial: null },
+      { id: 14, name: "Stormcaller Shaman", role: "Shaman", icon: "⚡", rarity: "Rare", types: ["Electric"], atk: 44, def: 22, skill: "Genesis Thunder: Hit 2 target sekaligus", minted: 1900, total_supply: null, serial: null },
+      { id: 15, name: "Serpent of Knowing", role: "Serpent", icon: "🐍", rarity: "Rare", types: ["Poison", "Dark"], atk: 47, def: 26, skill: "Forbidden Coil: Lawan skip 1 turn jika kena", minted: 2400, total_supply: null, serial: null },
+      { id: 16, name: "Glacier Warden", role: "Guardian", icon: "🧊", rarity: "Rare", types: ["Ice", "Water"], atk: 30, def: 50, skill: "Permafrost Veil: Lambatkan ATK lawan 20%", minted: 1750, total_supply: null, serial: null },
+      { id: 17, name: "Void Reaper of Genesis", role: "Specter", icon: "💀", rarity: "Epic", types: ["Ghost", "Dark"], atk: 72, def: 38, skill: "Soul Harvest: Curi 15 HP dari lawan", minted: 420, total_supply: null, serial: null },
+      { id: 18, name: "Primarch Titan", role: "Construct", icon: "🤖", rarity: "Epic", types: ["Steel", "Rock"], atk: 60, def: 65, skill: "Overload Protocol: DEF+20 ATK-10 selama 3 turn", minted: 310, total_supply: null, serial: null },
+      { id: 19, name: "Lunaris the First Dancer", role: "Duelist", icon: "🌙", rarity: "Epic", types: ["Psychic", "Fairy"], atk: 80, def: 28, skill: "Crescent Slash: Crit rate +35% di malam hari", minted: 280, total_supply: null, serial: null },
+      { id: 20, name: "Ancient Wyvern of Creation", role: "Dragon", icon: "🐲", rarity: "Epic", types: ["Dragon", "Flying"], atk: 68, def: 55, skill: "Primal Sweep: Hit semua musuh di baris depan", minted: 195, total_supply: null, serial: null },
+      { id: 21, name: "Phantom of the First Veil", role: "Specter", icon: "🌫️", rarity: "Epic", types: ["Ghost"], atk: 88, def: 22, skill: "Veil Strike: Ignore 50% DEF lawan", minted: 150, total_supply: null, serial: null },
+      { id: 22, name: "Magmaborn Colossus", role: "Elemental", icon: "🌋", rarity: "Epic", types: ["Fire", "Ground"], atk: 65, def: 72, skill: "World Forge: Bakar ground 10 DMG/turn selama 3 turn", minted: 205, total_supply: null, serial: null },
+      { id: 23, name: "Solarius the Firstborn", role: "Divine", icon: "☀️", rarity: "Legendary", types: ["Fire", "Fairy"], atk: 110, def: 90, skill: "Light of Creation: Bangkit sekali dengan 50% HP", minted: 48, total_supply: null, serial: null },
+      { id: 24, name: "Abyssal Sovereign Null", role: "Demon Lord", icon: "👁️", rarity: "Legendary", types: ["Dark", "Ghost"], atk: 130, def: 70, skill: "Unmaking: Hancurkan semua buff lawan", minted: 22, total_supply: null, serial: null },
+      { id: 25, name: "Zerath the First Chronomancer", role: "Arcane", icon: "⏳", rarity: "Legendary", types: ["Psychic", "Steel"], atk: 100, def: 95, skill: "Genesis Rewind: Kembalikan HP ke kondisi awal turn", minted: 35, total_supply: null, serial: null },
+      { id: 26, name: "Valdris the Bloodfather", role: "Warlord", icon: "🩸", rarity: "Legendary", types: ["Fighting", "Dark"], atk: 140, def: 60, skill: "Blood Covenant: ATK +5 setiap musuh dikalahkan", minted: 19, total_supply: null, serial: null },
+      { id: 27, name: "Stormgod of the First Sky", role: "Divine", icon: "🌩️", rarity: "Limited", types: ["Electric", "Flying"], atk: 160, def: 75, skill: "Divine Tempest: Serang semua lawan + stun 1 turn", minted: 7, total_supply: 10, serial: "#7/10" },
+      { id: 28, name: "Malgrath the Hollow King", role: "Undead", icon: "💎", rarity: "Limited", types: ["Ghost", "Steel"], atk: 135, def: 130, skill: "Undying Throne: Tidak bisa di-KO jika DEF > 100", minted: 29, total_supply: 50, serial: "#29/50" },
+      { id: 29, name: "Eclipse of the First Age", role: "Celestial", icon: "🌑", rarity: "Limited", types: ["Dark", "Dragon"], atk: 145, def: 85, skill: "Void Nova: Hapus semua efek & deal 80 true DMG", minted: 17, total_supply: 25, serial: "#17/25" },
+      { id: 30, name: "Frostborn Queen Eternal", role: "Sovereign", icon: "❄️", rarity: "Limited", types: ["Ice", "Fairy"], atk: 120, def: 115, skill: "Glacial Genesis: Freeze semua musuh selama 2 turn", minted: 43, total_supply: 100, serial: "#43/100" }
+    ];
+
+    function tp(t, sm) { const s = sm ? 'font-size:.5rem;padding:.1rem .35rem' : ''; return `<span class="tp" style="background:${TB[t]};color:${TC[t]};border:1px solid ${TC[t]}55;${s}">${t}</span>`; }
+    function ep(t) { return `<span class="ep" style="background:${TB[t]};color:${TC[t]};border:1px solid ${TC[t]}44">${t}</span>`; }
+
+    function getMerged(types) {
+      const S = new Set(), N = new Set(), I = new Set(), W = new Set();
+      types.forEach(t => { const d = TD[t]; if (!d) return; d.superEff?.forEach(x => S.add(x)); d.notEff?.forEach(x => N.add(x)); d.immune?.forEach(x => I.add(x)); d.weakTo?.forEach(x => W.add(x)); });
+      N.forEach(x => { if (S.has(x)) N.delete(x); });
+      return { S, N, I, W };
+    }
+
+    function buildSidebar(list) {
+      document.getElementById('sidebarList').innerHTML = list.map(c => `
+    <li class="sidebar-item" data-id="${c.id}" onclick="openCard(${c.id})">
+      <span class="s-icon">${c.icon}</span>
+      <span style="flex:1;line-height:1.2">${c.name}</span>
+      <span class="s-dot" style="background:${RC[c.rarity]}"></span>
+    </li>`).join('');
+    }
+
+    function buildGrid(list) {
+      document.getElementById('cardGrid').innerHTML = cards.map(c => {
+        const vis = list.find(x => x.id === c.id);
+        return `<div class="card-thumb${vis ? '' : ' hidden'}" onclick="openCard(${c.id})" data-id="${c.id}">
+      <div class="card-thumb-badge" style="color:${RC[c.rarity]};border-color:${RC[c.rarity]}66">${c.rarity}</div>
+      <div class="card-thumb-icon">${c.icon}</div>
+      <div class="card-thumb-name" style="color:${RC[c.rarity]}">${c.name}</div>
+      <div class="card-thumb-types">${c.types.map(t => tp(t, true)).join('')}</div>
+    </div>`;
+      }).join('');
+    }
+
+    let activeF = 'All';
+    function filterHome(btn, f) {
+      activeF = f;
+      document.querySelectorAll('.fb').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const fil = f === 'All' ? cards : cards.filter(c => c.rarity === f);
+      document.getElementById('homeLabel').textContent = `${fil.length} entri ditemukan`;
+      document.querySelectorAll('.card-thumb').forEach(el => {
+        const c = cards.find(x => x.id === parseInt(el.dataset.id));
+        el.classList.toggle('hidden', !(f === 'All' || c.rarity === f));
+      });
+    }
+
+    function onSearch(q) {
+      const l = q.toLowerCase().trim();
+      const fil = l ? cards.filter(c => c.name.toLowerCase().includes(l) || c.role.toLowerCase().includes(l) || c.types.some(t => t.toLowerCase().includes(l))) : cards;
+      document.getElementById('homeLabel').textContent = `${fil.length} entri ditemukan`;
+      document.querySelectorAll('.card-thumb').forEach(el => {
+        const c = cards.find(x => x.id === parseInt(el.dataset.id));
+        const m = !l || (c.name.toLowerCase().includes(l) || c.role.toLowerCase().includes(l) || c.types.some(t => t.toLowerCase().includes(l)));
+        el.classList.toggle('hidden', !(m && (activeF === 'All' || c.rarity === activeF)));
+      });
+      buildSidebar(fil);
+    }
+
+    function setNav(active) {
+      ['nav-home', 'nav-rules', 'nav-arena'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.classList.remove('active');
+      });
+      const a = document.getElementById(active); if (a) a.classList.add('active');
+      document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+    }
+
+    function hideAllPages() {
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('rulesPage').classList.add('hidden');
+      document.getElementById('wikiPage').classList.add('hidden');
+      document.getElementById('arenaPage').classList.add('hidden');
+    }
+
+    function goHome() {
+      hideAllPages();
+      setNav('nav-home');
+      document.getElementById('homePage').style.display = '';
+      document.getElementById('sidebar').classList.remove('open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function goRules() {
+      hideAllPages();
+      setNav('nav-rules');
+      document.getElementById('rulesPage').classList.remove('hidden');
+      document.getElementById('sidebar').classList.remove('open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openCard(id) {
+      const c = cards.find(x => x.id === id); if (!c) return;
+      hideAllPages();
+      setNav('nav-home');
+      document.querySelectorAll('.sidebar-item').forEach(el => el.classList.toggle('active', parseInt(el.dataset.id) === id));
+      const wiki = document.getElementById('wikiPage');
+      wiki.classList.remove('hidden');
+
+      const rc = RC[c.rarity], rb = RB[c.rarity];
+      const lore = LORE[id] || ["Tidak ada lore yang tersedia."];
+      const { S, N, I, W } = getMerged(c.types);
+      const cd = COOLDOWN[c.rarity];
+      const miss = MISS_CHANCE[c.rarity];
+      const crit = CRIT_CHANCE[c.rarity];
+      const cb = COUNTER_BONUS[c.rarity];
+      const hp = c.rarity === 'Limited' ? 110 : 100;
+      const deckMax = { Common: 'Bebas', Rare: 'Max 4', Epic: 'Max 2', Legendary: 'Max 1', Limited: 'Max 1' }[c.rarity];
+
+      const effPillsHTML = (set) => [...set].map(ep).join('') || `<span class="eff-none">—</span>`;
+      const atkP = Math.min(100, Math.round(c.atk / 1.65));
+      const defP = Math.min(100, Math.round(c.def / 1.65));
+      const totP = Math.min(100, Math.round((c.atk + c.def) / 3.3));
+
+      const related = cards.filter(x => x.id !== id && (x.types.some(t => c.types.includes(t)) || x.rarity === c.rarity)).slice(0, 8);
+
+      const supplyHTML = c.rarity === 'Limited'
+        ? `<div class="ib-row"><span class="ib-label">Total Supply</span><span class="ib-val">${c.total_supply}</span></div>
+      <div class="ib-row"><span class="ib-label">Serial</span><span class="ib-val" style="color:${rc};font-weight:700">${c.serial}</span></div>`
+        : `<div class="ib-row"><span class="ib-label">Total Minted</span><span class="ib-val">${c.minted.toLocaleString()}</span></div>`;
+
+      wiki.innerHTML = `
+<div class="page" style="display:block">
+  <div class="wiki-breadcrumb"><a onclick="goHome()">☰ GENESIS</a> › <a onclick="goRules()">Sistem Battle</a> › ${c.rarity} › ${c.name}</div>
+
+  <div class="wiki-header">
+    <div class="wiki-icon-box" style="border-color:${rc}44;background:${rb}">${c.icon}</div>
+    <div>
+      <div class="wiki-card-title" style="color:${rc}">${c.name}</div>
+      <div class="wiki-card-sub">${c.role} · GENESIS Set I · #${String(c.id).padStart(3, '0')}</div>
+      <div class="wiki-type-row">${c.types.map(t => tp(t, false)).join('')}</div>
+      <span class="wiki-rarity-badge" style="color:${rc};border-color:${rc}">${c.rarity}</span>
+    </div>
+  </div>
+
+  <div class="wiki-layout">
+    <div>
+
+      <div class="wiki-section">
+        <div class="wiki-section-title">Deskripsi & Lore</div>
+        ${lore.map(p => `<p>${p}</p>`).join('')}
+      </div>
+
+      <div class="wiki-section">
+        <div class="wiki-section-title">Kemampuan Khusus</div>
+        <p style="font-family:'IM Fell English SC',serif;font-size:1.02rem;color:#fde68a;padding:.6rem .9rem;background:rgba(251,191,36,.06);border-left:3px solid #fbbf24;border-radius:0 6px 6px 0;margin-bottom:.7rem">✦ ${c.skill}</p>
+        <div class="cooldown-badge">⏱ Cooldown: ${cd === 0 ? 'Tidak ada cooldown' : cd + ' ronde setelah penggunaan'}</div>
+      </div>
+
+      <div class="wiki-section">
+        <div class="wiki-section-title">Sistem Battle — Statistik Tempur</div>
+        <div class="bstat-grid">
+          <div class="bstat-box">
+            <div class="bstat-title">🎯 Critical & Miss</div>
+            <div style="font-size:.82rem;line-height:1.7;color:var(--text)">
+              <span style="color:#fbbf24">Crit Chance:</span> ${crit}% (×1.5 DMG)<br>
+              <span style="color:#60a5fa">Miss Chance:</span> ${miss}%<br>
+              <span style="color:#c084fc">Surprise Crit vs Legendary:</span> 5%
+            </div>
+          </div>
+          <div class="bstat-box">
+            <div class="bstat-title">❤️ HP & Ronde</div>
+            <div style="font-size:.82rem;line-height:1.7;color:var(--text)">
+              <span style="color:#f87171">HP Base:</span> ${hp}<br>
+              <span style="color:#9ca3af">Max Ronde:</span> ${c.rarity === 'Limited' ? '3 + 1 Overtime' : '3 Ronde'}<br>
+              <span style="color:#6b7280">Seri jika HP sama di ronde 3</span>
+            </div>
+          </div>
+          <div class="bstat-box">
+            <div class="bstat-title">⚖️ Deck & Counter</div>
+            <div style="font-size:.82rem;line-height:1.7;color:var(--text)">
+              <span style="color:#fbbf24">Deck Limit:</span> ${deckMax}<br>
+              ${cb ? `<span style="color:#f87171">Counter Bonus diterima:</span> +${cb}% dari Rare/Common<br>` : ''}
+              ${['Legendary', 'Limited'].includes(c.rarity) ? `<span style="color:#9ca3af">Tank Rare blokir skill: 30%</span>` : ''}
+            </div>
+          </div>
+          <div class="bstat-box">
+            <div class="bstat-title">🔻 Kerentanan Debuff</div>
+            <div class="debuff-list" style="margin:0">
+              ${['Epic', 'Legendary', 'Limited'].includes(c.rarity) ?
+          `<div style="font-size:.75rem;color:#f87171;line-height:1.6">ATK Down: −10–15%<br>DEF Down: −10–15%<br>Skill Disable: 1 ronde<br>Stun: 1× per duel</div>`
+          : `<div style="font-size:.75rem;color:var(--text-dim)">Rentan terhadap semua debuff standar. Tidak ada resistensi khusus.</div>`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wiki-section">
+        <div class="wiki-section-title">Efektivitas Tipe</div>
+        <p style="margin-bottom:.7rem;font-size:.88rem;color:var(--text-dim)">Berdasarkan tipe <strong style="color:var(--text-bright)">${c.types.join(' / ')}</strong>:</p>
+        <div class="eff-grid">
+          <div class="eff-box"><div class="eff-box-title" style="color:#fbbf24">⚡ Super Efektif Menyerang (+10–15%)</div><div class="eff-pills">${effPillsHTML(S)}</div></div>
+          <div class="eff-box"><div class="eff-box-title" style="color:#60a5fa">💨 Tidak Efektif Menyerang (−10–15%)</div><div class="eff-pills">${effPillsHTML(N)}</div></div>
+          <div class="eff-box"><div class="eff-box-title" style="color:#9ca3af">🛡️ Immune — 0 DMG masuk</div><div class="eff-pills">${effPillsHTML(I)}</div></div>
+          <div class="eff-box"><div class="eff-box-title" style="color:#f87171">💥 Lemah Terhadap Serangan Ini</div><div class="eff-pills">${effPillsHTML(W)}</div></div>
+        </div>
+      </div>
+
+      <div class="wiki-section">
+        <div class="wiki-section-title">Kartu Terkait</div>
+        <div class="related-grid">
+          ${related.map(r => `<div class="rel-card" onclick="openCard(${r.id})">
+            <div style="font-size:1.4rem;margin-bottom:.3rem">${r.icon}</div>
+            <div style="font-size:.6rem;font-family:'Cinzel',serif;color:${RC[r.rarity]};line-height:1.3;margin-bottom:.3rem">${r.name}</div>
+            <div>${r.types.map(t => tp(t, true)).join('')}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- INFOBOX -->
+    <aside>
+      <div class="wiki-infobox">
+        <div class="ib-title">Data Kartu #${String(c.id).padStart(3, '0')}</div>
+        <div class="ib-row"><span class="ib-label">Nama</span><span class="ib-val" style="color:${rc};font-size:.68rem;max-width:130px;text-align:right;line-height:1.3">${c.name}</span></div>
+        <div class="ib-row"><span class="ib-label">Rarity</span><span class="wiki-rarity-badge ib-val" style="color:${rc};border-color:${rc};font-size:.55rem">${c.rarity}</span></div>
+        <div class="ib-row"><span class="ib-label">Tipe</span><span class="ib-val">${c.types.map(t => `<span style="color:${TC[t]}">${t}</span>`).join('/')}</span></div>
+        <div class="ib-row"><span class="ib-label">Role</span><span class="ib-val">${c.role}</span></div>
+        <div class="ib-row"><span class="ib-label">Set</span><span class="ib-val">GENESIS · I</span></div>
+        <div class="ib-sep"></div>
+        <div class="ib-section-title">Statistik</div>
+        <div class="sb-row"><div class="sb-lbl"><span>ATK</span><span style="color:${rc};font-weight:700">${c.atk}</span></div><div class="sb-track"><div class="sb-fill" style="width:${atkP}%;background:${rc}"></div></div></div>
+        <div class="sb-row"><div class="sb-lbl"><span>DEF</span><span style="color:${rc};font-weight:700">${c.def}</span></div><div class="sb-track"><div class="sb-fill" style="width:${defP}%;background:${rc}aa"></div></div></div>
+        <div class="sb-row"><div class="sb-lbl"><span>TOTAL</span><span style="color:${rc};font-weight:700">${c.atk + c.def}</span></div><div class="sb-track"><div class="sb-fill" style="width:${totP}%;background:linear-gradient(90deg,${rc},${rc}55)"></div></div></div>
+        <div class="ib-row"><span class="ib-label">HP Base</span><span class="ib-val" style="color:#f87171;font-weight:700">${hp}</span></div>
+        <div class="ib-sep"></div>
+        <div class="ib-section-title">Battle Rules</div>
+        <div class="ib-row"><span class="ib-label">Cooldown</span><span class="ib-val" style="color:#fbbf24">${cd === 0 ? '—' : cd + ' ronde'}</span></div>
+        <div class="ib-row"><span class="ib-label">Crit Chance</span><span class="ib-val">${crit}%</span></div>
+        <div class="ib-row"><span class="ib-label">Miss Chance</span><span class="ib-val">${miss}%</span></div>
+        <div class="ib-row"><span class="ib-label">Deck Limit</span><span class="ib-val" style="color:${rc}">${deckMax}</span></div>
+        ${cb ? `<div class="ib-row"><span class="ib-label">Counter Bonus</span><span class="ib-val" style="color:#f87171">+${cb}%</span></div>` : ''}
+        <div class="ib-sep"></div>
+        ${supplyHTML}
+      </div>
+    </aside>
+  </div>
+</div>`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('sidebar').classList.remove('open');
+    }
+
+    // ══════════════════════════════════════════
+    // BATTLE SIMULATION — 5 Kartu per Player
+    // ══════════════════════════════════════════
+
+    const DECK_SIZE = 5;
+    // simDecks[pi] = array of 5 cards (or null for empty slots)
+    let simDecks = [Array(DECK_SIZE).fill(null), Array(DECK_SIZE).fill(null)];
+    let pickingPlayer = null;
+    let pickingSlot = null;
+    let sim = null;
+
+    // ── Card Stats Helpers ──
+    function calcMaxHP(card) { return 80 + card.def; }
+
+    function getTypeMultiplier(atkTypes, defTypes) {
+      let m = 1.0, label = '', labelText = '';
+      atkTypes.forEach(at => {
+        defTypes.forEach(dt => {
+          const d = TD[at];
+          if (!d) return;
+          if (d.immune && d.immune.includes(dt)) { m = 0; label = 'immune'; }
+          else if (d.superEff && d.superEff.includes(dt)) { if (m !== 0) { m *= 1.25; label = 'super'; } }
+          else if (d.notEff && d.notEff.includes(dt)) { if (m !== 0) { m *= 0.75; if (label !== 'super') label = 'noteff'; } }
+        });
+      });
+      if (m === 0) labelText = '🛡️ IMMUNE!';
+      else if (m > 1.0) labelText = `⚡ Super Efektif ×${m.toFixed(2)}`;
+      else if (m < 1.0) labelText = `💨 Tidak Efektif ×${m.toFixed(2)}`;
+      return { m, label, labelText };
+    }
+
+    function calcDamage(action, attackerCard, defenderCard) {
+      let baseDmg, dmg;
+      if (action === 'attack') {
+        baseDmg = randInt(15, 22);
+        dmg = baseDmg + Math.round(attackerCard.atk * 0.15);
+      } else {
+        baseDmg = randInt(20, 28);
+        dmg = baseDmg + Math.round(attackerCard.atk * 0.25);
+      }
+      const te = getTypeMultiplier(attackerCard.types, defenderCard.types);
+      dmg = Math.round(dmg * te.m);
+      if (te.m > 0) {
+        const defReduction = Math.round(defenderCard.def * 0.1);
+        dmg = Math.max(1, dmg - defReduction);
+      }
+      return { dmg, te };
+    }
+
+    // ── Slot & Picker ──
+    function initSlots() {
+      [0, 1].forEach(pi => {
+        const p = pi + 1;
+        const el = document.getElementById(`p${p}slots`);
+        el.innerHTML = Array.from({ length: DECK_SIZE }, (_, si) =>
+          `<div class="deck-slot" id="p${p}s${si}" onclick="openPicker(${p},${si})">
+            <span class="slot-hint">SLOT ${si + 1} — KLIK UNTUK PILIH KARTU</span>
+          </div>`
+        ).join('');
+      });
+      renderSlots();
+    }
+
+    function renderSlots() {
+      [0, 1].forEach(pi => {
+        const p = pi + 1;
+        let filled = 0;
+        simDecks[pi].forEach((c, si) => {
+          const el = document.getElementById(`p${p}s${si}`);
+          if (!el) return;
+          if (c) {
+            filled++;
+            const rc = RC[c.rarity];
+            const maxHP = calcMaxHP(c);
+            el.className = 'deck-slot filled';
+            el.onclick = () => openPicker(p, si);
+            el.innerHTML = `<span class="slot-icon">${c.icon}</span>
+              <span class="slot-info">
+                <div class="slot-name" style="color:${rc}">${c.name}</div>
+                <div class="slot-stats">ATK ${c.atk} · DEF ${c.def} · HP ${maxHP} · ${c.rarity}</div>
+                <div class="slot-types">${c.types.map(t => `<span class="tp" style="background:${TB[t]};color:${TC[t]};border:1px solid ${TC[t]}44;font-size:.48rem;padding:.08rem .3rem">${t}</span>`).join('')}</div>
+              </span>
+              <button class="remove-btn" onclick="removeCard(${pi},${si});event.stopPropagation()">✕</button>`;
+          } else {
+            el.className = 'deck-slot';
+            el.onclick = () => openPicker(p, si);
+            el.innerHTML = `<span class="slot-hint">SLOT ${si + 1} — KLIK UNTUK PILIH KARTU</span>`;
+          }
+        });
+        document.getElementById(`p${p}deckcount`).textContent = `${filled} / ${DECK_SIZE}`;
+      });
+      const p1ok = simDecks[0].every(Boolean);
+      const p2ok = simDecks[1].every(Boolean);
+      document.getElementById('startBtn').disabled = !(p1ok && p2ok);
+    }
+
+    function removeCard(pi, si) {
+      simDecks[pi][si] = null;
+      renderSlots();
+      resetSimDisplay();
+    }
+
+    function openPicker(player, slot) {
+      pickingPlayer = player;
+      pickingSlot = slot;
+      document.getElementById('pickerTitle').textContent = `Player ${player} — Slot ${slot + 1} — Pilih Kartu`;
+      document.getElementById('pickerSearch').value = '';
+      renderPickerGrid('');
+      document.getElementById('pickerOverlay').classList.add('open');
+    }
+    function closePicker() { document.getElementById('pickerOverlay').classList.remove('open'); }
+    function filterPicker(q) { renderPickerGrid(q.toLowerCase()); }
+
+    function renderPickerGrid(q) {
+      // All IDs already used in EITHER deck (except slot being replaced)
+      const usedIds = new Set();
+      [0, 1].forEach(pi => {
+        simDecks[pi].forEach((c, si) => {
+          // Skip the slot currently being replaced
+          if (pi === pickingPlayer - 1 && si === pickingSlot) return;
+          if (c) usedIds.add(c.id);
+        });
+      });
+      const filtered = q
+        ? cards.filter(c => c.name.toLowerCase().includes(q) || c.role.toLowerCase().includes(q) || c.types.some(t => t.toLowerCase().includes(q)))
+        : cards;
+      document.getElementById('pickerGrid').innerHTML = filtered.map(c => {
+        const used = usedIds.has(c.id);
+        const maxHP = calcMaxHP(c);
+        return `<div class="picker-card${used ? ' used' : ''}" onclick="pickCard(${c.id})">
+          <div class="pc-icon">${c.icon}</div>
+          <div class="pc-name" style="color:${RC[c.rarity]}">${c.name}</div>
+          <div class="pc-power" style="color:${RC[c.rarity]}">ATK ${c.atk} · DEF ${c.def} · HP ${maxHP}</div>
+          <div class="pc-types">${c.types.map(t => `<span class="tp" style="background:${TB[t]};color:${TC[t]};border:1px solid ${TC[t]}44;font-size:.48rem;padding:.08rem .28rem">${t}</span>`).join('')}</div>
+        </div>`;
+      }).join('');
+    }
+
+    function pickCard(id) {
+      const c = cards.find(x => x.id === id);
+      if (!c) return;
+      simDecks[pickingPlayer - 1][pickingSlot] = c;
+      closePicker();
+      renderSlots();
+      resetSimDisplay();
+    }
+
+    // ── Simulation Display ──
+    function resetSimDisplay() {
+      document.getElementById('simStatus').style.display = 'none';
+      document.getElementById('turnIndicator').style.display = 'none';
+      document.getElementById('simActions').style.display = 'none';
+      document.getElementById('simLog').innerHTML = '';
+      document.getElementById('winnerBanner').classList.remove('show');
+      document.getElementById('sb-pts1').textContent = '0';
+      document.getElementById('sb-pts2').textContent = '0';
+      const c1 = simDecks[0].find(Boolean);
+      const c2 = simDecks[1].find(Boolean);
+      document.getElementById('sb-card1').textContent = c1 ? `${c1.icon} ${c1.name}` : '—';
+      document.getElementById('sb-card2').textContent = c2 ? `${c2.icon} ${c2.name}` : '—';
+      document.getElementById('sb-rem1').textContent = '5 kartu tersisa';
+      document.getElementById('sb-rem2').textContent = '5 kartu tersisa';
+      sim = null;
+    }
+
+    function getName(p) { return document.getElementById(`p${p}name`).value.trim() || `Player ${p}`; }
+
+    function addLog(msg, cls) {
+      const log = document.getElementById('simLog');
+      const entry = document.createElement('div');
+      entry.className = `sim-log-entry ${cls || ''}`;
+      entry.innerHTML = msg;
+      log.appendChild(entry);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function updateHP() {
+      [0, 1].forEach(pi => {
+        const p = pi + 1;
+        const maxHP = sim.maxHP[pi];
+        const hp = Math.max(0, sim.hp[pi]);
+        const pct = (hp / maxHP) * 100;
+        document.getElementById(`ps${p}-hp`).textContent = `${hp} / ${maxHP}`;
+        const bar = document.getElementById(`ps${p}-bar`);
+        bar.style.width = pct + '%';
+        bar.style.background = pct > 50 ? (pi === 0 ? '#60a5fa' : '#f87171') : pct > 25 ? '#fbbf24' : '#ef4444';
+        const info = [];
+        if (sim.defending[pi]) info.push('<span class="sim-ps-badge" style="background:rgba(96,165,250,.15);color:#60a5fa;border:1px solid #60a5fa44">🛡️ Defending</span>');
+        if (sim.skillUsed[pi]) info.push('<span class="sim-ps-badge" style="background:rgba(156,163,175,.1);color:#9ca3af;border:1px solid #9ca3af44">Skill Used</span>');
+        document.getElementById(`ps${p}-info`).innerHTML = info.join('');
+      });
+    }
+
+    function currentCard(pi) {
+      return sim.deckQueue[pi][sim.deckIdx[pi]];
+    }
+
+    function updateScoreboard() {
+      document.getElementById('sb-name1').textContent = getName(1);
+      document.getElementById('sb-name2').textContent = getName(2);
+      [0, 1].forEach(pi => {
+        const c = currentCard(pi);
+        const p = pi + 1;
+        document.getElementById(`sb-card${p}`).textContent = c ? `${c.icon} ${c.name}` : '—';
+        const rem = sim.deckQueue[pi].length - sim.deckIdx[pi];
+        document.getElementById(`sb-rem${p}`).textContent = `${Math.max(0, rem)} kartu tersisa`;
+      });
+      document.getElementById('sb-pts1').textContent = sim.kills[0];
+      document.getElementById('sb-pts2').textContent = sim.kills[1];
+    }
+
+    function updateTurnUI() {
+      const ti = document.getElementById('turnIndicator');
+      const cp = sim.turn;
+      const name = getName(cp + 1);
+      const card = currentCard(cp);
+      ti.textContent = `⚔ Giliran ${name}: ${card.icon} ${card.name}`;
+      ti.className = `sim-turn-indicator ${cp === 0 ? 'p1-turn' : 'p2-turn'}`;
+      if (cp === 0) {
+        document.getElementById('simActions').style.display = 'flex';
+        document.getElementById('btnAtk').disabled = false;
+        document.getElementById('btnSkill').disabled = sim.skillUsed[0];
+        document.getElementById('btnDef').disabled = false;
+      } else {
+        document.getElementById('simActions').style.display = 'none';
+      }
+    }
+
+    function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+    // ── AI Logic ──
+    function aiAction() {
+      const aiHP = sim.hp[1], aiMaxHP = sim.maxHP[1];
+      const oppHP = sim.hp[0];
+      const aiHPpct = aiHP / aiMaxHP;
+      const skillAvail = !sim.skillUsed[1];
+      const oppDefending = sim.defending[0];
+      const r = Math.random();
+      if (aiHPpct < 0.3 && skillAvail) return r < 0.75 ? 'skill' : 'attack';
+      if (oppDefending && skillAvail) return r < 0.5 ? 'skill' : 'attack';
+      if (aiHPpct > 0.8 && skillAvail && oppHP > aiMaxHP * 0.5) return r < 0.45 ? 'skill' : r < 0.8 ? 'attack' : 'defend';
+      if (skillAvail) return r < 0.35 ? 'skill' : r < 0.75 ? 'attack' : 'defend';
+      return r < 0.7 ? 'attack' : 'defend';
+    }
+
+    // ── Battle Start ──
+    function startBattle() {
+      if (!simDecks[0].every(Boolean) || !simDecks[1].every(Boolean)) return;
+      // Build queue (copy of deck)
+      const q0 = [...simDecks[0]];
+      const q1 = [...simDecks[1]];
+      const c0 = q0[0], c1 = q1[0];
+      const hp0 = calcMaxHP(c0), hp1 = calcMaxHP(c1);
+      sim = {
+        deckQueue: [q0, q1],
+        deckIdx: [0, 0],
+        hp: [hp0, hp1],
+        maxHP: [hp0, hp1],
+        kills: [0, 0],
+        turn: 0,
+        skillUsed: [false, false],
+        defending: [false, false],
+        matchOver: false,
+        processing: false
+      };
+
+      document.getElementById('simStatus').style.display = '';
+      document.getElementById('turnIndicator').style.display = '';
+      document.getElementById('winnerBanner').classList.remove('show');
+      document.getElementById('simLog').innerHTML = '';
+      document.getElementById('ps1-icon').textContent = c0.icon;
+      document.getElementById('ps1-name').textContent = `${getName(1)}: ${c0.name}`;
+      document.getElementById('ps2-icon').textContent = c1.icon;
+      document.getElementById('ps2-name').textContent = `${getName(2)}: ${c1.name}`;
+
+      updateHP(); updateScoreboard(); updateTurnUI();
+      addLog(`═══ PERTARUNGAN DIMULAI! ═══`, 'log-round');
+      addLog(`${getName(1)} vs ${getName(2)} — Masing-masing membawa 5 kartu!`, 'log-system');
+      logMatchup();
+      addLog(`Giliran <strong style="color:#60a5fa">${getName(1)}</strong> — ${c0.icon} <strong>${c0.name}</strong>`, 'log-system');
+    }
+
+    function logMatchup() {
+      const c0 = currentCard(0), c1 = currentCard(1);
+      addLog(`⚔ <strong>${c0.icon} ${c0.name}</strong> [ATK ${c0.atk} · DEF ${c0.def} · HP ${sim.hp[0]}] vs <strong>${c1.icon} ${c1.name}</strong> [ATK ${c1.atk} · DEF ${c1.def} · HP ${sim.hp[1]}]`, 'log-system');
+      const te1 = getTypeMultiplier(c0.types, c1.types);
+      const te2 = getTypeMultiplier(c1.types, c0.types);
+      if (te1.labelText) addLog(`${getName(1)} → ${getName(2)}: ${te1.labelText}`, 'log-system');
+      if (te2.labelText) addLog(`${getName(2)} → ${getName(1)}: ${te2.labelText}`, 'log-system');
+    }
+
+    // ── Action Handler ──
+    function doAction(action) {
+      if (!sim || sim.matchOver || sim.processing) return;
+      const cp = sim.turn, op = 1 - cp;
+      const pName = getName(cp + 1), oName = getName(op + 1);
+      const pCard = currentCard(cp), oCard = currentCard(op);
+      const logCls = cp === 0 ? 'log-p1' : 'log-p2';
+
+      if (action === 'attack' || action === 'skill') {
+        if (action === 'skill' && sim.skillUsed[cp]) return;
+        if (action === 'skill') sim.skillUsed[cp] = true;
+
+        const { dmg: rawDmg, te } = calcDamage(action, pCard, oCard);
+        let dmg = rawDmg;
+        const actionLabel = action === 'skill' ? '<span class="sim-log-skill">SKILL!</span>' : 'menyerang!';
+        const teLbl = te.labelText ? ` <span style="color:${te.label === 'super' ? '#fbbf24' : te.label === 'noteff' ? '#60a5fa' : '#9ca3af'};font-size:.75rem">${te.labelText}</span>` : '';
+
+        if (te.m === 0) {
+          addLog(`${pCard.icon} <strong>${pName}</strong> ${actionLabel} ${teLbl} — Damage: <span class="sim-log-dmg">0</span>`, logCls);
+        } else if (sim.defending[op]) {
+          const orig = dmg; dmg = Math.round(dmg * 0.5);
+          addLog(`${pCard.icon} <strong>${pName}</strong> ${actionLabel}${teLbl} Damage <span class="sim-log-dmg">${orig}</span> → <span class="sim-log-shield">🛡️ dikurangi 50%</span> = <span class="sim-log-dmg">${dmg}</span>`, logCls);
+          sim.defending[op] = false;
+        } else {
+          addLog(`${pCard.icon} <strong>${pName}</strong> ${actionLabel}${teLbl} Damage: <span class="sim-log-dmg">−${dmg} HP</span>`, logCls);
+        }
+        sim.hp[op] -= dmg;
+      } else if (action === 'defend') {
+        sim.defending[cp] = true;
+        addLog(`${pCard.icon} <strong>${pName}</strong> memilih <span class="sim-log-shield">DEFEND!</span> Damage masuk dikurangi 50%.`, logCls);
+      }
+
+      sim.hp[op] = Math.max(0, sim.hp[op]);
+      updateHP();
+
+      // Check card death
+      if (sim.hp[op] <= 0) {
+        sim.kills[cp]++;
+        addLog(`💀 ${oCard.icon} <strong>${oCard.name}</strong> (${oName}) dikalahkan!`, 'log-system');
+        updateScoreboard();
+
+        // Advance opponent's deck
+        sim.deckIdx[op]++;
+        const nextCard = currentCard(op);
+
+        if (!nextCard) {
+          // Opponent has no more cards — attacker wins match
+          sim.matchOver = true;
+          addLog(`═══ PERTARUNGAN SELESAI! ═══`, 'log-round');
+          addLog(`🏆🏆🏆 <strong>${pName}</strong> MENANG! Mengalahkan semua kartu lawan! (${sim.kills[0]} kill vs ${sim.kills[1]} kill) 🏆🏆🏆`, 'log-winner');
+          document.getElementById('simActions').style.display = 'none';
+          document.getElementById('turnIndicator').textContent = `🏆 ${pName} Menang!`;
+          document.getElementById('turnIndicator').className = 'sim-turn-indicator';
+          const banner = document.getElementById('winnerBanner');
+          document.getElementById('winnerText').textContent = `🏆 ${pName} Menang!`;
+          document.getElementById('winnerText').style.color = cp === 0 ? '#60a5fa' : '#f87171';
+          document.getElementById('winnerSub').textContent = `Semua kartu ${oName} dikalahkan! · Kill: ${sim.kills[cp]} – ${sim.kills[op]}`;
+          banner.classList.add('show');
+          banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          updateScoreboard();
+          return;
+        }
+
+        // New card enters for opponent
+        const newHP = calcMaxHP(nextCard);
+        sim.hp[op] = newHP;
+        sim.maxHP[op] = newHP;
+        sim.skillUsed[op] = false;
+        sim.defending[op] = false;
+
+        // Update name/icon display for opponent
+        const p_op = op + 1;
+        document.getElementById(`ps${p_op}-icon`).textContent = nextCard.icon;
+        document.getElementById(`ps${p_op}-name`).textContent = `${getName(p_op)}: ${nextCard.name}`;
+
+        addLog(`🔄 ${oName} mengeluarkan kartu berikutnya: ${nextCard.icon} <strong>${nextCard.name}</strong> (HP ${newHP})`, 'log-round');
+        sim.processing = true;
+        setTimeout(() => {
+          sim.processing = false;
+          updateHP();
+          updateScoreboard();
+          // Turn stays with the attacker (winner continues)
+          updateTurnUI();
+          logMatchup();
+          addLog(`Giliran <strong style="color:${cp === 0 ? '#60a5fa' : '#f87171'}">${pName}</strong>...`, 'log-system');
+          if (cp === 1) {
+            sim.processing = true;
+            setTimeout(() => {
+              sim.processing = false;
+              doAction(aiAction());
+            }, 600);
+          }
+        }, 700);
+        return;
+      }
+
+      // Switch turn
+      sim.turn = op;
+      updateTurnUI();
+      addLog(`Giliran <strong style="color:${op === 0 ? '#60a5fa' : '#f87171'}">${getName(op + 1)}</strong>...`, 'log-system');
+
+      // AI auto-play for Player 2
+      if (op === 1 && !sim.matchOver) {
+        sim.processing = true;
+        setTimeout(() => {
+          if (!sim || sim.matchOver) return;
+          sim.processing = false;
+          doAction(aiAction());
+        }, 600);
+      }
+    }
+
+    function resetArena() {
+      simDecks = [Array(DECK_SIZE).fill(null), Array(DECK_SIZE).fill(null)];
+      sim = null;
+      initSlots();
+      resetSimDisplay();
+    }
+
+    function goArena() {
+      hideAllPages();
+      setNav('nav-arena');
+      document.getElementById('arenaPage').classList.remove('hidden');
+      document.getElementById('sidebar').classList.remove('open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      initSlots();
+      resetSimDisplay();
+    }
+
+    buildSidebar(cards);
+    buildGrid(cards);
+  </script>
+</body>
+
+</html>
