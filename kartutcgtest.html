@@ -1999,7 +1999,7 @@
             <span class="rule-section-title">Referensi Efektivitas Tipe</span>
           </div>
           <div class="rule-body">
-            <p>Setiap serangan dihitung berdasarkan tipe penyerang vs tipe target. Multiplier ×1.25 untuk Super Efektif, ×0.75 untuk Tidak Efektif, ×0.00 untuk Immune.</p>
+            <p>Setiap serangan dihitung berdasarkan tipe penyerang vs tipe target. Multiplier ×1.25 untuk Super Efektif, ×0.75 untuk Tidak Efektif, ×0.30 untuk matchup yang seharusnya Immune (dimodifikasi agar battle tidak stuck).</p>
             <table class="rule-table">
               <tr>
                 <th>Efektivitas</th>
@@ -2017,13 +2017,13 @@
                 <td style="color:#60a5fa">💨 Tidak Efektif</td>
                 <td style="color:#60a5fa">×0.75</td>
                 <td>Label biru + penalty DMG</td>
-                <td>Hindari matchup ini — damage berkurang drastis</td>
+                <td>Hindari matchup ini — damage berkurang signifikan</td>
               </tr>
               <tr>
-                <td style="color:#9ca3af">🛡️ Immune</td>
-                <td style="color:#9ca3af">×0.00</td>
-                <td>Label abu + 0 DMG</td>
-                <td>Damage tidak masuk sama sekali — ganti kartu jika bisa</td>
+                <td style="color:#9ca3af">🛡️ Hampir Immune</td>
+                <td style="color:#9ca3af">×0.30</td>
+                <td>Label abu — damage sangat kecil</td>
+                <td>Tipe target sangat resisten — ganti kartu jika memungkinkan</td>
               </tr>
               <tr>
                 <td>Normal</td>
@@ -2507,19 +2507,45 @@
     function calcMaxHP(card) { return 80 + card.def; }
 
     function getTypeMultiplier(atkTypes, defTypes) {
+      // TD[X].superEff = types that X hits super effectively (attacker's perspective)
+      // TD[X].notEff   = types that X hits not effectively (attacker's perspective)
+      // TD[X].immune   = types that X itself is immune TO (defender's perspective)
+      //
+      // So: "Ghost immune to Normal" means TD['Ghost'].immune = ['Normal']
+      // Which means: when attacker type is Normal and defender type is Ghost → immune
+      // We check: does defender type have immunity against attacker type?
+      //
+      // To avoid full-immune stalemates (0 dmg both ways), immune = ×0.3 instead of ×0
+
       let m = 1.0, label = '', labelText = '';
+
       atkTypes.forEach(at => {
         defTypes.forEach(dt => {
-          const d = TD[at];
-          if (!d) return;
-          if (d.immune && d.immune.includes(dt)) { m = 0; label = 'immune'; }
-          else if (d.superEff && d.superEff.includes(dt)) { if (m !== 0) { m *= 1.25; label = 'super'; } }
-          else if (d.notEff && d.notEff.includes(dt)) { if (m !== 0) { m *= 0.75; if (label !== 'super') label = 'noteff'; } }
+          const defData = TD[dt]; // check DEFENDER's immunities
+          const atkData = TD[at]; // check ATTACKER's effectiveness
+
+          if (defData && defData.immune && defData.immune.includes(at)) {
+            // Defender is immune to this attacker type → very reduced, not zero
+            m *= 0.3;
+            if (label !== 'super') label = 'immune';
+          } else if (atkData && atkData.superEff && atkData.superEff.includes(dt)) {
+            m *= 1.25;
+            if (label !== 'immune') label = 'super';
+          } else if (atkData && atkData.notEff && atkData.notEff.includes(dt)) {
+            m *= 0.75;
+            if (label !== 'super' && label !== 'immune') label = 'noteff';
+          }
         });
       });
-      if (m === 0) labelText = '🛡️ IMMUNE!';
+
+      // Floor multiplier so damage is never truly 0 — prevents infinite stalemates
+      if (m < 0.3) m = 0.3;
+
+      if (m >= 1.2) labelText = `⚡ Super Efektif ×${m.toFixed(2)}`;
       else if (m > 1.0) labelText = `⚡ Super Efektif ×${m.toFixed(2)}`;
+      else if (label === 'immune') labelText = `🛡️ Hampir Immune ×${m.toFixed(2)}`;
       else if (m < 1.0) labelText = `💨 Tidak Efektif ×${m.toFixed(2)}`;
+
       return { m, label, labelText };
     }
 
