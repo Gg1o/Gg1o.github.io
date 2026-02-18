@@ -1540,9 +1540,8 @@
     /* Type table enhancements */
     .rule-table tr:nth-child(even) td,
     .rule-table tr:nth-child(even) th {
-      background: rgba(255, 255, 255, .02);
+      background: rgba(255,255,255,.02);
     }
-
     .rule-table td:first-child {
       font-weight: 600;
       white-space: nowrap;
@@ -1553,17 +1552,15 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, .82);
+      background: rgba(0,0,0,.82);
       z-index: 500;
       align-items: center;
       justify-content: center;
       padding: 1rem;
     }
-
     .picker-overlay.open {
       display: flex;
     }
-
     .picker-modal {
       background: var(--surface);
       border: 1px solid var(--border2);
@@ -1574,9 +1571,8 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, .7);
+      box-shadow: 0 20px 60px rgba(0,0,0,.7);
     }
-
     .picker-header {
       display: flex;
       align-items: center;
@@ -1585,7 +1581,6 @@
       border-bottom: 1px solid var(--border);
       flex-shrink: 0;
     }
-
     .picker-header h3 {
       font-family: 'Cinzel', serif;
       font-size: .82rem;
@@ -1593,7 +1588,6 @@
       text-transform: uppercase;
       color: var(--accent);
     }
-
     .picker-close {
       font-family: 'Cinzel', serif;
       font-size: .65rem;
@@ -1606,21 +1600,15 @@
       cursor: pointer;
       transition: all .2s;
     }
-
-    .picker-close:hover {
-      color: #ef4444;
-      border-color: #ef444466;
-    }
-
+    .picker-close:hover { color: #ef4444; border-color: #ef444466; }
     .picker-search {
       padding: .7rem 1rem;
       border-bottom: 1px solid var(--border);
       flex-shrink: 0;
     }
-
     .picker-search input {
       width: 100%;
-      background: rgba(255, 255, 255, .05);
+      background: rgba(255,255,255,.05);
       border: 1px solid var(--border2);
       border-radius: 5px;
       padding: .45rem .75rem;
@@ -1630,11 +1618,7 @@
       letter-spacing: 1px;
       outline: none;
     }
-
-    .picker-search input:focus {
-      border-color: rgba(251, 191, 36, .4);
-    }
-
+    .picker-search input:focus { border-color: rgba(251,191,36,.4); }
     .picker-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -1643,9 +1627,8 @@
       overflow-y: auto;
       flex: 1;
     }
-
     .picker-card {
-      background: rgba(255, 255, 255, .04);
+      background: rgba(255,255,255,.04);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: .65rem .5rem;
@@ -1653,23 +1636,16 @@
       cursor: pointer;
       transition: all .18s;
     }
-
     .picker-card:hover {
-      background: rgba(255, 255, 255, .09);
-      border-color: rgba(251, 191, 36, .4);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(251,191,36,.4);
       transform: translateY(-2px);
     }
-
     .picker-card.used {
       opacity: .28;
       pointer-events: none;
     }
-
-    .pc-icon {
-      font-size: 1.7rem;
-      margin-bottom: .3rem;
-    }
-
+    .pc-icon { font-size: 1.7rem; margin-bottom: .3rem; }
     .pc-name {
       font-family: 'Cinzel', serif;
       font-size: .58rem;
@@ -1677,19 +1653,8 @@
       margin-bottom: .25rem;
       line-height: 1.3;
     }
-
-    .pc-power {
-      font-size: .55rem;
-      color: var(--text-dim);
-      margin-bottom: .3rem;
-    }
-
-    .pc-types {
-      display: flex;
-      gap: .2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .pc-power { font-size: .55rem; color: var(--text-dim); margin-bottom: .3rem; }
+    .pc-types { display: flex; gap: .2rem; justify-content: center; flex-wrap: wrap; }
 
     /* Slot hint text fix */
     .slot-hint {
@@ -1761,9 +1726,7 @@
             <span class="rule-section-title">Cara Bermain — 5 Kartu per Deck</span>
           </div>
           <div class="rule-body">
-            <p>Setiap pemain memilih <strong>5 kartu</strong> sebelum battle dimulai. Kartu bertarung satu per satu
-              secara berurutan — kartu Slot 1 maju duluan, lalu Slot 2 ketika Slot 1 kalah, dan seterusnya. Pemain yang
-              berhasil mengalahkan semua 5 kartu lawan adalah pemenangnya.</p>
+            <p>Setiap pemain memilih <strong>5 kartu</strong> sebelum battle dimulai. Kartu bertarung satu per satu secara berurutan — kartu Slot 1 maju duluan, lalu Slot 2 ketika Slot 1 kalah, dan seterusnya. Pemain yang berhasil mengalahkan semua 5 kartu lawan adalah pemenangnya.</p>
             <table class="rule-table">
               <tr>
                 <th>Fase</th>
@@ -1786,9 +1749,7 @@
                 <td>Habiskan semua 5 kartu lawan untuk memenangkan pertandingan</td>
               </tr>
             </table>
-            <div class="example-box"><strong>Tips urutan slot:</strong> Tempatkan kartu pembuka (cepat / ATK tinggi) di
-              Slot 1, kartu debuffer di Slot 2–3, dan kartu terkuat (Legendary/Limited) di Slot 4–5 sebagai finisher.
-            </div>
+            <div class="example-box"><strong>Tips urutan slot:</strong> Tempatkan kartu pembuka (cepat / ATK tinggi) di Slot 1, kartu debuffer di Slot 2–3, dan kartu terkuat (Legendary/Limited) di Slot 4–5 sebagai finisher.</div>
           </div>
         </div>
 
@@ -1799,8 +1760,7 @@
             <span class="rule-section-title">3 Aksi Battle — Attack, Skill, Defend</span>
           </div>
           <div class="rule-body">
-            <p>Setiap giliran kamu hanya bisa memilih <strong>satu aksi</strong>. Pilihan yang tepat di waktu yang tepat
-              seringkali lebih menentukan daripada kekuatan kartu itu sendiri.</p>
+            <p>Setiap giliran kamu hanya bisa memilih <strong>satu aksi</strong>. Pilihan yang tepat di waktu yang tepat seringkali lebih menentukan daripada kekuatan kartu itu sendiri.</p>
             <table class="rule-table">
               <tr>
                 <th>Aksi</th>
@@ -1827,9 +1787,7 @@
                 <td>Saat HP kritis atau membaca lawan akan pakai Skill</td>
               </tr>
             </table>
-            <div class="example-box"><strong>Perhatian:</strong> Skill hanya bisa dipakai <strong>sekali per
-                kartu</strong> — tidak bisa disimpan untuk kartu berikutnya. Gunakan Skill selagi bisa, jangan buang
-              sia-sia dengan defend lawan.</div>
+            <div class="example-box"><strong>Perhatian:</strong> Skill hanya bisa dipakai <strong>sekali per kartu</strong> — tidak bisa disimpan untuk kartu berikutnya. Gunakan Skill selagi bisa, jangan buang sia-sia dengan defend lawan.</div>
           </div>
         </div>
 
@@ -1840,9 +1798,7 @@
             <span class="rule-section-title">HP Kartu — 80 + DEF</span>
           </div>
           <div class="rule-body">
-            <p>HP setiap kartu dihitung otomatis dari formula <strong>HP = 80 + DEF</strong>. Artinya kartu dengan DEF
-              tinggi jauh lebih sulit dikalahkan — bukan hanya karena mengurangi damage masuk, tapi juga karena HP
-              awalnya lebih besar.</p>
+            <p>HP setiap kartu dihitung otomatis dari formula <strong>HP = 80 + DEF</strong>. Artinya kartu dengan DEF tinggi jauh lebih sulit dikalahkan — bukan hanya karena mengurangi damage masuk, tapi juga karena HP awalnya lebih besar.</p>
             <table class="rule-table">
               <tr>
                 <th>Rarity</th>
@@ -1881,9 +1837,7 @@
                 <td>HP tertinggi di semua rarity — butuh strategi tipe dan timing Defend</td>
               </tr>
             </table>
-            <div class="example-box"><strong>Contoh:</strong> Glacier Warden (Rare, DEF 50) punya HP 130. Primarch Titan
-              (Epic, DEF 65) punya HP 145. Malgrath the Hollow King (Limited, DEF 130) punya HP 210 — butuh 7–10 giliran
-              Attack biasa untuk mengalahkannya.</div>
+            <div class="example-box"><strong>Contoh:</strong> Glacier Warden (Rare, DEF 50) punya HP 130. Primarch Titan (Epic, DEF 65) punya HP 145. Malgrath the Hollow King (Limited, DEF 130) punya HP 210 — butuh 7–10 giliran Attack biasa untuk mengalahkannya.</div>
           </div>
         </div>
 
@@ -1894,8 +1848,7 @@
             <span class="rule-section-title">Damage Formula — ATK + Type Counter</span>
           </div>
           <div class="rule-body">
-            <p>Damage yang keluar bukan sekadar angka acak — ada komponen ATK kartu dan efektivitas tipe yang
-              mempengaruhinya secara signifikan.</p>
+            <p>Damage yang keluar bukan sekadar angka acak — ada komponen ATK kartu dan efektivitas tipe yang mempengaruhinya secara signifikan.</p>
             <div class="bstat-grid" style="margin:.6rem 0">
               <div class="bstat-box">
                 <div class="bstat-title">⚔ Attack</div>
@@ -1905,8 +1858,7 @@
               <div class="bstat-box">
                 <div class="bstat-title">✨ Skill</div>
                 <div class="bstat-val" style="color:#c084fc">35–45 + (ATK × 0.25)</div>
-                <div class="bstat-desc">Multiplier ATK lebih besar. Kartu Legendary bisa menghasilkan 70–90+ damage
-                  dengan Skill</div>
+                <div class="bstat-desc">Multiplier ATK lebih besar. Kartu Legendary bisa menghasilkan 70–90+ damage dengan Skill</div>
               </div>
               <div class="bstat-box">
                 <div class="bstat-title">⚡ Super Efektif</div>
@@ -1919,9 +1871,7 @@
                 <div class="bstat-desc">DEF lawan mengurangi damage masuk secara flat setiap serangan</div>
               </div>
             </div>
-            <div class="example-box"><strong>Simulasi damage:</strong> Kartu ATK 90 menggunakan Skill → base 35–45 +
-              (90×0.25) = 57–67 → kena Super Efektif ×1.25 = 71–84 → dikurangi DEF lawan 65×0.10 = 6 → <strong>total
-                ~65–78 damage</strong>.</div>
+            <div class="example-box"><strong>Simulasi damage:</strong> Kartu ATK 90 menggunakan Skill → base 35–45 + (90×0.25) = 57–67 → kena Super Efektif ×1.25 = 71–84 → dikurangi DEF lawan 65×0.10 = 6 → <strong>total ~65–78 damage</strong>.</div>
           </div>
         </div>
 
@@ -1932,9 +1882,7 @@
             <span class="rule-section-title">Strategi Deck — Urutan & Komposisi</span>
           </div>
           <div class="rule-body">
-            <p>Dengan 5 slot kartu, susunan deck sangat menentukan. Kartu yang kalah digantikan oleh kartu berikutnya,
-              dan <strong>pemenang duel tetap giliran menyerang lebih dulu</strong> — ini keuntungan besar yang bisa
-              dimanfaatkan.</p>
+            <p>Dengan 5 slot kartu, susunan deck sangat menentukan. Kartu yang kalah digantikan oleh kartu berikutnya, dan <strong>pemenang duel tetap giliran menyerang lebih dulu</strong> — ini keuntungan besar yang bisa dimanfaatkan.</p>
             <table class="rule-table">
               <tr>
                 <th>Slot</th>
@@ -1968,17 +1916,10 @@
               </tr>
             </table>
             <div class="rule-pills">
-              <span class="rule-pill" style="background:rgba(96,165,250,.12);color:#60a5fa;border:1px solid #60a5fa44">✓
-                Opener cepat = info tipe gratis</span>
-              <span class="rule-pill"
-                style="background:rgba(192,132,252,.12);color:#c084fc;border:1px solid #c084fc44">✓ Simpan Skill untuk
-                HP lawan < 50%</span>
-                  <span class="rule-pill"
-                    style="background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid #fbbf2444">✓ Legendary/Limited
-                    sebagai closers</span>
-                  <span class="rule-pill"
-                    style="background:rgba(74,222,128,.12);color:#4ade80;border:1px solid #4ade8044">✓ Defend saat HP <
-                      30%</span>
+              <span class="rule-pill" style="background:rgba(96,165,250,.12);color:#60a5fa;border:1px solid #60a5fa44">✓ Opener cepat = info tipe gratis</span>
+              <span class="rule-pill" style="background:rgba(192,132,252,.12);color:#c084fc;border:1px solid #c084fc44">✓ Simpan Skill untuk HP lawan < 50%</span>
+              <span class="rule-pill" style="background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid #fbbf2444">✓ Legendary/Limited sebagai closers</span>
+              <span class="rule-pill" style="background:rgba(74,222,128,.12);color:#4ade80;border:1px solid #4ade8044">✓ Defend saat HP < 30%</span>
             </div>
           </div>
         </div>
@@ -1990,8 +1931,7 @@
             <span class="rule-section-title">Kelemahan Rarity — Cara Mengalahkan Kartu Kuat</span>
           </div>
           <div class="rule-body">
-            <p>Kartu Legendary dan Limited memang memiliki ATK dan HP jauh lebih tinggi — tapi mereka tetap punya celah
-              yang bisa dieksploitasi dengan strategi tipe yang tepat.</p>
+            <p>Kartu Legendary dan Limited memang memiliki ATK dan HP jauh lebih tinggi — tapi mereka tetap punya celah yang bisa dieksploitasi dengan strategi tipe yang tepat.</p>
             <table class="rule-table">
               <tr>
                 <th>Rarity</th>
@@ -2030,9 +1970,7 @@
                 <td>HP terbesar — wajib tipe Super Efektif + Skill untuk efisiensi. Defend sering untuk kartu ini</td>
               </tr>
             </table>
-            <div class="example-box"><strong>Contoh mengalahkan Limited:</strong> Malgrath the Hollow King (Ghost, HP
-              210) → gunakan kartu Ghost atau Dark (Super Efektif ×1.25). Skill + tipe counter = ~80–100 damage per
-              Skill. Butuh 3–4 kartu tapi sangat efisien dibanding Attack biasa yang hanya 20–30.</div>
+            <div class="example-box"><strong>Contoh mengalahkan Limited:</strong> Malgrath the Hollow King (Ghost, HP 210) → gunakan kartu Ghost atau Dark (Super Efektif ×1.25). Skill + tipe counter = ~80–100 damage per Skill. Butuh 3–4 kartu tapi sangat efisien dibanding Attack biasa yang hanya 20–30.</div>
           </div>
         </div>
 
@@ -2044,29 +1982,14 @@
           </div>
           <div class="rule-body">
             <div class="debuff-list">
-              <div class="debuff-item">🎯 <strong style="color:#fbbf24;min-width:130px">Baca tipe lawan</strong> Sebelum
-                menyerang, cek tipe kartu aktif lawan. Pilih kartu di deck-mu yang punya Super Efektif vs tipe tersebut.
-              </div>
-              <div class="debuff-item">✨ <strong style="color:#c084fc;min-width:130px">Timing Skill</strong> Jangan
-                langsung pakai Skill di awal — tunggu sampai lawan HP rendah atau tidak dalam posisi Defend. Satu Skill
-                yang tepat bisa langsung mengakhiri kartu lawan.</div>
-              <div class="debuff-item">🛡️ <strong style="color:#60a5fa;min-width:130px">Kapan Defend</strong> Defend
-                berguna saat HP kartu aktifmu di bawah 30%, atau saat kamu yakin lawan akan pakai Skill. Defend
-                memblokir 50% damage — bisa menyelamatkan kartu dari satu serangan mematikan.</div>
-              <div class="debuff-item">⚡ <strong style="color:#4ade80;min-width:130px">Manfaatkan Momentum</strong>
-                Pemenang duel tetap menyerang duluan saat kartu baru lawan masuk. Artinya satu kartu kuatmu bisa
-                menghabiskan 2–3 kartu lawan berturut-turut jika HP-nya masih cukup.</div>
-              <div class="debuff-item">🃏 <strong style="color:#9ca3af;min-width:130px">Korbankan Opener</strong> Kartu
-                Common di Slot 1 boleh dikorbankan — tugasnya bukan menang, tapi mengikis HP kartu awal lawan dan
-                menghabiskan Skill-nya sebelum kartu utamamu masuk.</div>
-              <div class="debuff-item">🏆 <strong style="color:#f87171;min-width:130px">Simpan Finisher</strong>
-                Legendary atau Limited di Slot 5 akan keluar saat lawan sudah kehabisan counter dan kartu terbaiknya. Di
-                saat itu, finisher-mu bisa membersihkan 2–3 kartu terakhir lawan dengan mudah.</div>
+              <div class="debuff-item">🎯 <strong style="color:#fbbf24;min-width:130px">Baca tipe lawan</strong> Sebelum menyerang, cek tipe kartu aktif lawan. Pilih kartu di deck-mu yang punya Super Efektif vs tipe tersebut.</div>
+              <div class="debuff-item">✨ <strong style="color:#c084fc;min-width:130px">Timing Skill</strong> Jangan langsung pakai Skill di awal — tunggu sampai lawan HP rendah atau tidak dalam posisi Defend. Satu Skill yang tepat bisa langsung mengakhiri kartu lawan.</div>
+              <div class="debuff-item">🛡️ <strong style="color:#60a5fa;min-width:130px">Kapan Defend</strong> Defend berguna saat HP kartu aktifmu di bawah 30%, atau saat kamu yakin lawan akan pakai Skill. Defend memblokir 50% damage — bisa menyelamatkan kartu dari satu serangan mematikan.</div>
+              <div class="debuff-item">⚡ <strong style="color:#4ade80;min-width:130px">Manfaatkan Momentum</strong> Pemenang duel tetap menyerang duluan saat kartu baru lawan masuk. Artinya satu kartu kuatmu bisa menghabiskan 2–3 kartu lawan berturut-turut jika HP-nya masih cukup.</div>
+              <div class="debuff-item">🃏 <strong style="color:#9ca3af;min-width:130px">Korbankan Opener</strong> Kartu Common di Slot 1 boleh dikorbankan — tugasnya bukan menang, tapi mengikis HP kartu awal lawan dan menghabiskan Skill-nya sebelum kartu utamamu masuk.</div>
+              <div class="debuff-item">🏆 <strong style="color:#f87171;min-width:130px">Simpan Finisher</strong> Legendary atau Limited di Slot 5 akan keluar saat lawan sudah kehabisan counter dan kartu terbaiknya. Di saat itu, finisher-mu bisa membersihkan 2–3 kartu terakhir lawan dengan mudah.</div>
             </div>
-            <div class="example-box"><strong>Kombo Deck Efektif:</strong> Common (Slot 1, opener) → Rare Fire (Slot 2,
-              counter Ice/Grass) → Rare Psychic (Slot 3, counter Fighting/Poison) → Epic Ghost (Slot 4, counter Psychic)
-              → Legendary Dark (Slot 5, finisher Super Efektif vs Psychic/Ghost). Deck ini punya coverage tipe lebar dan
-              finisher mematikan.</div>
+            <div class="example-box"><strong>Kombo Deck Efektif:</strong> Common (Slot 1, opener) → Rare Fire (Slot 2, counter Ice/Grass) → Rare Psychic (Slot 3, counter Fighting/Poison) → Epic Ghost (Slot 4, counter Psychic) → Legendary Dark (Slot 5, finisher Super Efektif vs Psychic/Ghost). Deck ini punya coverage tipe lebar dan finisher mematikan.</div>
           </div>
         </div>
 
@@ -2077,9 +2000,7 @@
             <span class="rule-section-title">Referensi Efektivitas Tipe</span>
           </div>
           <div class="rule-body">
-            <p>Setiap serangan dihitung berdasarkan tipe penyerang vs tipe target. Multiplier ×1.25 untuk Super Efektif,
-              ×0.75 untuk Tidak Efektif, ×0.30 untuk matchup yang seharusnya Immune (dimodifikasi agar battle tidak
-              stuck).</p>
+            <p>Setiap serangan dihitung berdasarkan tipe penyerang vs tipe target. Multiplier ×1.25 untuk Super Efektif, ×0.75 untuk Tidak Efektif, ×0.30 untuk matchup yang seharusnya Immune (dimodifikasi agar battle tidak stuck).</p>
             <table class="rule-table">
               <tr>
                 <th>Efektivitas</th>
@@ -2112,152 +2033,39 @@
                 <td>Tidak ada modifikasi — damage sesuai formula dasar</td>
               </tr>
             </table>
-            <div class="example-box"><strong>Combo tipe terkuat:</strong> Kartu dual-type Ghost/Dark menyerang Psychic →
-              Super Efektif ganda ×1.25 × ×1.25 = total ×1.56 damage. Void Reaper of Genesis memanfaatkan ini secara
-              penuh.</div>
+            <div class="example-box"><strong>Combo tipe terkuat:</strong> Kartu dual-type Ghost/Dark menyerang Psychic → Super Efektif ganda ×1.25 × ×1.25 = total ×1.56 damage. Void Reaper of Genesis memanfaatkan ini secara penuh.</div>
 
-            <div
-              style="margin-top:1.4rem;margin-bottom:.5rem;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent)">
-              📋 Daftar Lengkap Efektivitas Tipe</div>
-            <p style="font-size:.82rem;color:var(--text-dim);margin-bottom:.9rem">Tabel berikut mencakup semua 18 tipe.
-              Gunakan sebagai referensi saat membangun deck atau memilih kartu di Battle Simulation.</p>
+            <div style="margin-top:1.4rem;margin-bottom:.5rem;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent)">📋 Daftar Lengkap Efektivitas Tipe</div>
+            <p style="font-size:.82rem;color:var(--text-dim);margin-bottom:.9rem">Tabel berikut mencakup semua 18 tipe. Gunakan sebagai referensi saat membangun deck atau memilih kartu di Battle Simulation.</p>
 
             <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--border)">
-              <table class="rule-table" style="min-width:680px;border:none;border-radius:0">
-                <tr>
-                  <th style="width:90px">Tipe</th>
-                  <th style="color:#fbbf24">⚡ Super Efektif vs</th>
-                  <th style="color:#60a5fa">💨 Not Effective vs</th>
-                  <th style="color:#f87171">💥 Lemah terhadap</th>
-                  <th style="color:#4ade80">🛡️ Kuat terhadap</th>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#9fa19f">Normal</span></td>
-                  <td style="color:var(--text-dim)">—</td>
-                  <td>Rock, Steel</td>
-                  <td>Fighting</td>
-                  <td style="color:var(--text-dim)">—</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#e8554e">Fire</span></td>
-                  <td>Grass, Ice, Bug, Steel</td>
-                  <td>Fire, Water, Rock, Dragon</td>
-                  <td>Water, Rock, Ground</td>
-                  <td>Grass, Ice, Bug, Steel</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#4d90d5">Water</span></td>
-                  <td>Fire, Ground, Rock</td>
-                  <td>Water, Grass, Dragon</td>
-                  <td>Electric, Grass</td>
-                  <td>Fire, Ground, Rock</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#f3d23b">Electric</span></td>
-                  <td>Water, Flying</td>
-                  <td>Electric, Grass, Dragon, <em style="color:#9ca3af">Ground (immune)</em></td>
-                  <td>Ground</td>
-                  <td>Water, Flying</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5fbd58">Grass</span></td>
-                  <td>Water, Ground, Rock</td>
-                  <td>Fire, Grass, Poison, Flying, Bug, Dragon, Steel</td>
-                  <td>Fire, Ice, Poison, Flying, Bug</td>
-                  <td>Water, Ground, Rock</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#75d0c1">Ice</span></td>
-                  <td>Grass, Ground, Flying, Dragon</td>
-                  <td>Fire, Water, Ice, Steel</td>
-                  <td>Fire, Fighting, Rock, Steel</td>
-                  <td>Grass, Ground, Flying, Dragon</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ce4265">Fighting</span></td>
-                  <td>Normal, Ice, Rock, Dark, Steel</td>
-                  <td>Poison, Flying, Psychic, Bug, Fairy</td>
-                  <td>Psychic, Flying, Fairy</td>
-                  <td>Normal, Ice, Rock, Dark, Steel</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ab6ac8">Poison</span></td>
-                  <td>Grass, Fairy</td>
-                  <td>Poison, Ground, Rock, Ghost</td>
-                  <td>Ground, Psychic</td>
-                  <td>Grass, Fairy</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#d97845">Ground</span></td>
-                  <td>Fire, Electric, Poison, Rock, Steel</td>
-                  <td>Grass, Bug</td>
-                  <td>Water, Ice, Grass</td>
-                  <td>Fire, Electric, Poison, Rock, Steel</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#8fa8dd">Flying</span></td>
-                  <td>Grass, Fighting, Bug</td>
-                  <td>Electric, Rock, Steel</td>
-                  <td>Electric, Ice, Rock</td>
-                  <td>Grass, Fighting, Bug</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#f97176">Psychic</span></td>
-                  <td>Fighting, Poison</td>
-                  <td>Psychic, Steel</td>
-                  <td>Bug, Ghost, Dark</td>
-                  <td>Fighting, Poison</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#91c12f">Bug</span></td>
-                  <td>Grass, Psychic, Dark</td>
-                  <td>Fire, Fighting, Flying, Ghost, Steel, Fairy</td>
-                  <td>Fire, Flying, Rock</td>
-                  <td>Grass, Psychic, Dark</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#c5b78c">Rock</span></td>
-                  <td>Fire, Ice, Flying, Bug</td>
-                  <td>Fighting, Ground, Steel</td>
-                  <td>Water, Grass, Fighting, Ground, Steel</td>
-                  <td>Fire, Ice, Flying, Bug</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5269ac">Ghost</span></td>
-                  <td>Psychic, Ghost</td>
-                  <td>Dark, <em style="color:#9ca3af">Normal (immune)</em></td>
-                  <td>Ghost, Dark</td>
-                  <td>Psychic, Ghost</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#0f6ac0">Dragon</span></td>
-                  <td>Dragon</td>
-                  <td>Steel</td>
-                  <td>Ice, Dragon, Fairy</td>
-                  <td>Dragon</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#595761">Dark</span></td>
-                  <td>Psychic, Ghost</td>
-                  <td>Fighting, Dark, Fairy</td>
-                  <td>Fighting, Bug, Fairy</td>
-                  <td>Psychic, Ghost</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5a8ea2">Steel</span></td>
-                  <td>Ice, Rock, Fairy</td>
-                  <td>Fire, Water, Electric, Steel</td>
-                  <td>Fire, Fighting, Ground</td>
-                  <td>Ice, Rock, Fairy</td>
-                </tr>
-                <tr>
-                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ec8fe6">Fairy</span></td>
-                  <td>Fighting, Dragon, Dark</td>
-                  <td>Fire, Poison, Steel</td>
-                  <td>Poison, Steel</td>
-                  <td>Fighting, Dragon, Dark</td>
-                </tr>
-              </table>
+            <table class="rule-table" style="min-width:680px;border:none;border-radius:0">
+              <tr>
+                <th style="width:90px">Tipe</th>
+                <th style="color:#fbbf24">⚡ Super Efektif vs</th>
+                <th style="color:#60a5fa">💨 Not Effective vs</th>
+                <th style="color:#f87171">💥 Lemah terhadap</th>
+                <th style="color:#4ade80">🛡️ Kuat terhadap</th>
+              </tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#9fa19f">Normal</span></td><td style="color:var(--text-dim)">—</td><td>Rock, Steel</td><td>Fighting</td><td style="color:var(--text-dim)">—</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#e8554e">Fire</span></td><td>Grass, Ice, Bug, Steel</td><td>Fire, Water, Rock, Dragon</td><td>Water, Rock, Ground</td><td>Grass, Ice, Bug, Steel</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#4d90d5">Water</span></td><td>Fire, Ground, Rock</td><td>Water, Grass, Dragon</td><td>Electric, Grass</td><td>Fire, Ground, Rock</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#f3d23b">Electric</span></td><td>Water, Flying</td><td>Electric, Grass, Dragon, <em style="color:#9ca3af">Ground (immune)</em></td><td>Ground</td><td>Water, Flying</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5fbd58">Grass</span></td><td>Water, Ground, Rock</td><td>Fire, Grass, Poison, Flying, Bug, Dragon, Steel</td><td>Fire, Ice, Poison, Flying, Bug</td><td>Water, Ground, Rock</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#75d0c1">Ice</span></td><td>Grass, Ground, Flying, Dragon</td><td>Fire, Water, Ice, Steel</td><td>Fire, Fighting, Rock, Steel</td><td>Grass, Ground, Flying, Dragon</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ce4265">Fighting</span></td><td>Normal, Ice, Rock, Dark, Steel</td><td>Poison, Flying, Psychic, Bug, Fairy</td><td>Psychic, Flying, Fairy</td><td>Normal, Ice, Rock, Dark, Steel</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ab6ac8">Poison</span></td><td>Grass, Fairy</td><td>Poison, Ground, Rock, Ghost</td><td>Ground, Psychic</td><td>Grass, Fairy</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#d97845">Ground</span></td><td>Fire, Electric, Poison, Rock, Steel</td><td>Grass, Bug</td><td>Water, Ice, Grass</td><td>Fire, Electric, Poison, Rock, Steel</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#8fa8dd">Flying</span></td><td>Grass, Fighting, Bug</td><td>Electric, Rock, Steel</td><td>Electric, Ice, Rock</td><td>Grass, Fighting, Bug</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#f97176">Psychic</span></td><td>Fighting, Poison</td><td>Psychic, Steel</td><td>Bug, Ghost, Dark</td><td>Fighting, Poison</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#91c12f">Bug</span></td><td>Grass, Psychic, Dark</td><td>Fire, Fighting, Flying, Ghost, Steel, Fairy</td><td>Fire, Flying, Rock</td><td>Grass, Psychic, Dark</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#c5b78c">Rock</span></td><td>Fire, Ice, Flying, Bug</td><td>Fighting, Ground, Steel</td><td>Water, Grass, Fighting, Ground, Steel</td><td>Fire, Ice, Flying, Bug</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5269ac">Ghost</span></td><td>Psychic, Ghost</td><td>Dark, <em style="color:#9ca3af">Normal (immune)</em></td><td>Ghost, Dark</td><td>Psychic, Ghost</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#0f6ac0">Dragon</span></td><td>Dragon</td><td>Steel</td><td>Ice, Dragon, Fairy</td><td>Dragon</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#595761">Dark</span></td><td>Psychic, Ghost</td><td>Fighting, Dark, Fairy</td><td>Fighting, Bug, Fairy</td><td>Psychic, Ghost</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5a8ea2">Steel</span></td><td>Ice, Rock, Fairy</td><td>Fire, Water, Electric, Steel</td><td>Fire, Fighting, Ground</td><td>Ice, Rock, Fairy</td></tr>
+              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ec8fe6">Fairy</span></td><td>Fighting, Dragon, Dark</td><td>Fire, Poison, Steel</td><td>Poison, Steel</td><td>Fighting, Dragon, Dark</td></tr>
+            </table>
             </div>
 
           </div>
@@ -2273,10 +2081,8 @@
         <div class="arena-sub">5 Kartu per Player · Turn-Based · Eliminasi Semua Kartu Lawan</div>
 
         <div class="formula-box">
-          Pilih 5 kartu per player &nbsp;|&nbsp; Kartu bertarung satu per satu &nbsp;|&nbsp; HP = 80 + DEF &nbsp;|&nbsp;
-          ⚡ Type Counter System
-          &nbsp;|&nbsp; 1️⃣ Attack (20-30) &nbsp;|&nbsp; 2️⃣ Skill (35-45, 1×) &nbsp;|&nbsp; 3️⃣ Defend (−50%)
-          &nbsp;|&nbsp; 🤖 AI Opponent
+          Pilih 5 kartu per player &nbsp;|&nbsp; Kartu bertarung satu per satu &nbsp;|&nbsp; HP = 80 + DEF &nbsp;|&nbsp; ⚡ Type Counter System
+          &nbsp;|&nbsp; 1️⃣ Attack (20-30) &nbsp;|&nbsp; 2️⃣ Skill (35-45, 1×) &nbsp;|&nbsp; 3️⃣ Defend (−50%) &nbsp;|&nbsp; 🤖 AI Opponent
         </div>
 
         <!-- Deck Builder -->
@@ -2286,9 +2092,7 @@
             <div class="deck-panel-header">
               <span style="font-size:1rem">🔵</span>
               <span class="deck-panel-title" style="color:#60a5fa">Player 1</span>
-              <span id="p1deckcount"
-                style="margin-left:auto;font-size:.6rem;color:#4b5563;font-family:'Cinzel',serif;letter-spacing:1px">0 /
-                5</span>
+              <span id="p1deckcount" style="margin-left:auto;font-size:.6rem;color:#4b5563;font-family:'Cinzel',serif;letter-spacing:1px">0 / 5</span>
             </div>
             <div style="padding:.5rem .7rem 0">
               <input class="name-input" id="p1name" placeholder="Nama Player 1..." value="Player 1">
@@ -2300,9 +2104,7 @@
             <div class="deck-panel-header">
               <span style="font-size:1rem">🔴</span>
               <span class="deck-panel-title" style="color:#f87171">Player 2</span>
-              <span id="p2deckcount"
-                style="margin-left:auto;font-size:.6rem;color:#4b5563;font-family:'Cinzel',serif;letter-spacing:1px">0 /
-                5</span>
+              <span id="p2deckcount" style="margin-left:auto;font-size:.6rem;color:#4b5563;font-family:'Cinzel',serif;letter-spacing:1px">0 / 5</span>
             </div>
             <div style="padding:.5rem .7rem 0">
               <input class="name-input" id="p2name" placeholder="Nama Player 2..." value="Player 2">
@@ -2327,16 +2129,14 @@
               <div class="sim-score-name" style="color:#60a5fa" id="sb-name1">Player 1</div>
               <div class="sim-score-card" id="sb-card1">—</div>
               <div class="sim-score-points" style="color:#60a5fa" id="sb-pts1">0</div>
-              <div style="font-size:.58rem;color:#374151;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem"
-                id="sb-rem1">5 kartu tersisa</div>
+              <div style="font-size:.58rem;color:#374151;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem" id="sb-rem1">5 kartu tersisa</div>
             </div>
             <div class="sim-vs">VS</div>
             <div class="sim-score-side">
               <div class="sim-score-name" style="color:#f87171" id="sb-name2">Player 2</div>
               <div class="sim-score-card" id="sb-card2">—</div>
               <div class="sim-score-points" style="color:#f87171" id="sb-pts2">0</div>
-              <div style="font-size:.58rem;color:#374151;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem"
-                id="sb-rem2">5 kartu tersisa</div>
+              <div style="font-size:.58rem;color:#374151;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem" id="sb-rem2">5 kartu tersisa</div>
             </div>
           </div>
 
