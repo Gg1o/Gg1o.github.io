@@ -2497,7 +2497,7 @@
     // BATTLE SIMULATION — 5 Kartu per Player
     // ══════════════════════════════════════════
 
-    const DECK_SIZE = 5;
+    const DECK_SIZE = 3;
     // simDecks[pi] = array of 5 cards (or null for empty slots)
     let simDecks = [Array(DECK_SIZE).fill(null), Array(DECK_SIZE).fill(null)];
     let pickingPlayer = null;
@@ -2550,7 +2550,260 @@
       return { m, label, labelText };
     }
 
-    function calcDamage(action, attackerCard, defenderCard) {
+    function executeCardSkill(session, actor, opponent) {
+    const cardId = actor.card.id;
+    let msgAction = `✨ *Skill: ${actor.card.skill.split(':')[0]}* — *${actor.name}*\n`;
+    actor.skillUsed = true;
+    actor.skillCooldown = COOLDOWN[actor.card.rarity] || 0;
+
+    let dmg = 0;
+
+    // Default damage modifier formulas
+    const baseAtkDmg = () => randInt(20, 28) + Math.round(actor.card.atk * 0.25);
+    const effMultiplier = getTypeMultiplier(actor.card.types, opponent.card.types);
+    const calcFinalDmg = (raw) => {
+        let final = Math.round(raw * effMultiplier);
+        if (effMultiplier > 0) {
+            const defRed = Math.round(opponent.card.def * 0.1);
+            final = Math.max(1, final - defRed);
+        }
+        if (opponent.defending) final = Math.round(final * 0.5);
+        return final;
+    };
+
+    switch (cardId) {
+        case 1: // First Guard: Kurangi incoming damage 5% (Implemented as self DEF buff)
+            actor.buffs.push({ type: 'DEF_MULTI', value: 1.05, duration: 99 });
+            msgAction += `🛡️ Pertahanan meningkat 5% secara permanen!`;
+            break;
+
+        case 2: // Swiftshot: Tembak 2x jika musuh belum bergerak (First turn check)
+            let hits = (session.round === 1) ? 2 : 1;
+            dmg = calcFinalDmg(baseAtkDmg() * hits);
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            msgAction += `🏹 Menembakkan ${hits} anak panah!\n💢 Damage: *${dmg}*`;
+            break;
+
+        case 3: // Stone Skin: Setiap 3 turn DEF+8 permanen
+            actor.buffs.push({ type: 'DEF', value: 8, duration: 99 });
+            msgAction += `🪨 Kulit mengeras! DEF bertambah +8 permanen.`;
+            break;
+
+        case 4: // Primal Venom: 3 DMG/turn selama 2 turn
+            opponent.status.push({ type: 'POISON', value: 3, duration: 2 });
+            msgAction += `🐸 Menyemburkan racun! Lawan akan menerima 3 DMG selama 2 turn.`;
+            break;
+
+        case 5: // First Flame: +5 bonus DMG sekali
+            dmg = calcFinalDmg(baseAtkDmg() + 5);
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            msgAction += `🔥 Semburan api awal!\n💢 Damage: *${dmg}*`;
+            break;
+
+        case 6: // Iron Wall: Jika diserang balik 5 DMG ke penyerang
+            actor.buffs.push({ type: 'REFLECT', value: 5, duration: 1 });
+            msgAction += `🛡️ Mengaktifkan dinding besi! (Memantulkan 5 DMG turn ini)`;
+            break;
+
+        case 7: // Camouflage: 20% chance hindari serangan
+            actor.buffs.push({ type: 'DODGE', value: 20, duration: 1 });
+            msgAction += `🦎 Berkamuflase! (Peluang menghindar +20% turn ini)`;
+            break;
+
+        case 8: // First Light: Hapus efek stealth lawan
+            opponent.buffs = opponent.buffs.filter(b => b.type !== 'DODGE' && b.type !== 'STEALTH');
+            msgAction += `🔦 Menyinari kebenaran! Semua efek sembunyi/menghindar lawan dihapus.`;
+            break;
+
+        case 9: // Genesis Shield: Blokir 1 serangan fatal
+            actor.buffs.push({ type: 'IMMUNE_FATAL', duration: 99 });
+            msgAction += `⚔️ Mengangkat perisai perlindungan fatal!`;
+            break;
+
+        case 10: // First Wind: +15 ATK jika menyerang duluan
+            let bonusAtk = (session.round === 1) ? 15 : 0;
+            actor.buffs.push({ type: 'ATK', value: bonusAtk, duration: 1 });
+            dmg = calcFinalDmg(randInt(20, 28) + Math.round((actor.card.atk + bonusAtk) * 0.25));
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            msgAction += `🦅 Menukik super cepat!\n💢 Damage: *${dmg}*`;
+            break;
+
+        case 11: // Primordial Flood: Kurangi DEF lawan 10
+            opponent.buffs.push({ type: 'DEF', value: -10, duration: 99 });
+            msgAction += `🌊 Banjir purba menerjang! DEF lawan turun 10 permanen.`;
+            break;
+
+        case 12: // Origin Stab: 2x DMG dari belakang
+            dmg = calcFinalDmg(baseAtkDmg() * 2);
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            msgAction += `🗡️ Menusuk dari bayangan!\n💢 Damage: *${dmg}*`;
+            break;
+
+        case 13: // First Charge: +10 ATK saat first turn
+            let chargeAtk = (session.round === 1) ? 10 : 0;
+            actor.buffs.push({ type: 'ATK', value: chargeAtk, duration: 1 });
+            dmg = calcFinalDmg(randInt(20, 28) + Math.round((actor.card.atk + chargeAtk) * 0.25));
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            msgAction += `🐴 Menyerbu dengan kekuatan penuh!\n💢 Damage: *${dmg}*`;
+            break;
+
+        case 14: // Genesis Thunder: Hit 2 target sekaligus
+            // In 1v1, acts as a 1.5x damage nuke
+            dmg = calcFinalDmg(baseAtkDmg() * 1.5);
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            msgAction += `⚡ Memanggil badai petir!\n💢 Damage: *${dmg}*`;
+            break;
+
+        case 15: // Forbidden Coil: Lawan skip 1 turn jika kena
+            opponent.status.push({ type: 'STUN', duration: 1 });
+            msgAction += `🐍 Lilitan kutukan! Lawan tidak bisa bergerak turn depan.`;
+            break;
+
+        case 16: // Permafrost Veil: Lambatkan ATK lawan 20%
+            opponent.buffs.push({ type: 'ATK_MULTI', value: 0.8, duration: 99 });
+            msgAction += `🧊 Tabir es menyelimuti! ATK lawan melambat 20% permanen.`;
+            break;
+
+        case 17: // Soul Harvest: Curi 15 HP dari lawan
+            opponent.hp = Math.max(0, opponent.hp - 15);
+            actor.hp = Math.min(actor.maxHp, actor.hp + 15);
+            msgAction += `💀 Mencabut jiwa! Mencuri 15 HP dari lawan.`;
+            break;
+
+        case 18: // Overload Protocol: DEF+20 ATK-10 selama 3 turn
+            actor.buffs.push({ type: 'DEF', value: 20, duration: 3 });
+            actor.buffs.push({ type: 'ATK', value: -10, duration: 3 });
+            msgAction += `🤖 Overload aktif! DEF naik, ATK turun selama 3 turn.`;
+            break;
+
+        case 19: // Crescent Slash: Crit rate +35% di malam hari
+            let slashDmg = baseAtkDmg();
+            // 50% chance forced crit implementation
+            if (Math.random() < 0.5) {
+                slashDmg *= 1.5;
+                msgAction += `💥 *CRITICAL STRIKE!*\n`;
+            }
+            dmg = calcFinalDmg(slashDmg);
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            msgAction += `🌙 Tebasan sabit bulan!\n💢 Damage: *${dmg}*`;
+            break;
+
+        case 20: // Primal Sweep: Hit semua musuh di baris depan
+            // 1v1 adaptation: slight damage boost + chance to bypass defend
+            dmg = calcFinalDmg(baseAtkDmg() * 1.2);
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            msgAction += `🐲 Sapuan naga purba!\n💢 Damage: *${dmg}*`;
+            break;
+
+        case 21: // Veil Strike: Ignore 50% DEF lawan
+            let effDef = opponent.card.def;
+            if (opponent.buffs) opponent.buffs.forEach(b => { if (b.type === 'DEF') effDef += b.value; });
+            let halvedDef = Math.round(effDef * 0.5);
+
+            let raw21 = baseAtkDmg() * effMultiplier;
+            if (effMultiplier > 0) raw21 = Math.max(1, raw21 - Math.round(halvedDef * 0.1));
+            if (opponent.defending) raw21 *= 0.5;
+
+            dmg = Math.round(raw21);
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            msgAction += `🌫️ Menembus pertahanan lawan!\n💢 Damage: *${dmg}*`;
+            break;
+
+        case 22: // World Forge: Bakar ground 10 DMG/turn selama 3 turn
+            opponent.status.push({ type: 'BURN', value: 10, duration: 3 });
+            msgAction += `🌋 Menciptakan lautan lava! Lawan akan menerima 10 DMG selama 3 turn.`;
+            break;
+
+        case 23: // Light of Creation: Bangkit sekali dengan 50% HP
+            actor.buffs.push({ type: 'REVIVE', value: 0.5, duration: 99 });
+            msgAction += `☀️ Cahaya penciptaan memberkati! Akan kembali dari kematian dengan 50% HP.`;
+            break;
+
+        case 24: // Unmaking: Hancurkan semua buff lawan
+            opponent.buffs = [];
+            msgAction += `👁️ Kekosongan melahap segalanya! Semua status positif lawan dilenyapkan.`;
+            break;
+
+        case 25: // Genesis Rewind: Kembalikan HP ke kondisi awal turn
+            actor.hp = actor.maxHp;
+            msgAction += `⏳ Memutar balik waktu! Kondisi tubuh kembali sempurna (HP Penuh).`;
+            break;
+
+        case 26: // Blood Covenant: ATK +5 setiap musuh dikalahkan
+            actor.buffs.push({ type: 'ATK', value: 5, duration: 99 });
+            // In 1v1 we simulate the immediate buff and deal slight damage
+            dmg = calcFinalDmg(baseAtkDmg());
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            msgAction += `🩸 Mengikat sumpah darah! ATK +5 permanen!\n💢 Damage: *${dmg}*`;
+            break;
+
+        case 27: // Divine Tempest: Serang semua lawan + stun 1 turn
+            dmg = calcFinalDmg(baseAtkDmg());
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            opponent.status.push({ type: 'STUN', duration: 1 });
+            msgAction += `🌩️ Badai langit pertama menyambar! Lawan terkena STUN!\n💢 Damage: *${dmg}*`;
+            break;
+
+        case 28: // Undying Throne: Tidak bisa di-KO jika DEF > 100
+            let tDef = actor.card.def;
+            if (actor.buffs) actor.buffs.forEach(b => { if (b.type === 'DEF') tDef += b.value; });
+
+            if (tDef > 100) {
+                actor.buffs.push({ type: 'IMMUNE_FATAL', duration: 1 });
+                msgAction += `💎 Tahta keabadian aktif (DEF > 100). Imun dari pukulan fatal turn ini!`;
+            } else {
+                msgAction += `💎 Gagal mengaktifkan Tahta Keabadian (Syarat DEF > 100).`;
+            }
+            break;
+
+        case 29: // Void Nova: Hapus semua efek & deal 80 true DMG
+            opponent.buffs = [];
+            opponent.status = [];
+            actor.buffs = [];
+            actor.status = [];
+            dmg = 80;
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            msgAction += `🌑 Kekosongan menelan semua efek! True Damage Absolut!\n💢 Damage: *${dmg}*`;
+            break;
+
+        case 30: // Glacial Genesis: Freeze semua musuh selama 2 turn
+            opponent.status.push({ type: 'STUN', duration: 2 });
+            msgAction += `❄️ Embun beku absolut! Lawan terkena FREEZE selama 2 turn!`;
+            break;
+
+        default:
+            // Fallback generic skill
+            dmg = calcFinalDmg(baseAtkDmg());
+            opponent.hp = Math.max(0, opponent.hp - dmg);
+            msgAction += `💥 Menyerang dengan skill!\n💢 Damage: *${dmg}*`;
+            break;
+    }
+
+    msgAction += `\n❤️ HP ${opponent.name}: *${opponent.hp}*`;
+    return msgAction;
+}
+
+function calcDamageBot(actor, opponent, action) {
+    let baseDmg, dmg;
+    let effAtk = actor.card.atk;
+    let effDef = opponent.card.def;
+    if (actor.buffs) actor.buffs.forEach(b => { if (b.type === 'ATK') effAtk += b.value; if (b.type === 'ATK_MULTI') effAtk *= b.value; });
+    if (opponent.buffs) opponent.buffs.forEach(b => { if (b.type === 'DEF') effDef += b.value; if (b.type === 'DEF_MULTI') effDef *= b.value; });
+    effAtk = Math.max(1, Math.round(effAtk)); effDef = Math.max(1, Math.round(effDef));
+    if (action === 'attack') { baseDmg = randInt(15, 22); dmg = baseDmg + Math.round(effAtk * 0.15); } 
+    else if (action === 'skill') { baseDmg = randInt(20, 28); dmg = baseDmg + Math.round(effAtk * 0.25); } 
+    else return { damage: 0, isCrit: false, isMiss: false, multiplier: 1, te: {m:1, labelText:''} };
+    const isMiss = (Math.random() * 100) < (MISS_CHANCE[actor.card.rarity] || 0);
+    if (isMiss) return { damage: 0, isCrit: false, isMiss: true, multiplier: 1, te: {m:1, labelText:''} };
+    const isCrit = (Math.random() * 100) < (CRIT_CHANCE[actor.card.rarity] || 15);
+    if (isCrit) dmg = Math.round(dmg * 1.5);
+    const te = getTypeMultiplier(actor.card.types, opponent.card.types);
+    dmg = Math.round(dmg * te.m);
+    if (te.m > 0) dmg = Math.max(1, dmg - Math.round(effDef * 0.1));
+    return { damage: dmg, isCrit, isMiss, multiplier: te.m, te };
+}
+
+function calcDamage(action, attackerCard, defenderCard) {
       let baseDmg, dmg;
       if (action === 'attack') {
         baseDmg = randInt(15, 22);
@@ -2679,8 +2932,8 @@
       const c2 = simDecks[1].find(Boolean);
       document.getElementById('sb-card1').textContent = c1 ? `${c1.icon} ${c1.name}` : '—';
       document.getElementById('sb-card2').textContent = c2 ? `${c2.icon} ${c2.name}` : '—';
-      document.getElementById('sb-rem1').textContent = '5 kartu tersisa';
-      document.getElementById('sb-rem2').textContent = '5 kartu tersisa';
+      document.getElementById('sb-rem1').textContent = '3 kartu tersisa';
+      document.getElementById('sb-rem2').textContent = '3 kartu tersisa';
       sim = null;
     }
 
@@ -2780,7 +3033,11 @@
         kills: [0, 0],
         turn: 0,
         skillUsed: [false, false],
+        skillCooldown: [0, 0],
         defending: [false, false],
+        buffs: [[], []],
+        status: [[], []],
+        round: 1,
         matchOver: false,
         processing: false
       };
@@ -2796,7 +3053,7 @@
 
       updateHP(); updateScoreboard(); updateTurnUI();
       addLog(`═══ PERTARUNGAN DIMULAI! ═══`, 'log-round');
-      addLog(`${getName(1)} vs ${getName(2)} — Masing-masing membawa 5 kartu!`, 'log-system');
+      addLog(`${getName(1)} vs ${getName(2)} — Masing-masing membawa 3 kartu!`, 'log-system');
       logMatchup();
       addLog(`Giliran <strong style="color:#60a5fa">${getName(1)}</strong> — ${c0.icon} <strong>${c0.name}</strong>`, 'log-system');
     }
@@ -2818,111 +3075,69 @@
       const pCard = currentCard(cp), oCard = currentCard(op);
       const logCls = cp === 0 ? 'log-p1' : 'log-p2';
 
-      if (action === 'attack' || action === 'skill') {
-        if (action === 'skill' && sim.skillUsed[cp]) return;
-        if (action === 'skill') sim.skillUsed[cp] = true;
+      const actor = { userId: cp, name: pName, card: pCard, hp: sim.hp[cp], maxHp: sim.maxHP[cp], defending: sim.defending[cp], buffs: sim.buffs[cp] || [], status: sim.status[cp] || [], skillUsed: sim.skillUsed[cp], skillCooldown: sim.skillCooldown[cp] || 0 };
+      const opponent = { userId: op, name: oName, card: oCard, hp: sim.hp[op], maxHp: sim.maxHP[op], defending: sim.defending[op], buffs: sim.buffs[op] || [], status: sim.status[op] || [], skillUsed: sim.skillUsed[op], skillCooldown: sim.skillCooldown[op] || 0 };
 
-        const { dmg: rawDmg, te } = calcDamage(action, pCard, oCard);
-        let dmg = rawDmg;
-        const actionLabel = action === 'skill' ? '<span class="sim-log-skill">SKILL!</span>' : 'menyerang!';
-        const teLbl = te.labelText ? ` <span style="color:${te.label === 'super' ? '#fbbf24' : te.label === 'noteff' ? '#60a5fa' : '#9ca3af'};font-size:.75rem">${te.labelText}</span>` : '';
-
-        if (te.m === 0) {
-          addLog(`${pCard.icon} <strong>${pName}</strong> ${actionLabel} ${teLbl} — Damage: <span class="sim-log-dmg">0</span>`, logCls);
-        } else if (sim.defending[op]) {
-          const orig = dmg; dmg = Math.round(dmg * 0.5);
-          addLog(`${pCard.icon} <strong>${pName}</strong> ${actionLabel}${teLbl} Damage <span class="sim-log-dmg">${orig}</span> → <span class="sim-log-shield">🛡️ dikurangi 50%</span> = <span class="sim-log-dmg">${dmg}</span>`, logCls);
-          sim.defending[op] = false;
-        } else {
-          addLog(`${pCard.icon} <strong>${pName}</strong> ${actionLabel}${teLbl} Damage: <span class="sim-log-dmg">−${dmg} HP</span>`, logCls);
-        }
-        sim.hp[op] -= dmg;
-      } else if (action === 'defend') {
-        sim.defending[cp] = true;
-        addLog(`${pCard.icon} <strong>${pName}</strong> memilih <span class="sim-log-shield">DEFEND!</span> Damage masuk dikurangi 50%.`, logCls);
+      if (action === 'skill') {
+         if (actor.skillCooldown > 0) { addLog('❌ <strong>' + actor.name + '</strong>, Skill cooldown! (' + actor.skillCooldown + ' turn).', logCls); sim.processing = false; return; }
       }
+
+      if (action === 'attack') {
+          const { damage: rawDamage, isCrit, isMiss, te } = calcDamageBot(actor, opponent, 'attack');
+          const teLbl = te && te.labelText ? ' <span style="color:' + (te.label === 'super' ? '#fbbf24' : te.label === 'noteff' ? '#60a5fa' : '#9ca3af') + ';font-size:.75rem">' + te.labelText + '</span>' : '';
+          if (isMiss) { addLog('⚔️ <strong>' + actor.name + '</strong> menyerang!<br>💨 <strong>MELESET!</strong>', logCls); } 
+          else {
+              let dmg = rawDamage;
+              if (opponent.defending) { const orig = dmg; dmg = Math.round(dmg * 0.5); opponent.defending = false; addLog('⚔️ <strong>' + actor.name + '</strong> menyerang!'+teLbl+'<br>Damage <span class="sim-log-dmg">'+orig+'</span> → <span class="sim-log-shield">🛡️ dikurangi 50%</span> = <span class="sim-log-dmg">'+dmg+'</span>', logCls); } 
+              else { let cri = isCrit ? '💥 <strong>CRIT!</strong> (×1.5)<br>' : ''; if (te.m === 0) addLog('⚔️ <strong>' + actor.name + '</strong>... Tidak berefek!<br>Damage: <span class="sim-log-dmg">0 HP</span>', logCls); else addLog('⚔️ <strong>' + actor.name + '</strong>!'+teLbl+'<br>'+cri+'Damage: <span class="sim-log-dmg">−'+dmg+' HP</span>', logCls); }
+              opponent.hp = Math.max(0, opponent.hp - dmg);
+          }
+      } else if (action === 'skill') {
+          const sessionWrapper = { round: sim.round || 1 };
+          const skillOutput = executeCardSkill(sessionWrapper, actor, opponent);
+          addLog(skillOutput.replace(/\*(.*?)\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>'), logCls);
+      } else if (action === 'defend') { actor.defending = true; addLog('🛡️ <strong>' + actor.name + '</strong> bertahan!<br><em>(Damage -50% turn ini)</em>', logCls); }
+
+      sim.hp[cp] = actor.hp; sim.defending[cp] = actor.defending; sim.buffs[cp] = actor.buffs; sim.status[cp] = actor.status; sim.skillUsed[cp] = actor.skillUsed; sim.skillCooldown[cp] = actor.skillCooldown;
+      sim.hp[op] = opponent.hp; sim.defending[op] = opponent.defending; sim.buffs[op] = opponent.buffs; sim.status[op] = opponent.status; sim.skillUsed[op] = opponent.skillUsed; sim.skillCooldown[op] = opponent.skillCooldown;
+
+      const dots = sim.status[op].filter(s => s.type === 'POISON' || s.type === 'BURN');
+      dots.forEach(dot => { sim.hp[op] = Math.max(0, sim.hp[op] - dot.value); addLog('☠️ <strong>' + opponent.name + '</strong> terkena efek ' + dot.type + '! HP -' + dot.value, 'log-system'); });
+      const tickDown = (arr) => arr.map(x => ({...x, duration: x.duration - 1})).filter(x => x.duration > 0);
+      sim.buffs[op] = tickDown(sim.buffs[op]); sim.status[op] = tickDown(sim.status[op]); sim.buffs[cp] = tickDown(sim.buffs[cp]); sim.status[cp] = tickDown(sim.status[cp]);
+      if (sim.skillCooldown[cp] > 0) sim.skillCooldown[cp]--;
 
       sim.hp[op] = Math.max(0, sim.hp[op]);
       updateHP();
 
-      // Check card death
       if (sim.hp[op] <= 0) {
-        sim.kills[cp]++;
-        addLog(`💀 ${oCard.icon} <strong>${oCard.name}</strong> (${oName}) dikalahkan!`, 'log-system');
-        updateScoreboard();
+        const reviveBuff = sim.buffs[op].find(b => b.type === 'REVIVE');
+        if (reviveBuff) { sim.hp[op] = Math.max(1, Math.round(sim.maxHP[op] * reviveBuff.value)); sim.buffs[op] = sim.buffs[op].filter(b => b.type !== 'REVIVE'); addLog('☀️ <strong>Cahaya Penciptaan Aktif!</strong> ' + opponent.name + ' bangkit dengan ' + sim.hp[op] + ' HP!', 'log-system'); updateHP(); }
+      }
 
-        // Advance opponent's deck
-        sim.deckIdx[op]++;
-        const nextCard = currentCard(op);
-
+      if (sim.hp[op] <= 0) {
+        sim.kills[cp]++; addLog('💀 ' + oCard.icon + ' <strong>' + oCard.name + '</strong> (' + oName + ') dikalahkan!', 'log-system'); updateScoreboard();
+        sim.deckIdx[op]++; const nextCard = currentCard(op);
         if (!nextCard) {
-          // Opponent has no more cards — attacker wins match
-          sim.matchOver = true;
-          addLog(`═══ PERTARUNGAN SELESAI! ═══`, 'log-round');
-          addLog(`🏆🏆🏆 <strong>${pName}</strong> MENANG! Mengalahkan semua kartu lawan! (${sim.kills[0]} kill vs ${sim.kills[1]} kill) 🏆🏆🏆`, 'log-winner');
-          document.getElementById('simActions').style.display = 'none';
-          document.getElementById('turnIndicator').textContent = `🏆 ${pName} Menang!`;
-          document.getElementById('turnIndicator').className = 'sim-turn-indicator';
-          const banner = document.getElementById('winnerBanner');
-          document.getElementById('winnerText').textContent = `🏆 ${pName} Menang!`;
-          document.getElementById('winnerText').style.color = cp === 0 ? '#60a5fa' : '#f87171';
-          document.getElementById('winnerSub').textContent = `Semua kartu ${oName} dikalahkan! · Kill: ${sim.kills[cp]} – ${sim.kills[op]}`;
-          banner.classList.add('show');
-          banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          updateScoreboard();
-          return;
+          sim.matchOver = true; addLog('═══ PERTARUNGAN SELESAI! ═══', 'log-round'); addLog('🏆🏆🏆 <strong>' + pName + '</strong> MENANG! (' + sim.kills[0] + ' kill vs ' + sim.kills[1] + ') 🏆🏆🏆', 'log-winner');
+          document.getElementById('simActions').style.display = 'none'; document.getElementById('turnIndicator').textContent = '🏆 ' + pName + ' Menang!'; document.getElementById('turnIndicator').className = 'sim-turn-indicator';
+          const banner = document.getElementById('winnerBanner'); document.getElementById('winnerText').textContent = '🏆 ' + pName + ' Menang!'; document.getElementById('winnerText').style.color = cp === 0 ? '#60a5fa' : '#f87171'; document.getElementById('winnerSub').textContent = 'Kill: ' + sim.kills[cp] + ' – ' + sim.kills[op];
+          banner.classList.add('show'); banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); updateScoreboard(); return;
         }
-
-        // New card enters for opponent
-        const newHP = calcMaxHP(nextCard);
-        sim.hp[op] = newHP;
-        sim.maxHP[op] = newHP;
-        sim.skillUsed[op] = false;
-        sim.defending[op] = false;
-
-        // Update name/icon display for opponent
-        const p_op = op + 1;
-        document.getElementById(`ps${p_op}-icon`).textContent = nextCard.icon;
-        document.getElementById(`ps${p_op}-name`).textContent = `${getName(p_op)}: ${nextCard.name}`;
-
-        addLog(`🔄 ${oName} mengeluarkan kartu berikutnya: ${nextCard.icon} <strong>${nextCard.name}</strong> (HP ${newHP})`, 'log-round');
+        const newHP = calcMaxHP(nextCard); sim.hp[op] = newHP; sim.maxHP[op] = newHP; sim.skillUsed[op] = false; sim.defending[op] = false; sim.skillCooldown[op] = 0; sim.buffs[op] = []; sim.status[op] = [];
+        const p_op = op + 1; document.getElementById('ps' + p_op + '-icon').textContent = nextCard.icon; document.getElementById('ps' + p_op + '-name').textContent = getName(p_op) + ': ' + nextCard.name;
+        addLog('🔄 ' + oName + ' mengeluarkan: ' + nextCard.icon + ' <strong>' + nextCard.name + '</strong> (HP ' + newHP + ')', 'log-round');
         sim.processing = true;
-        setTimeout(() => {
-          sim.processing = false;
-          updateHP();
-          updateScoreboard();
-          // Turn stays with the attacker (winner continues)
-          updateTurnUI();
-          logMatchup();
-          addLog(`Giliran <strong style="color:${cp === 0 ? '#60a5fa' : '#f87171'}">${pName}</strong>...`, 'log-system');
-          if (cp === 1) {
-            sim.processing = true;
-            setTimeout(() => {
-              sim.processing = false;
-              doAction(aiAction());
-            }, 600);
-          }
-        }, 700);
+        setTimeout(() => { sim.processing = false; updateHP(); updateScoreboard(); updateTurnUI(); logMatchup(); addLog('Giliran <strong style="color:' + (cp === 0 ? '#60a5fa' : '#f87171') + '">' + pName + '</strong>...', 'log-system'); if (cp === 1) { sim.processing = true; setTimeout(() => { sim.processing = false; doAction(aiAction()); }, 600); } }, 700);
         return;
       }
-
-      // Switch turn
       sim.turn = op;
-      updateTurnUI();
-      addLog(`Giliran <strong style="color:${op === 0 ? '#60a5fa' : '#f87171'}">${getName(op + 1)}</strong>...`, 'log-system');
-
-      // AI auto-play for Player 2
-      if (op === 1 && !sim.matchOver) {
-        sim.processing = true;
-        setTimeout(() => {
-          if (!sim || sim.matchOver) return;
-          sim.processing = false;
-          doAction(aiAction());
-        }, 600);
-      }
+      const isStunned = sim.status[op].some(s => s.type === 'STUN' || s.type === 'FREEZE');
+      if (isStunned) { addLog('❄️ <strong>' + opponent.name + '</strong> terkena Stun/Freeze! Skip giliran...', 'log-system'); sim.status[op].forEach(s => { if(s.type === 'STUN' || s.type === 'FREEZE') s.duration--; }); sim.status[op] = sim.status[op].filter(s => s.duration > 0); if (sim.skillCooldown[op] > 0) sim.skillCooldown[op]--; sim.turn = cp; }
+      updateTurnUI(); addLog('Giliran <strong style="color:' + (sim.turn === 0 ? '#60a5fa' : '#f87171') + '">' + getName(sim.turn + 1) + '</strong>...', 'log-system');
+      if (sim.turn === 1 && !sim.matchOver) { sim.processing = true; setTimeout(() => { if (!sim || sim.matchOver) return; sim.processing = false; doAction(aiAction()); }, 600); }
     }
-
-    function resetArena() {
+function resetArena() {
       simDecks = [Array(DECK_SIZE).fill(null), Array(DECK_SIZE).fill(null)];
       sim = null;
       initSlots();
