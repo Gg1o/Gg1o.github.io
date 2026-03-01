@@ -1540,8 +1540,9 @@
     /* Type table enhancements */
     .rule-table tr:nth-child(even) td,
     .rule-table tr:nth-child(even) th {
-      background: rgba(255,255,255,.02);
+      background: rgba(255, 255, 255, .02);
     }
+
     .rule-table td:first-child {
       font-weight: 600;
       white-space: nowrap;
@@ -1552,15 +1553,17 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.82);
+      background: rgba(0, 0, 0, .82);
       z-index: 500;
       align-items: center;
       justify-content: center;
       padding: 1rem;
     }
+
     .picker-overlay.open {
       display: flex;
     }
+
     .picker-modal {
       background: var(--surface);
       border: 1px solid var(--border2);
@@ -1571,8 +1574,9 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,.7);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .7);
     }
+
     .picker-header {
       display: flex;
       align-items: center;
@@ -1581,6 +1585,7 @@
       border-bottom: 1px solid var(--border);
       flex-shrink: 0;
     }
+
     .picker-header h3 {
       font-family: 'Cinzel', serif;
       font-size: .82rem;
@@ -1588,6 +1593,7 @@
       text-transform: uppercase;
       color: var(--accent);
     }
+
     .picker-close {
       font-family: 'Cinzel', serif;
       font-size: .65rem;
@@ -1600,15 +1606,21 @@
       cursor: pointer;
       transition: all .2s;
     }
-    .picker-close:hover { color: #ef4444; border-color: #ef444466; }
+
+    .picker-close:hover {
+      color: #ef4444;
+      border-color: #ef444466;
+    }
+
     .picker-search {
       padding: .7rem 1rem;
       border-bottom: 1px solid var(--border);
       flex-shrink: 0;
     }
+
     .picker-search input {
       width: 100%;
-      background: rgba(255,255,255,.05);
+      background: rgba(255, 255, 255, .05);
       border: 1px solid var(--border2);
       border-radius: 5px;
       padding: .45rem .75rem;
@@ -1618,7 +1630,11 @@
       letter-spacing: 1px;
       outline: none;
     }
-    .picker-search input:focus { border-color: rgba(251,191,36,.4); }
+
+    .picker-search input:focus {
+      border-color: rgba(251, 191, 36, .4);
+    }
+
     .picker-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -1627,8 +1643,9 @@
       overflow-y: auto;
       flex: 1;
     }
+
     .picker-card {
-      background: rgba(255,255,255,.04);
+      background: rgba(255, 255, 255, .04);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: .65rem .5rem;
@@ -1636,16 +1653,23 @@
       cursor: pointer;
       transition: all .18s;
     }
+
     .picker-card:hover {
-      background: rgba(255,255,255,.09);
-      border-color: rgba(251,191,36,.4);
+      background: rgba(255, 255, 255, .09);
+      border-color: rgba(251, 191, 36, .4);
       transform: translateY(-2px);
     }
+
     .picker-card.used {
       opacity: .28;
       pointer-events: none;
     }
-    .pc-icon { font-size: 1.7rem; margin-bottom: .3rem; }
+
+    .pc-icon {
+      font-size: 1.7rem;
+      margin-bottom: .3rem;
+    }
+
     .pc-name {
       font-family: 'Cinzel', serif;
       font-size: .58rem;
@@ -1653,8 +1677,19 @@
       margin-bottom: .25rem;
       line-height: 1.3;
     }
-    .pc-power { font-size: .55rem; color: var(--text-dim); margin-bottom: .3rem; }
-    .pc-types { display: flex; gap: .2rem; justify-content: center; flex-wrap: wrap; }
+
+    .pc-power {
+      font-size: .55rem;
+      color: var(--text-dim);
+      margin-bottom: .3rem;
+    }
+
+    .pc-types {
+      display: flex;
+      gap: .2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
     /* Slot hint text fix */
     .slot-hint {
@@ -1683,6 +1718,7 @@
         <div class="sidebar-nav-item active" id="nav-home" onclick="goHome()">🏠 Beranda</div>
         <div class="sidebar-nav-item" id="nav-rules" onclick="goRules()">📖 Sistem Battle</div>
         <div class="sidebar-nav-item" id="nav-arena" onclick="goArena()">⚔️ Battle Simulation</div>
+        <div class="sidebar-nav-item" id="nav-update" onclick="goUpdate()">📢 Update Lengkap</div>
       </div>
       <div class="sidebar-section-title">— Kartu (30) —</div>
       <ul class="sidebar-list" id="sidebarList"></ul>
@@ -1726,7 +1762,9 @@
             <span class="rule-section-title">Cara Bermain — 5 Kartu per Deck</span>
           </div>
           <div class="rule-body">
-            <p>Setiap pemain memilih <strong>5 kartu</strong> sebelum battle dimulai. Kartu bertarung satu per satu secara berurutan — kartu Slot 1 maju duluan, lalu Slot 2 ketika Slot 1 kalah, dan seterusnya. Pemain yang berhasil mengalahkan semua 5 kartu lawan adalah pemenangnya.</p>
+            <p>Setiap pemain memilih <strong>5 kartu</strong> sebelum battle dimulai. Kartu bertarung satu per satu
+              secara berurutan — kartu Slot 1 maju duluan, lalu Slot 2 ketika Slot 1 kalah, dan seterusnya. Pemain yang
+              berhasil mengalahkan semua 5 kartu lawan adalah pemenangnya.</p>
             <table class="rule-table">
               <tr>
                 <th>Fase</th>
@@ -1749,7 +1787,9 @@
                 <td>Habiskan semua 5 kartu lawan untuk memenangkan pertandingan</td>
               </tr>
             </table>
-            <div class="example-box"><strong>Tips urutan slot:</strong> Tempatkan kartu pembuka (cepat / ATK tinggi) di Slot 1, kartu debuffer di Slot 2–3, dan kartu terkuat (Legendary/Limited) di Slot 4–5 sebagai finisher.</div>
+            <div class="example-box"><strong>Tips urutan slot:</strong> Tempatkan kartu pembuka (cepat / ATK tinggi) di
+              Slot 1, kartu debuffer di Slot 2–3, dan kartu terkuat (Legendary/Limited) di Slot 4–5 sebagai finisher.
+            </div>
           </div>
         </div>
 
@@ -1760,7 +1800,8 @@
             <span class="rule-section-title">3 Aksi Battle — Attack, Skill, Defend</span>
           </div>
           <div class="rule-body">
-            <p>Setiap giliran kamu hanya bisa memilih <strong>satu aksi</strong>. Pilihan yang tepat di waktu yang tepat seringkali lebih menentukan daripada kekuatan kartu itu sendiri.</p>
+            <p>Setiap giliran kamu hanya bisa memilih <strong>satu aksi</strong>. Pilihan yang tepat di waktu yang tepat
+              seringkali lebih menentukan daripada kekuatan kartu itu sendiri.</p>
             <table class="rule-table">
               <tr>
                 <th>Aksi</th>
@@ -1787,7 +1828,9 @@
                 <td>Saat HP kritis atau membaca lawan akan pakai Skill</td>
               </tr>
             </table>
-            <div class="example-box"><strong>Perhatian:</strong> Skill hanya bisa dipakai <strong>sekali per kartu</strong> — tidak bisa disimpan untuk kartu berikutnya. Gunakan Skill selagi bisa, jangan buang sia-sia dengan defend lawan.</div>
+            <div class="example-box"><strong>Perhatian:</strong> Skill hanya bisa dipakai <strong>sekali per
+                kartu</strong> — tidak bisa disimpan untuk kartu berikutnya. Gunakan Skill selagi bisa, jangan buang
+              sia-sia dengan defend lawan.</div>
           </div>
         </div>
 
@@ -1798,7 +1841,9 @@
             <span class="rule-section-title">HP Kartu — 80 + DEF</span>
           </div>
           <div class="rule-body">
-            <p>HP setiap kartu dihitung otomatis dari formula <strong>HP = 80 + DEF</strong>. Artinya kartu dengan DEF tinggi jauh lebih sulit dikalahkan — bukan hanya karena mengurangi damage masuk, tapi juga karena HP awalnya lebih besar.</p>
+            <p>HP setiap kartu dihitung otomatis dari formula <strong>HP = 80 + DEF</strong>. Artinya kartu dengan DEF
+              tinggi jauh lebih sulit dikalahkan — bukan hanya karena mengurangi damage masuk, tapi juga karena HP
+              awalnya lebih besar.</p>
             <table class="rule-table">
               <tr>
                 <th>Rarity</th>
@@ -1837,7 +1882,9 @@
                 <td>HP tertinggi di semua rarity — butuh strategi tipe dan timing Defend</td>
               </tr>
             </table>
-            <div class="example-box"><strong>Contoh:</strong> Glacier Warden (Rare, DEF 50) punya HP 130. Primarch Titan (Epic, DEF 65) punya HP 145. Malgrath the Hollow King (Limited, DEF 130) punya HP 210 — butuh 7–10 giliran Attack biasa untuk mengalahkannya.</div>
+            <div class="example-box"><strong>Contoh:</strong> Glacier Warden (Rare, DEF 50) punya HP 130. Primarch Titan
+              (Epic, DEF 65) punya HP 145. Malgrath the Hollow King (Limited, DEF 130) punya HP 210 — butuh 7–10 giliran
+              Attack biasa untuk mengalahkannya.</div>
           </div>
         </div>
 
@@ -1848,7 +1895,8 @@
             <span class="rule-section-title">Damage Formula — ATK + Type Counter</span>
           </div>
           <div class="rule-body">
-            <p>Damage yang keluar bukan sekadar angka acak — ada komponen ATK kartu dan efektivitas tipe yang mempengaruhinya secara signifikan.</p>
+            <p>Damage yang keluar bukan sekadar angka acak — ada komponen ATK kartu dan efektivitas tipe yang
+              mempengaruhinya secara signifikan.</p>
             <div class="bstat-grid" style="margin:.6rem 0">
               <div class="bstat-box">
                 <div class="bstat-title">⚔ Attack</div>
@@ -1858,7 +1906,8 @@
               <div class="bstat-box">
                 <div class="bstat-title">✨ Skill</div>
                 <div class="bstat-val" style="color:#c084fc">35–45 + (ATK × 0.25)</div>
-                <div class="bstat-desc">Multiplier ATK lebih besar. Kartu Legendary bisa menghasilkan 70–90+ damage dengan Skill</div>
+                <div class="bstat-desc">Multiplier ATK lebih besar. Kartu Legendary bisa menghasilkan 70–90+ damage
+                  dengan Skill</div>
               </div>
               <div class="bstat-box">
                 <div class="bstat-title">⚡ Super Efektif</div>
@@ -1871,7 +1920,9 @@
                 <div class="bstat-desc">DEF lawan mengurangi damage masuk secara flat setiap serangan</div>
               </div>
             </div>
-            <div class="example-box"><strong>Simulasi damage:</strong> Kartu ATK 90 menggunakan Skill → base 35–45 + (90×0.25) = 57–67 → kena Super Efektif ×1.25 = 71–84 → dikurangi DEF lawan 65×0.10 = 6 → <strong>total ~65–78 damage</strong>.</div>
+            <div class="example-box"><strong>Simulasi damage:</strong> Kartu ATK 90 menggunakan Skill → base 35–45 +
+              (90×0.25) = 57–67 → kena Super Efektif ×1.25 = 71–84 → dikurangi DEF lawan 65×0.10 = 6 → <strong>total
+                ~65–78 damage</strong>.</div>
           </div>
         </div>
 
@@ -1882,7 +1933,9 @@
             <span class="rule-section-title">Strategi Deck — Urutan & Komposisi</span>
           </div>
           <div class="rule-body">
-            <p>Dengan 5 slot kartu, susunan deck sangat menentukan. Kartu yang kalah digantikan oleh kartu berikutnya, dan <strong>pemenang duel tetap giliran menyerang lebih dulu</strong> — ini keuntungan besar yang bisa dimanfaatkan.</p>
+            <p>Dengan 5 slot kartu, susunan deck sangat menentukan. Kartu yang kalah digantikan oleh kartu berikutnya,
+              dan <strong>pemenang duel tetap giliran menyerang lebih dulu</strong> — ini keuntungan besar yang bisa
+              dimanfaatkan.</p>
             <table class="rule-table">
               <tr>
                 <th>Slot</th>
@@ -1916,10 +1969,17 @@
               </tr>
             </table>
             <div class="rule-pills">
-              <span class="rule-pill" style="background:rgba(96,165,250,.12);color:#60a5fa;border:1px solid #60a5fa44">✓ Opener cepat = info tipe gratis</span>
-              <span class="rule-pill" style="background:rgba(192,132,252,.12);color:#c084fc;border:1px solid #c084fc44">✓ Simpan Skill untuk HP lawan < 50%</span>
-              <span class="rule-pill" style="background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid #fbbf2444">✓ Legendary/Limited sebagai closers</span>
-              <span class="rule-pill" style="background:rgba(74,222,128,.12);color:#4ade80;border:1px solid #4ade8044">✓ Defend saat HP < 30%</span>
+              <span class="rule-pill" style="background:rgba(96,165,250,.12);color:#60a5fa;border:1px solid #60a5fa44">✓
+                Opener cepat = info tipe gratis</span>
+              <span class="rule-pill"
+                style="background:rgba(192,132,252,.12);color:#c084fc;border:1px solid #c084fc44">✓ Simpan Skill untuk
+                HP lawan < 50%</span>
+                  <span class="rule-pill"
+                    style="background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid #fbbf2444">✓ Legendary/Limited
+                    sebagai closers</span>
+                  <span class="rule-pill"
+                    style="background:rgba(74,222,128,.12);color:#4ade80;border:1px solid #4ade8044">✓ Defend saat HP <
+                      30%</span>
             </div>
           </div>
         </div>
@@ -1931,7 +1991,8 @@
             <span class="rule-section-title">Kelemahan Rarity — Cara Mengalahkan Kartu Kuat</span>
           </div>
           <div class="rule-body">
-            <p>Kartu Legendary dan Limited memang memiliki ATK dan HP jauh lebih tinggi — tapi mereka tetap punya celah yang bisa dieksploitasi dengan strategi tipe yang tepat.</p>
+            <p>Kartu Legendary dan Limited memang memiliki ATK dan HP jauh lebih tinggi — tapi mereka tetap punya celah
+              yang bisa dieksploitasi dengan strategi tipe yang tepat.</p>
             <table class="rule-table">
               <tr>
                 <th>Rarity</th>
@@ -1970,7 +2031,9 @@
                 <td>HP terbesar — wajib tipe Super Efektif + Skill untuk efisiensi. Defend sering untuk kartu ini</td>
               </tr>
             </table>
-            <div class="example-box"><strong>Contoh mengalahkan Limited:</strong> Malgrath the Hollow King (Ghost, HP 210) → gunakan kartu Ghost atau Dark (Super Efektif ×1.25). Skill + tipe counter = ~80–100 damage per Skill. Butuh 3–4 kartu tapi sangat efisien dibanding Attack biasa yang hanya 20–30.</div>
+            <div class="example-box"><strong>Contoh mengalahkan Limited:</strong> Malgrath the Hollow King (Ghost, HP
+              210) → gunakan kartu Ghost atau Dark (Super Efektif ×1.25). Skill + tipe counter = ~80–100 damage per
+              Skill. Butuh 3–4 kartu tapi sangat efisien dibanding Attack biasa yang hanya 20–30.</div>
           </div>
         </div>
 
@@ -1982,14 +2045,29 @@
           </div>
           <div class="rule-body">
             <div class="debuff-list">
-              <div class="debuff-item">🎯 <strong style="color:#fbbf24;min-width:130px">Baca tipe lawan</strong> Sebelum menyerang, cek tipe kartu aktif lawan. Pilih kartu di deck-mu yang punya Super Efektif vs tipe tersebut.</div>
-              <div class="debuff-item">✨ <strong style="color:#c084fc;min-width:130px">Timing Skill</strong> Jangan langsung pakai Skill di awal — tunggu sampai lawan HP rendah atau tidak dalam posisi Defend. Satu Skill yang tepat bisa langsung mengakhiri kartu lawan.</div>
-              <div class="debuff-item">🛡️ <strong style="color:#60a5fa;min-width:130px">Kapan Defend</strong> Defend berguna saat HP kartu aktifmu di bawah 30%, atau saat kamu yakin lawan akan pakai Skill. Defend memblokir 50% damage — bisa menyelamatkan kartu dari satu serangan mematikan.</div>
-              <div class="debuff-item">⚡ <strong style="color:#4ade80;min-width:130px">Manfaatkan Momentum</strong> Pemenang duel tetap menyerang duluan saat kartu baru lawan masuk. Artinya satu kartu kuatmu bisa menghabiskan 2–3 kartu lawan berturut-turut jika HP-nya masih cukup.</div>
-              <div class="debuff-item">🃏 <strong style="color:#9ca3af;min-width:130px">Korbankan Opener</strong> Kartu Common di Slot 1 boleh dikorbankan — tugasnya bukan menang, tapi mengikis HP kartu awal lawan dan menghabiskan Skill-nya sebelum kartu utamamu masuk.</div>
-              <div class="debuff-item">🏆 <strong style="color:#f87171;min-width:130px">Simpan Finisher</strong> Legendary atau Limited di Slot 5 akan keluar saat lawan sudah kehabisan counter dan kartu terbaiknya. Di saat itu, finisher-mu bisa membersihkan 2–3 kartu terakhir lawan dengan mudah.</div>
+              <div class="debuff-item">🎯 <strong style="color:#fbbf24;min-width:130px">Baca tipe lawan</strong> Sebelum
+                menyerang, cek tipe kartu aktif lawan. Pilih kartu di deck-mu yang punya Super Efektif vs tipe tersebut.
+              </div>
+              <div class="debuff-item">✨ <strong style="color:#c084fc;min-width:130px">Timing Skill</strong> Jangan
+                langsung pakai Skill di awal — tunggu sampai lawan HP rendah atau tidak dalam posisi Defend. Satu Skill
+                yang tepat bisa langsung mengakhiri kartu lawan.</div>
+              <div class="debuff-item">🛡️ <strong style="color:#60a5fa;min-width:130px">Kapan Defend</strong> Defend
+                berguna saat HP kartu aktifmu di bawah 30%, atau saat kamu yakin lawan akan pakai Skill. Defend
+                memblokir 50% damage — bisa menyelamatkan kartu dari satu serangan mematikan.</div>
+              <div class="debuff-item">⚡ <strong style="color:#4ade80;min-width:130px">Manfaatkan Momentum</strong>
+                Pemenang duel tetap menyerang duluan saat kartu baru lawan masuk. Artinya satu kartu kuatmu bisa
+                menghabiskan 2–3 kartu lawan berturut-turut jika HP-nya masih cukup.</div>
+              <div class="debuff-item">🃏 <strong style="color:#9ca3af;min-width:130px">Korbankan Opener</strong> Kartu
+                Common di Slot 1 boleh dikorbankan — tugasnya bukan menang, tapi mengikis HP kartu awal lawan dan
+                menghabiskan Skill-nya sebelum kartu utamamu masuk.</div>
+              <div class="debuff-item">🏆 <strong style="color:#f87171;min-width:130px">Simpan Finisher</strong>
+                Legendary atau Limited di Slot 5 akan keluar saat lawan sudah kehabisan counter dan kartu terbaiknya. Di
+                saat itu, finisher-mu bisa membersihkan 2–3 kartu terakhir lawan dengan mudah.</div>
             </div>
-            <div class="example-box"><strong>Kombo Deck Efektif:</strong> Common (Slot 1, opener) → Rare Fire (Slot 2, counter Ice/Grass) → Rare Psychic (Slot 3, counter Fighting/Poison) → Epic Ghost (Slot 4, counter Psychic) → Legendary Dark (Slot 5, finisher Super Efektif vs Psychic/Ghost). Deck ini punya coverage tipe lebar dan finisher mematikan.</div>
+            <div class="example-box"><strong>Kombo Deck Efektif:</strong> Common (Slot 1, opener) → Rare Fire (Slot 2,
+              counter Ice/Grass) → Rare Psychic (Slot 3, counter Fighting/Poison) → Epic Ghost (Slot 4, counter Psychic)
+              → Legendary Dark (Slot 5, finisher Super Efektif vs Psychic/Ghost). Deck ini punya coverage tipe lebar dan
+              finisher mematikan.</div>
           </div>
         </div>
 
@@ -2000,7 +2078,9 @@
             <span class="rule-section-title">Referensi Efektivitas Tipe</span>
           </div>
           <div class="rule-body">
-            <p>Setiap serangan dihitung berdasarkan tipe penyerang vs tipe target. Multiplier ×1.25 untuk Super Efektif, ×0.75 untuk Tidak Efektif, ×0.30 untuk matchup yang seharusnya Immune (dimodifikasi agar battle tidak stuck).</p>
+            <p>Setiap serangan dihitung berdasarkan tipe penyerang vs tipe target. Multiplier ×1.25 untuk Super Efektif,
+              ×0.75 untuk Tidak Efektif, ×0.30 untuk matchup yang seharusnya Immune (dimodifikasi agar battle tidak
+              stuck).</p>
             <table class="rule-table">
               <tr>
                 <th>Efektivitas</th>
@@ -2033,39 +2113,152 @@
                 <td>Tidak ada modifikasi — damage sesuai formula dasar</td>
               </tr>
             </table>
-            <div class="example-box"><strong>Combo tipe terkuat:</strong> Kartu dual-type Ghost/Dark menyerang Psychic → Super Efektif ganda ×1.25 × ×1.25 = total ×1.56 damage. Void Reaper of Genesis memanfaatkan ini secara penuh.</div>
+            <div class="example-box"><strong>Combo tipe terkuat:</strong> Kartu dual-type Ghost/Dark menyerang Psychic →
+              Super Efektif ganda ×1.25 × ×1.25 = total ×1.56 damage. Void Reaper of Genesis memanfaatkan ini secara
+              penuh.</div>
 
-            <div style="margin-top:1.4rem;margin-bottom:.5rem;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent)">📋 Daftar Lengkap Efektivitas Tipe</div>
-            <p style="font-size:.82rem;color:var(--text-dim);margin-bottom:.9rem">Tabel berikut mencakup semua 18 tipe. Gunakan sebagai referensi saat membangun deck atau memilih kartu di Battle Simulation.</p>
+            <div
+              style="margin-top:1.4rem;margin-bottom:.5rem;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent)">
+              📋 Daftar Lengkap Efektivitas Tipe</div>
+            <p style="font-size:.82rem;color:var(--text-dim);margin-bottom:.9rem">Tabel berikut mencakup semua 18 tipe.
+              Gunakan sebagai referensi saat membangun deck atau memilih kartu di Battle Simulation.</p>
 
             <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--border)">
-            <table class="rule-table" style="min-width:680px;border:none;border-radius:0">
-              <tr>
-                <th style="width:90px">Tipe</th>
-                <th style="color:#fbbf24">⚡ Super Efektif vs</th>
-                <th style="color:#60a5fa">💨 Not Effective vs</th>
-                <th style="color:#f87171">💥 Lemah terhadap</th>
-                <th style="color:#4ade80">🛡️ Kuat terhadap</th>
-              </tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#9fa19f">Normal</span></td><td style="color:var(--text-dim)">—</td><td>Rock, Steel</td><td>Fighting</td><td style="color:var(--text-dim)">—</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#e8554e">Fire</span></td><td>Grass, Ice, Bug, Steel</td><td>Fire, Water, Rock, Dragon</td><td>Water, Rock, Ground</td><td>Grass, Ice, Bug, Steel</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#4d90d5">Water</span></td><td>Fire, Ground, Rock</td><td>Water, Grass, Dragon</td><td>Electric, Grass</td><td>Fire, Ground, Rock</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#f3d23b">Electric</span></td><td>Water, Flying</td><td>Electric, Grass, Dragon, <em style="color:#9ca3af">Ground (immune)</em></td><td>Ground</td><td>Water, Flying</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5fbd58">Grass</span></td><td>Water, Ground, Rock</td><td>Fire, Grass, Poison, Flying, Bug, Dragon, Steel</td><td>Fire, Ice, Poison, Flying, Bug</td><td>Water, Ground, Rock</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#75d0c1">Ice</span></td><td>Grass, Ground, Flying, Dragon</td><td>Fire, Water, Ice, Steel</td><td>Fire, Fighting, Rock, Steel</td><td>Grass, Ground, Flying, Dragon</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ce4265">Fighting</span></td><td>Normal, Ice, Rock, Dark, Steel</td><td>Poison, Flying, Psychic, Bug, Fairy</td><td>Psychic, Flying, Fairy</td><td>Normal, Ice, Rock, Dark, Steel</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ab6ac8">Poison</span></td><td>Grass, Fairy</td><td>Poison, Ground, Rock, Ghost</td><td>Ground, Psychic</td><td>Grass, Fairy</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#d97845">Ground</span></td><td>Fire, Electric, Poison, Rock, Steel</td><td>Grass, Bug</td><td>Water, Ice, Grass</td><td>Fire, Electric, Poison, Rock, Steel</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#8fa8dd">Flying</span></td><td>Grass, Fighting, Bug</td><td>Electric, Rock, Steel</td><td>Electric, Ice, Rock</td><td>Grass, Fighting, Bug</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#f97176">Psychic</span></td><td>Fighting, Poison</td><td>Psychic, Steel</td><td>Bug, Ghost, Dark</td><td>Fighting, Poison</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#91c12f">Bug</span></td><td>Grass, Psychic, Dark</td><td>Fire, Fighting, Flying, Ghost, Steel, Fairy</td><td>Fire, Flying, Rock</td><td>Grass, Psychic, Dark</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#c5b78c">Rock</span></td><td>Fire, Ice, Flying, Bug</td><td>Fighting, Ground, Steel</td><td>Water, Grass, Fighting, Ground, Steel</td><td>Fire, Ice, Flying, Bug</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5269ac">Ghost</span></td><td>Psychic, Ghost</td><td>Dark, <em style="color:#9ca3af">Normal (immune)</em></td><td>Ghost, Dark</td><td>Psychic, Ghost</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#0f6ac0">Dragon</span></td><td>Dragon</td><td>Steel</td><td>Ice, Dragon, Fairy</td><td>Dragon</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#595761">Dark</span></td><td>Psychic, Ghost</td><td>Fighting, Dark, Fairy</td><td>Fighting, Bug, Fairy</td><td>Psychic, Ghost</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5a8ea2">Steel</span></td><td>Ice, Rock, Fairy</td><td>Fire, Water, Electric, Steel</td><td>Fire, Fighting, Ground</td><td>Ice, Rock, Fairy</td></tr>
-              <tr><td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ec8fe6">Fairy</span></td><td>Fighting, Dragon, Dark</td><td>Fire, Poison, Steel</td><td>Poison, Steel</td><td>Fighting, Dragon, Dark</td></tr>
-            </table>
+              <table class="rule-table" style="min-width:680px;border:none;border-radius:0">
+                <tr>
+                  <th style="width:90px">Tipe</th>
+                  <th style="color:#fbbf24">⚡ Super Efektif vs</th>
+                  <th style="color:#60a5fa">💨 Not Effective vs</th>
+                  <th style="color:#f87171">💥 Lemah terhadap</th>
+                  <th style="color:#4ade80">🛡️ Kuat terhadap</th>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#9fa19f">Normal</span></td>
+                  <td style="color:var(--text-dim)">—</td>
+                  <td>Rock, Steel</td>
+                  <td>Fighting</td>
+                  <td style="color:var(--text-dim)">—</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#e8554e">Fire</span></td>
+                  <td>Grass, Ice, Bug, Steel</td>
+                  <td>Fire, Water, Rock, Dragon</td>
+                  <td>Water, Rock, Ground</td>
+                  <td>Grass, Ice, Bug, Steel</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#4d90d5">Water</span></td>
+                  <td>Fire, Ground, Rock</td>
+                  <td>Water, Grass, Dragon</td>
+                  <td>Electric, Grass</td>
+                  <td>Fire, Ground, Rock</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#f3d23b">Electric</span></td>
+                  <td>Water, Flying</td>
+                  <td>Electric, Grass, Dragon, <em style="color:#9ca3af">Ground (immune)</em></td>
+                  <td>Ground</td>
+                  <td>Water, Flying</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5fbd58">Grass</span></td>
+                  <td>Water, Ground, Rock</td>
+                  <td>Fire, Grass, Poison, Flying, Bug, Dragon, Steel</td>
+                  <td>Fire, Ice, Poison, Flying, Bug</td>
+                  <td>Water, Ground, Rock</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#75d0c1">Ice</span></td>
+                  <td>Grass, Ground, Flying, Dragon</td>
+                  <td>Fire, Water, Ice, Steel</td>
+                  <td>Fire, Fighting, Rock, Steel</td>
+                  <td>Grass, Ground, Flying, Dragon</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ce4265">Fighting</span></td>
+                  <td>Normal, Ice, Rock, Dark, Steel</td>
+                  <td>Poison, Flying, Psychic, Bug, Fairy</td>
+                  <td>Psychic, Flying, Fairy</td>
+                  <td>Normal, Ice, Rock, Dark, Steel</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ab6ac8">Poison</span></td>
+                  <td>Grass, Fairy</td>
+                  <td>Poison, Ground, Rock, Ghost</td>
+                  <td>Ground, Psychic</td>
+                  <td>Grass, Fairy</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#d97845">Ground</span></td>
+                  <td>Fire, Electric, Poison, Rock, Steel</td>
+                  <td>Grass, Bug</td>
+                  <td>Water, Ice, Grass</td>
+                  <td>Fire, Electric, Poison, Rock, Steel</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#8fa8dd">Flying</span></td>
+                  <td>Grass, Fighting, Bug</td>
+                  <td>Electric, Rock, Steel</td>
+                  <td>Electric, Ice, Rock</td>
+                  <td>Grass, Fighting, Bug</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#f97176">Psychic</span></td>
+                  <td>Fighting, Poison</td>
+                  <td>Psychic, Steel</td>
+                  <td>Bug, Ghost, Dark</td>
+                  <td>Fighting, Poison</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#91c12f">Bug</span></td>
+                  <td>Grass, Psychic, Dark</td>
+                  <td>Fire, Fighting, Flying, Ghost, Steel, Fairy</td>
+                  <td>Fire, Flying, Rock</td>
+                  <td>Grass, Psychic, Dark</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#c5b78c">Rock</span></td>
+                  <td>Fire, Ice, Flying, Bug</td>
+                  <td>Fighting, Ground, Steel</td>
+                  <td>Water, Grass, Fighting, Ground, Steel</td>
+                  <td>Fire, Ice, Flying, Bug</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5269ac">Ghost</span></td>
+                  <td>Psychic, Ghost</td>
+                  <td>Dark, <em style="color:#9ca3af">Normal (immune)</em></td>
+                  <td>Ghost, Dark</td>
+                  <td>Psychic, Ghost</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#0f6ac0">Dragon</span></td>
+                  <td>Dragon</td>
+                  <td>Steel</td>
+                  <td>Ice, Dragon, Fairy</td>
+                  <td>Dragon</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#595761">Dark</span></td>
+                  <td>Psychic, Ghost</td>
+                  <td>Fighting, Dark, Fairy</td>
+                  <td>Fighting, Bug, Fairy</td>
+                  <td>Psychic, Ghost</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#5a8ea2">Steel</span></td>
+                  <td>Ice, Rock, Fairy</td>
+                  <td>Fire, Water, Electric, Steel</td>
+                  <td>Fire, Fighting, Ground</td>
+                  <td>Ice, Rock, Fairy</td>
+                </tr>
+                <tr>
+                  <td><span style="font-family:'Cinzel',serif;font-size:.7rem;color:#ec8fe6">Fairy</span></td>
+                  <td>Fighting, Dragon, Dark</td>
+                  <td>Fire, Poison, Steel</td>
+                  <td>Poison, Steel</td>
+                  <td>Fighting, Dragon, Dark</td>
+                </tr>
+              </table>
             </div>
 
           </div>
@@ -2075,14 +2268,636 @@
       <!-- WIKI ARTICLE -->
       <div class="page hidden" id="wikiPage"></div>
 
+      <!-- UPDATE LENGKAP PAGE -->
+      <div class="rule-page hidden" id="updatePage">
+        <div class="rule-page-title">📢 Update Lengkap</div>
+        <div class="rule-page-sub">GENESIS · Set I · Patch Notes v1.1 — Balance Update</div>
+
+        <!-- Tab Navigation -->
+        <div id="updateTabs" style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.4rem">
+          <button class="fb active" data-tab="all" onclick="switchTab(this,'all')">Semua</button>
+          <button class="fb" data-tab="nerf" onclick="switchTab(this,'nerf')"
+            style="color:#f87171;border-color:#f8717166">🔴 Nerf</button>
+          <button class="fb" data-tab="buff" onclick="switchTab(this,'buff')"
+            style="color:#4ade80;border-color:#4ade8066">🟢 Buff</button>
+          <button class="fb" data-tab="rebalance" onclick="switchTab(this,'rebalance')"
+            style="color:#fbbf24;border-color:#fbbf2466">⚖️ Rebalance</button>
+          <button class="fb" data-tab="cooldown" onclick="switchTab(this,'cooldown')"
+            style="color:#c084fc;border-color:#c084fc66">⏱ Cooldown</button>
+        </div>
+
+        <!-- NERF -->
+        <div class="update-section" data-category="nerf">
+          <div class="rule-section">
+            <div class="rule-section-header">
+              <span style="font-size:1.1rem">🔴</span>
+              <span class="rule-section-title">Nerf — Legendary</span>
+            </div>
+            <div class="rule-body">
+              <table class="rule-table">
+                <tr>
+                  <th>Kartu</th>
+                  <th>Stat</th>
+                  <th>Sebelum</th>
+                  <th>Sesudah</th>
+                  <th>Alasan</th>
+                </tr>
+                <tr>
+                  <td>☀️ Solarius the Firstborn</td>
+                  <td>ATK</td>
+                  <td>110</td>
+                  <td style="color:#4ade80">95</td>
+                  <td>Terlalu mendominasi fase akhir</td>
+                </tr>
+                <tr>
+                  <td>☀️ Solarius the Firstborn</td>
+                  <td>DEF</td>
+                  <td>90</td>
+                  <td style="color:#4ade80">80</td>
+                  <td>Revive + DEF tinggi = hampir tidak bisa dikalahkan</td>
+                </tr>
+                <tr>
+                  <td>☀️ Solarius the Firstborn</td>
+                  <td>Skill: Light of Creation</td>
+                  <td>Bangkit 50% HP</td>
+                  <td style="color:#4ade80">Bangkit 25% HP</td>
+                  <td>Revive dengan HP penuh di Legendary terlalu kuat</td>
+                </tr>
+                <tr>
+                  <td>⏳ Zerath the Chronomancer</td>
+                  <td>ATK</td>
+                  <td>100</td>
+                  <td style="color:#4ade80">90</td>
+                  <td>Kontrol waktu + ATK tinggi = tidak adil</td>
+                </tr>
+                <tr>
+                  <td>⏳ Zerath the Chronomancer</td>
+                  <td>DEF</td>
+                  <td>95</td>
+                  <td style="color:#4ade80">80</td>
+                  <td>Daya tahan terlalu tinggi untuk kit kontrol</td>
+                </tr>
+                <tr>
+                  <td>⏳ Zerath the Chronomancer</td>
+                  <td>Skill: Genesis Rewind</td>
+                  <td>HP Full</td>
+                  <td style="color:#4ade80">+40% HP</td>
+                  <td>Heal HP penuh di tier Legendary tidak seimbang</td>
+                </tr>
+                <tr>
+                  <td>👁️ Abyssal Sovereign Null</td>
+                  <td>ATK</td>
+                  <td>130</td>
+                  <td style="color:#4ade80">120</td>
+                  <td>ATK tertinggi di Legendary dengan utility buff-remove</td>
+                </tr>
+                <tr>
+                  <td>👁️ Abyssal Sovereign Null</td>
+                  <td>Skill: Unmaking</td>
+                  <td>Hapus semua buff</td>
+                  <td style="color:#4ade80">Hapus 2 buff acak</td>
+                  <td>Menghapus semua buff sekaligus terlalu efisien</td>
+                </tr>
+                <tr>
+                  <td>🩸 Valdris the Bloodfather</td>
+                  <td>ATK</td>
+                  <td>140</td>
+                  <td style="color:#4ade80">125</td>
+                  <td>Stack ATK per kill + base ATK tertinggi = snowball berlebihan</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="rule-section">
+            <div class="rule-section-header">
+              <span style="font-size:1.1rem">🔴</span>
+              <span class="rule-section-title">Nerf — Epic</span>
+            </div>
+            <div class="rule-body">
+              <table class="rule-table">
+                <tr>
+                  <th>Kartu</th>
+                  <th>Stat</th>
+                  <th>Sebelum</th>
+                  <th>Sesudah</th>
+                  <th>Alasan</th>
+                </tr>
+                <tr>
+                  <td>🌫️ Phantom of the First Veil</td>
+                  <td>ATK</td>
+                  <td>88</td>
+                  <td style="color:#4ade80">85</td>
+                  <td>ATK tertinggi di Epic</td>
+                </tr>
+                <tr>
+                  <td>🌫️ Phantom of the First Veil</td>
+                  <td>Skill: Veil Strike</td>
+                  <td>Ignore 50% DEF</td>
+                  <td style="color:#4ade80">Ignore 30% DEF</td>
+                  <td>DEF bypass 50% terlalu destruktif di meta tank-heavy</td>
+                </tr>
+                <tr>
+                  <td>🌋 Magmaborn Colossus</td>
+                  <td>DEF</td>
+                  <td>72</td>
+                  <td style="color:#4ade80">60</td>
+                  <td>DEF terlalu tinggi untuk kartu ofensif</td>
+                </tr>
+                <tr>
+                  <td>🌋 Magmaborn Colossus</td>
+                  <td>Skill: World Forge</td>
+                  <td>10 DMG/turn × 3 turn</td>
+                  <td style="color:#4ade80">7 DMG/turn × 3 turn</td>
+                  <td>30 total passive damage di Epic terlalu tinggi</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="rule-section">
+            <div class="rule-section-header">
+              <span style="font-size:1.1rem">🔴</span>
+              <span class="rule-section-title">Nerf — Rare</span>
+            </div>
+            <div class="rule-body">
+              <table class="rule-table">
+                <tr>
+                  <th>Kartu</th>
+                  <th>Stat</th>
+                  <th>Sebelum</th>
+                  <th>Sesudah</th>
+                  <th>Alasan</th>
+                </tr>
+                <tr>
+                  <td>🗡️ Bloodpact Rogue</td>
+                  <td>ATK</td>
+                  <td>50</td>
+                  <td style="color:#4ade80">44</td>
+                  <td>Assassin Rare tidak seharusnya melebihi ATK beberapa Epic</td>
+                </tr>
+                <tr>
+                  <td>🗡️ Bloodpact Rogue</td>
+                  <td>Skill: Origin Stab</td>
+                  <td>2× DMG</td>
+                  <td style="color:#4ade80">1.5× DMG</td>
+                  <td>2× DMG dari belakang bisa one-shot Epic dengan tipe counter</td>
+                </tr>
+                <tr>
+                  <td>🧊 Glacier Warden</td>
+                  <td>DEF</td>
+                  <td>50</td>
+                  <td style="color:#4ade80">42</td>
+                  <td>Tank Rare dengan DEF 50 mengganggu keseimbangan tier</td>
+                </tr>
+                <tr>
+                  <td>🧊 Glacier Warden</td>
+                  <td>Skill: Permafrost Veil</td>
+                  <td>Permanen</td>
+                  <td style="color:#4ade80">3 turn</td>
+                  <td>Slow permanen tidak boleh ada di tier Rare</td>
+                </tr>
+                <tr>
+                  <td>🌊 Tidecaller</td>
+                  <td>Skill: Primordial Flood</td>
+                  <td>Permanen DEF–10</td>
+                  <td style="color:#4ade80">3 turn</td>
+                  <td>DEF Down permanen terlalu kuat sebagai debuffer</td>
+                </tr>
+                <tr>
+                  <td>⚡ Stormcaller Shaman</td>
+                  <td>Skill: Genesis Thunder</td>
+                  <td>1.5× DMG</td>
+                  <td style="color:#4ade80">1.3× DMG</td>
+                  <td>Nuke 1.5× + area effect di Rare terlalu efisien</td>
+                </tr>
+                <tr>
+                  <td>🐍 Serpent of Knowing</td>
+                  <td>ATK</td>
+                  <td>47</td>
+                  <td style="color:#4ade80">44</td>
+                  <td>Skip turn + ATK tinggi = win nearly guaranteed jika kena</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="rule-section">
+            <div class="rule-section-header">
+              <span style="font-size:1.1rem">🔴</span>
+              <span class="rule-section-title">Nerf — Limited</span>
+            </div>
+            <div class="rule-body">
+              <table class="rule-table">
+                <tr>
+                  <th>Kartu</th>
+                  <th>Stat</th>
+                  <th>Sebelum</th>
+                  <th>Sesudah</th>
+                  <th>Alasan</th>
+                </tr>
+                <tr>
+                  <td>💎 Malgrath the Hollow King</td>
+                  <td>DEF</td>
+                  <td>130</td>
+                  <td style="color:#4ade80">115</td>
+                  <td>DEF 130 + Undying Throne = hampir tidak bisa dikalahkan tanpa DEF Down</td>
+                </tr>
+                <tr>
+                  <td>🌑 Eclipse of the First Age</td>
+                  <td>Skill: Void Nova</td>
+                  <td>80 true DMG</td>
+                  <td style="color:#4ade80">60 true DMG</td>
+                  <td>True DMG 80 bisa langsung membunuh Legendary</td>
+                </tr>
+                <tr>
+                  <td>❄️ Frostborn Queen Eternal</td>
+                  <td>Skill: Glacial Genesis</td>
+                  <td>Freeze 2 turn</td>
+                  <td style="color:#4ade80">Freeze 1 turn</td>
+                  <td>2 turn freeze seluruh musuh = tidak ada counter yang efektif</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- BUFF -->
+        <div class="update-section" data-category="buff">
+          <div class="rule-section">
+            <div class="rule-section-header">
+              <span style="font-size:1.1rem">🟢</span>
+              <span class="rule-section-title">Buff — Common</span>
+            </div>
+            <div class="rule-body">
+              <table class="rule-table">
+                <tr>
+                  <th>Kartu</th>
+                  <th>Stat</th>
+                  <th>Sebelum</th>
+                  <th>Sesudah</th>
+                  <th>Alasan</th>
+                </tr>
+                <tr>
+                  <td>🐸 Marshborn Toad</td>
+                  <td>ATK</td>
+                  <td>10</td>
+                  <td style="color:#f87171">13</td>
+                  <td>Common Poison/Water terlalu lemah di meta saat ini</td>
+                </tr>
+                <tr>
+                  <td>🐸 Marshborn Toad</td>
+                  <td>DEF</td>
+                  <td>10</td>
+                  <td style="color:#f87171">13</td>
+                  <td>Perlu survivability lebih agar skill DoT sempat aktif</td>
+                </tr>
+                <tr>
+                  <td>🦎 Dawncrest Sentinel</td>
+                  <td>ATK</td>
+                  <td>8</td>
+                  <td style="color:#f87171">12</td>
+                  <td>Ground attacker dengan ATK 8 tidak berdampak sama sekali</td>
+                </tr>
+                <tr>
+                  <td>🦎 Dawncrest Sentinel</td>
+                  <td>DEF</td>
+                  <td>16</td>
+                  <td style="color:#f87171">18</td>
+                  <td>Dodge-tank perlu sedikit base DEF lebih tinggi</td>
+                </tr>
+                <tr>
+                  <td>🔮 Spark Weaver</td>
+                  <td>DEF</td>
+                  <td>6</td>
+                  <td style="color:#f87171">10</td>
+                  <td>Mage Common dengan DEF 6 terlalu fragile sebagai opener</td>
+                </tr>
+                <tr>
+                  <td>🔮 Spark Weaver</td>
+                  <td>Skill: First Flame</td>
+                  <td>+5 DMG</td>
+                  <td style="color:#f87171">+10 DMG</td>
+                  <td>Skill Common dengan +5 DMG tidak terasa di battle mid-late</td>
+                </tr>
+                <tr>
+                  <td>🔦 Lantern of Origin</td>
+                  <td>ATK</td>
+                  <td>14</td>
+                  <td style="color:#f87171">16</td>
+                  <td>Support dengan ATK 14 tidak bisa berkontribusi saat skill sudah dipakai</td>
+                </tr>
+                <tr>
+                  <td>🔦 Lantern of Origin</td>
+                  <td>DEF</td>
+                  <td>12</td>
+                  <td style="color:#f87171">14</td>
+                  <td>Sinergi dengan bonus true DMG skill baru</td>
+                </tr>
+                <tr>
+                  <td>🔦 Lantern of Origin</td>
+                  <td>Skill: First Light</td>
+                  <td>Hapus stealth saja</td>
+                  <td style="color:#f87171">Hapus stealth + 10 true DMG</td>
+                  <td>Skill utilitas murni kurang menarik; tambah damage minor</td>
+                </tr>
+                <tr>
+                  <td>🏹 Eden's Arrow</td>
+                  <td>DEF</td>
+                  <td>8</td>
+                  <td style="color:#f87171">12</td>
+                  <td>Ranger perlu sedikit survivability tambahan setelah ATK buffed di pre-patch</td>
+                </tr>
+                <tr>
+                  <td>🪨 Primordial Stone</td>
+                  <td>ATK</td>
+                  <td>12</td>
+                  <td style="color:#f87171">14</td>
+                  <td>Tank pure yang tidak bisa balik DMG sama sekali tidak berguna</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="rule-section">
+            <div class="rule-section-header">
+              <span style="font-size:1.1rem">🟢</span>
+              <span class="rule-section-title">Buff — Rare</span>
+            </div>
+            <div class="rule-body">
+              <table class="rule-table">
+                <tr>
+                  <th>Kartu</th>
+                  <th>Stat</th>
+                  <th>Sebelum</th>
+                  <th>Sesudah</th>
+                  <th>Alasan</th>
+                </tr>
+                <tr>
+                  <td>🦅 Skywarden Eagle</td>
+                  <td>DEF</td>
+                  <td>20</td>
+                  <td style="color:#f87171">25</td>
+                  <td>First Wind opener perlu cukup tahan untuk tidak langsung gugur</td>
+                </tr>
+                <tr>
+                  <td>🌊 Tidecaller of the Deep</td>
+                  <td>DEF</td>
+                  <td>18</td>
+                  <td style="color:#f87171">24</td>
+                  <td>Debuffer lain mendapat survivability — Tidecaller perlu setara</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="rule-section">
+            <div class="rule-section-header">
+              <span style="font-size:1.1rem">🟢</span>
+              <span class="rule-section-title">Buff — Epic</span>
+            </div>
+            <div class="rule-body">
+              <table class="rule-table">
+                <tr>
+                  <th>Kartu</th>
+                  <th>Stat</th>
+                  <th>Sebelum</th>
+                  <th>Sesudah</th>
+                  <th>Alasan</th>
+                </tr>
+                <tr>
+                  <td>🌙 Lunaris the First Dancer</td>
+                  <td>DEF</td>
+                  <td>28</td>
+                  <td style="color:#f87171">35</td>
+                  <td>Duelist Epic dengan DEF 28 terlalu mudah dieliminate</td>
+                </tr>
+                <tr>
+                  <td>🌫️ Phantom of the First Veil</td>
+                  <td>DEF</td>
+                  <td>22</td>
+                  <td style="color:#f87171">30</td>
+                  <td>Kompensasi nerf ATK — Phantom tetap harus terasa mengancam</td>
+                </tr>
+                <tr>
+                  <td>💀 Void Reaper of Genesis</td>
+                  <td>Skill: Soul Harvest</td>
+                  <td>15 HP drain</td>
+                  <td style="color:#f87171">25 HP drain</td>
+                  <td>15 HP drain di Epic terasa kecil dibanding damage biasa</td>
+                </tr>
+                <tr>
+                  <td>🐲 Ancient Wyvern of Creation</td>
+                  <td>Skill: Primal Sweep</td>
+                  <td>1.2× DMG area</td>
+                  <td style="color:#f87171">1.35× DMG area</td>
+                  <td>Area AoE dengan multiplier 1.2× tidak terasa lebih baik dari single target</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- REBALANCE -->
+        <div class="update-section" data-category="rebalance">
+          <div class="rule-section">
+            <div class="rule-section-header">
+              <span style="font-size:1.1rem">⚖️</span>
+              <span class="rule-section-title">Rebalance — Perubahan dua arah</span>
+            </div>
+            <div class="rule-body">
+              <p>Rebalance adalah perubahan yang melibatkan nerf di satu sisi dan buff di sisi lain — menjaga total
+                power tetap mirip tetapi mengubah gaya bermain kartu.</p>
+              <table class="rule-table">
+                <tr>
+                  <th>Kartu</th>
+                  <th>Perubahan</th>
+                  <th>Detail</th>
+                </tr>
+                <tr>
+                  <td>🪨 Primordial Stone</td>
+                  <td>ATK ↑ +2, DEF ↓ −2</td>
+                  <td>ATK 12→14, DEF 28→26. Tank pure tanpa balik damage tidak efektif, kini sedikit bisa menyerang.
+                  </td>
+                </tr>
+                <tr>
+                  <td>🌫️ Phantom of the First Veil</td>
+                  <td>ATK ↓ −3, DEF ↑ +8</td>
+                  <td>ATK 88→85, DEF 22→30. Phantom terlalu bisa one-shot sekaligus susah dimatikan — pertukaran ini
+                    membuat ia lebih "duelist" sejati.</td>
+                </tr>
+                <tr>
+                  <td>🧊 Glacier Warden</td>
+                  <td>ATK ↑ +2, DEF ↓ −8</td>
+                  <td>ATK 30→32, DEF 50→42. DEF 50 di Rare terlalu superior — sekarang masih tank terkuat di Rare tapi
+                    tidak melampaui Epic.</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- COOLDOWN -->
+        <div class="update-section" data-category="cooldown">
+          <div class="rule-section">
+            <div class="rule-section-header">
+              <span style="font-size:1.1rem">⏱️</span>
+              <span class="rule-section-title">Cooldown Skill — Perubahan Global v1.1</span>
+            </div>
+            <div class="rule-body">
+              <p>Cooldown skill disesuaikan untuk memperketat penggunaan skill di tier atas dan memberi lebih banyak
+                window counter bagi tier bawah.</p>
+              <table class="rule-table">
+                <tr>
+                  <th>Tier</th>
+                  <th>Cooldown Lama</th>
+                  <th>Cooldown Baru</th>
+                  <th>Dampak</th>
+                </tr>
+                <tr>
+                  <td style="color:var(--common)">⚪ Common</td>
+                  <td>0 ronde</td>
+                  <td style="color:#4ade80">0 ronde (tidak berubah)</td>
+                  <td>Skill spam Common tetap diizinkan sebagai kompensasi stat rendah</td>
+                </tr>
+                <tr>
+                  <td style="color:var(--rare)">🔵 Rare</td>
+                  <td>0 ronde</td>
+                  <td style="color:#f87171">1 ronde</td>
+                  <td>Rare tidak lagi bisa spam skill setiap turn — lebih strategis</td>
+                </tr>
+                <tr>
+                  <td style="color:var(--epic)">🟣 Epic</td>
+                  <td>1 ronde</td>
+                  <td style="color:#f87171">2 ronde</td>
+                  <td>Epic perlu lebih sabar dalam memakai skill — membuat pertarungan lebih panjang</td>
+                </tr>
+                <tr>
+                  <td style="color:var(--legendary)">🟡 Legendary</td>
+                  <td>2 ronde</td>
+                  <td style="color:#f87171">3 ronde</td>
+                  <td>Legendary skill digunakan maksimal sekali per duel standar 3 ronde</td>
+                </tr>
+                <tr>
+                  <td style="color:var(--limited)">🔴 Limited</td>
+                  <td>2 ronde</td>
+                  <td style="color:#f87171">3 ronde</td>
+                  <td>Sama dengan Legendary — Limited tidak bisa double-skill dalam 1 duel</td>
+                </tr>
+              </table>
+              <div class="example-box"><strong>Catatan:</strong> Perubahan cooldown ini berlaku untuk semua kartu yang
+                tersedia di GENESIS Set I. Tidak ada pengecualian individual kecuali kartu memiliki catatan khusus di
+                entry wiki mereka.</div>
+            </div>
+          </div>
+
+          <div class="rule-section">
+            <div class="rule-section-header">
+              <span style="font-size:1.1rem">📋</span>
+              <span class="rule-section-title">Cooldown Per-Kartu Saat Ini (Post-Patch v1.1)</span>
+            </div>
+            <div class="rule-body">
+              <table class="rule-table">
+                <tr>
+                  <th>Tier</th>
+                  <th>Kartu</th>
+                  <th>Cooldown</th>
+                </tr>
+                <tr>
+                  <td style="color:var(--common)">Common</td>
+                  <td>🗡️ Firstborn Soldier, 🏹 Eden's Arrow, 🪨 Primordial Stone, 🐸 Marshborn Toad, 🔮 Spark Weaver,
+                    🛡️ Ashen Warden, 🦎 Dawncrest Sentinel, 🔦 Lantern of Origin</td>
+                  <td>Tidak ada</td>
+                </tr>
+                <tr>
+                  <td style="color:var(--rare)">Rare</td>
+                  <td>⚔️ Vanguard, 🦅 Skywarden, 🌊 Tidecaller, 🗡️ Bloodpact, 🐴 Earthborn, ⚡ Stormcaller, 🐍 Serpent,
+                    🧊 Glacier</td>
+                  <td>1 ronde</td>
+                </tr>
+                <tr>
+                  <td style="color:var(--epic)">Epic</td>
+                  <td>💀 Void Reaper, 🤖 Primarch, 🌙 Lunaris, 🐲 Ancient Wyvern, 🌫️ Phantom, 🌋 Magmaborn</td>
+                  <td>2 ronde</td>
+                </tr>
+                <tr>
+                  <td style="color:var(--legendary)">Legendary</td>
+                  <td>☀️ Solarius, 👁️ Abyssal Null, ⏳ Zerath, 🩸 Valdris</td>
+                  <td>3 ronde</td>
+                </tr>
+                <tr>
+                  <td style="color:var(--limited)">Limited</td>
+                  <td>🌩️ Stormgod, 💎 Malgrath, 🌑 Eclipse, ❄️ Frostborn Queen</td>
+                  <td>3 ronde</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary Section (always shown) -->
+        <div class="rule-section" style="border-color:rgba(251,191,36,.25)">
+          <div class="rule-section-header" style="background:rgba(251,191,36,.04)">
+            <span class="rule-num">📊</span>
+            <span class="rule-section-title">Ringkasan Patch v1.1</span>
+          </div>
+          <div class="rule-body">
+            <div
+              style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem;margin-bottom:1rem">
+              <div
+                style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);border-radius:8px;padding:.8rem;text-align:center">
+                <div style="font-size:1.4rem;margin-bottom:.3rem">🔴</div>
+                <div
+                  style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:2px;color:#f87171;margin-bottom:.25rem">
+                  NERFS</div>
+                <div style="font-size:1.5rem;font-family:'Cinzel Decorative',serif;color:#f87171">17</div>
+                <div style="font-size:.6rem;color:var(--text-dim)">perubahan total</div>
+              </div>
+              <div
+                style="background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);border-radius:8px;padding:.8rem;text-align:center">
+                <div style="font-size:1.4rem;margin-bottom:.3rem">🟢</div>
+                <div
+                  style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:2px;color:#4ade80;margin-bottom:.25rem">
+                  BUFFS</div>
+                <div style="font-size:1.5rem;font-family:'Cinzel Decorative',serif;color:#4ade80">15</div>
+                <div style="font-size:.6rem;color:var(--text-dim)">perubahan total</div>
+              </div>
+              <div
+                style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:8px;padding:.8rem;text-align:center">
+                <div style="font-size:1.4rem;margin-bottom:.3rem">⚖️</div>
+                <div
+                  style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:2px;color:#fbbf24;margin-bottom:.25rem">
+                  REBALANCE</div>
+                <div style="font-size:1.5rem;font-family:'Cinzel Decorative',serif;color:#fbbf24">3</div>
+                <div style="font-size:.6rem;color:var(--text-dim)">kartu</div>
+              </div>
+              <div
+                style="background:rgba(192,132,252,.08);border:1px solid rgba(192,132,252,.25);border-radius:8px;padding:.8rem;text-align:center">
+                <div style="font-size:1.4rem;margin-bottom:.3rem">⏱</div>
+                <div
+                  style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:2px;color:#c084fc;margin-bottom:.25rem">
+                  COOLDOWN</div>
+                <div style="font-size:1.5rem;font-family:'Cinzel Decorative',serif;color:#c084fc">4</div>
+                <div style="font-size:.6rem;color:var(--text-dim)">tier diubah</div>
+              </div>
+            </div>
+            <div class="example-box"><strong>Tujuan Patch v1.1:</strong> Menyeimbangkan meta yang terlalu didominasi
+              Legendary dan Limited. Buff diberikan ke Common dan Rare agar lebih kompetitif, sementara
+              Legendary/Limited diperketat agar pertandingan tidak langsung dimenangkan tier atas.</div>
+          </div>
+        </div>
+      </div>
+
       <!-- BATTLE ARENA SIMULATION -->
       <div class="arena-page hidden" id="arenaPage">
         <div class="arena-title">⚔ Battle Simulation</div>
         <div class="arena-sub">5 Kartu per Player · Turn-Based · Eliminasi Semua Kartu Lawan</div>
 
         <div class="formula-box">
-          Pilih 5 kartu per player &nbsp;|&nbsp; Kartu bertarung satu per satu &nbsp;|&nbsp; HP = 80 + DEF &nbsp;|&nbsp; ⚡ Type Counter System
-          &nbsp;|&nbsp; 1️⃣ Attack (20-30) &nbsp;|&nbsp; 2️⃣ Skill (35-45, 1×) &nbsp;|&nbsp; 3️⃣ Defend (−50%) &nbsp;|&nbsp; 🤖 AI Opponent
+          Pilih 5 kartu per player &nbsp;|&nbsp; Kartu bertarung satu per satu &nbsp;|&nbsp; HP = 80 + DEF &nbsp;|&nbsp;
+          ⚡ Type Counter System
+          &nbsp;|&nbsp; 1️⃣ Attack (20-30) &nbsp;|&nbsp; 2️⃣ Skill (35-45, 1×) &nbsp;|&nbsp; 3️⃣ Defend (−50%)
+          &nbsp;|&nbsp; 🤖 AI Opponent
         </div>
 
         <!-- Deck Builder -->
@@ -2092,7 +2907,9 @@
             <div class="deck-panel-header">
               <span style="font-size:1rem">🔵</span>
               <span class="deck-panel-title" style="color:#60a5fa">Player 1</span>
-              <span id="p1deckcount" style="margin-left:auto;font-size:.6rem;color:#4b5563;font-family:'Cinzel',serif;letter-spacing:1px">0 / 5</span>
+              <span id="p1deckcount"
+                style="margin-left:auto;font-size:.6rem;color:#4b5563;font-family:'Cinzel',serif;letter-spacing:1px">0 /
+                5</span>
             </div>
             <div style="padding:.5rem .7rem 0">
               <input class="name-input" id="p1name" placeholder="Nama Player 1..." value="Player 1">
@@ -2104,7 +2921,9 @@
             <div class="deck-panel-header">
               <span style="font-size:1rem">🔴</span>
               <span class="deck-panel-title" style="color:#f87171">Player 2</span>
-              <span id="p2deckcount" style="margin-left:auto;font-size:.6rem;color:#4b5563;font-family:'Cinzel',serif;letter-spacing:1px">0 / 5</span>
+              <span id="p2deckcount"
+                style="margin-left:auto;font-size:.6rem;color:#4b5563;font-family:'Cinzel',serif;letter-spacing:1px">0 /
+                5</span>
             </div>
             <div style="padding:.5rem .7rem 0">
               <input class="name-input" id="p2name" placeholder="Nama Player 2..." value="Player 2">
@@ -2129,14 +2948,16 @@
               <div class="sim-score-name" style="color:#60a5fa" id="sb-name1">Player 1</div>
               <div class="sim-score-card" id="sb-card1">—</div>
               <div class="sim-score-points" style="color:#60a5fa" id="sb-pts1">0</div>
-              <div style="font-size:.58rem;color:#374151;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem" id="sb-rem1">5 kartu tersisa</div>
+              <div style="font-size:.58rem;color:#374151;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem"
+                id="sb-rem1">5 kartu tersisa</div>
             </div>
             <div class="sim-vs">VS</div>
             <div class="sim-score-side">
               <div class="sim-score-name" style="color:#f87171" id="sb-name2">Player 2</div>
               <div class="sim-score-card" id="sb-card2">—</div>
               <div class="sim-score-points" style="color:#f87171" id="sb-pts2">0</div>
-              <div style="font-size:.58rem;color:#374151;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem" id="sb-rem2">5 kartu tersisa</div>
+              <div style="font-size:.58rem;color:#374151;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem"
+                id="sb-rem2">5 kartu tersisa</div>
             </div>
           </div>
 
@@ -2215,7 +3036,7 @@
     const TB = { Normal: 'rgba(159,161,159,.18)', Fire: 'rgba(232,85,78,.18)', Water: 'rgba(77,144,213,.18)', Electric: 'rgba(243,210,59,.18)', Grass: 'rgba(95,189,88,.18)', Ice: 'rgba(117,208,193,.18)', Fighting: 'rgba(206,66,101,.18)', Poison: 'rgba(171,106,200,.18)', Ground: 'rgba(217,120,69,.18)', Flying: 'rgba(143,168,221,.18)', Psychic: 'rgba(249,113,118,.18)', Bug: 'rgba(145,193,47,.18)', Rock: 'rgba(197,183,140,.18)', Ghost: 'rgba(82,105,172,.18)', Dragon: 'rgba(15,106,192,.18)', Dark: 'rgba(89,87,97,.18)', Steel: 'rgba(90,142,162,.18)', Fairy: 'rgba(236,143,230,.18)' };
     const TD = { Normal: { superEff: [], notEff: ['Rock', 'Steel'], immune: ['Ghost'], weakTo: ['Fighting'] }, Fire: { superEff: ['Grass', 'Ice', 'Bug', 'Steel'], notEff: ['Fire', 'Water', 'Rock', 'Dragon'], immune: [], weakTo: ['Water', 'Rock', 'Ground'] }, Water: { superEff: ['Fire', 'Ground', 'Rock'], notEff: ['Water', 'Grass', 'Dragon'], immune: [], weakTo: ['Electric', 'Grass'] }, Electric: { superEff: ['Water', 'Flying'], notEff: ['Electric', 'Grass', 'Dragon'], immune: ['Ground'], weakTo: ['Ground'] }, Grass: { superEff: ['Water', 'Ground', 'Rock'], notEff: ['Fire', 'Grass', 'Poison', 'Flying', 'Bug', 'Dragon', 'Steel'], immune: [], weakTo: ['Fire', 'Ice', 'Poison', 'Flying', 'Bug'] }, Ice: { superEff: ['Grass', 'Ground', 'Flying', 'Dragon'], notEff: ['Water', 'Ice', 'Steel'], immune: [], weakTo: ['Fire', 'Fighting', 'Rock', 'Steel'] }, Fighting: { superEff: ['Normal', 'Ice', 'Rock', 'Dark', 'Steel'], notEff: ['Poison', 'Flying', 'Psychic', 'Bug', 'Fairy'], immune: ['Ghost'], weakTo: ['Psychic', 'Flying', 'Fairy'] }, Poison: { superEff: ['Grass', 'Fairy'], notEff: ['Poison', 'Ground', 'Rock', 'Ghost'], immune: ['Steel'], weakTo: ['Ground', 'Psychic'] }, Ground: { superEff: ['Fire', 'Electric', 'Poison', 'Rock', 'Steel'], notEff: ['Grass', 'Bug'], immune: ['Flying'], weakTo: ['Water', 'Ice', 'Grass'] }, Flying: { superEff: ['Grass', 'Fighting', 'Bug'], notEff: ['Electric', 'Rock', 'Steel'], immune: [], weakTo: ['Electric', 'Ice', 'Rock'] }, Psychic: { superEff: ['Fighting', 'Poison'], notEff: ['Psychic', 'Steel'], immune: ['Dark'], weakTo: ['Bug', 'Ghost', 'Dark'] }, Bug: { superEff: ['Grass', 'Psychic', 'Dark'], notEff: ['Fire', 'Fighting', 'Flying', 'Ghost', 'Steel', 'Fairy'], immune: [], weakTo: ['Fire', 'Flying', 'Rock'] }, Rock: { superEff: ['Fire', 'Ice', 'Flying', 'Bug'], notEff: ['Fighting', 'Ground', 'Steel'], immune: [], weakTo: ['Water', 'Grass', 'Fighting', 'Ground', 'Steel'] }, Ghost: { superEff: ['Psychic', 'Ghost'], notEff: ['Dark'], immune: ['Normal'], weakTo: ['Ghost', 'Dark'] }, Dragon: { superEff: ['Dragon'], notEff: ['Steel'], immune: ['Fairy'], weakTo: ['Ice', 'Dragon', 'Fairy'] }, Dark: { superEff: ['Psychic', 'Ghost'], notEff: ['Fighting', 'Dark', 'Fairy'], immune: [], weakTo: ['Fighting', 'Bug', 'Fairy'] }, Steel: { superEff: ['Ice', 'Rock', 'Fairy'], notEff: ['Fire', 'Water', 'Electric', 'Steel'], immune: [], weakTo: ['Fire', 'Fighting', 'Ground'] }, Fairy: { superEff: ['Fighting', 'Dragon', 'Dark'], notEff: ['Fire', 'Poison', 'Steel'], immune: [], weakTo: ['Poison', 'Steel'] } };
 
-    const COOLDOWN = { Common: 0, Rare: 1, Epic: 1, Legendary: 2, Limited: 3 };
+    const COOLDOWN = { Common: 0, Rare: 1, Epic: 2, Legendary: 3, Limited: 3 }; // v1.1 patch
     const MISS_CHANCE = { Common: 0, Rare: 5, Epic: 8, Legendary: 10, Limited: 10 };
     const CRIT_CHANCE = { Common: 20, Rare: 18, Epic: 15, Legendary: 12, Limited: 10 };
     const COUNTER_BONUS = { Legendary: 10, Limited: 15 };
@@ -2223,36 +3044,41 @@
     const LORE = { 1: ["Firstborn Soldier adalah entitas pertama yang muncul setelah fajar penciptaan. Terlahir dari tanah abu keabadian, ia mengenakan baju besi yang ditempa dari baja primordial — material yang dipercaya berasal dari inti bumi pertama.", "Dalam catatan kuno GENESIS, ia disebut sebagai <em>\"Penjaga Ambang\"</em> — sosok yang berdiri di perbatasan antara dunia yang belum ada dan dunia yang baru saja lahir."], 2: ["Eden's Arrow adalah pemanah yang konon menembakkan anak panah pertama dalam sejarah dunia. Panahnya tidak melukai — melainkan menandai batas antara surga dan bumi yang belum terbagi.", "Ia bergerak dengan kecepatan angin pagi, dan dikatakan bahwa setiap panahnya membawa potongan langit bersama ujungnya."], 3: ["Primordial Stone bukan sekadar batu biasa. Ia adalah fragmen dari benda langit pertama yang jatuh ke permukaan dunia GENESIS — membawa kepadatan gravitasi yang tidak dapat dijelaskan oleh hukum alam biasa.", "Para ilmuwan kartu menyebut statusnya sebagai anomali: makhluk tanpa kehendak, namun memiliki naluri bertahan yang luar biasa. Stone Skin-nya adalah kemampuan kumulatif — semakin lama ia bertahan, semakin sulit ditembus."], 4: ["Marshborn Toad lahir di rawa-rawa hitam di bawah bulan merah pertama. Racunnya bukan hasil evolusi — melainkan berasal dari air yang terkontaminasi saat langit dan bumi pertama kali berpisah.", "Meski lemah secara fisik, toksisitas alaminya menjadikannya ancaman yang tidak boleh diremehkan. Cooldown-nya nol — racun bisa diaplikasikan setiap turn tanpa jeda."], 5: ["Spark Weaver adalah penyulut api pertama. Sebelum ada matahari, dialah yang membawa cahaya kecil ke dalam kegelapan purba. Apinya bukan sekadar panas — ia adalah representasi dari kehendak pertama.", "Dalam mitologi GENESIS, ia dipercaya menjadi nenek moyang semua makhluk api. Skill-nya tidak membutuhkan cooldown, menjadikannya kartu Common paling ofensif."], 6: ["Ashen Warden adalah pelindung yang lahir dari abu perang pertama. Tidak ada yang tahu dari pihak mana ia berasal — ia hanya ada, berdiri di antara reruntuhan, siap menerima serangan berikutnya.", "Iron Wall-nya adalah mekanisme retaliasinya: setiap serangan yang datang sebagian dikembalikan kepada penyerang. Efektif terutama melawan musuh yang bergantung pada serangan berulang."], 7: ["Dawncrest Sentinel adalah reptil purba yang hidup di lapisan bumi terdalam. Kemampuan kamuflasenya sempurna — beberapa peneliti bahkan meragukan apakah ia benar-benar ada.", "Dengan tipe Ground, ia kebal terhadap serangan Electric — aset penting melawan kartu seperti Stormcaller Shaman. Dodge chance 20% membuatnya sulit dikenai secara konsisten."], 8: ["Lantern of Origin membawa lentera yang dinyalakan dari percikan bintang pertama. Cahayanya tidak menerangi — melainkan mengungkap hal tersembunyi.", "Ia bisa menghapus efek stealth lawan tanpa cooldown, menjadikannya counter alami terhadap Ghost dan Dark yang mengandalkan invisible mechanics."], 9: ["Vanguard of the New Age adalah kesatria baja pertama yang bersumpah melindungi era baru. Perisainya telah memblokir kekuatan yang cukup untuk meruntuhkan gunung, namun tidak pernah retak.", "Sebagai Rare dengan tipe Fighting/Steel, ia mendapatkan counter bonus +10% melawan Legendary dan berpotensi memblokir skill Legendary (30% chance) dengan DEF-nya yang kokoh."], 10: ["Skywarden Eagle menguasai langit sejak hari pertama angin berembus. Ia selalu menyerang pertama — seperti petir yang memilih targetnya sendiri.", "Keunggulan First Wind-nya paling terasa di ronde pertama: +15 ATK pada turn pertama menjadikannya opener terbaik di kelas Rare. Tipe Flying memberinya dodge bonus melawan serangan Ground."], 11: ["Tidecaller of the Deep muncul dari lautan sebelum lautan memiliki nama. Ia bukan penyihir yang mempelajari air — ia <em>adalah</em> air, dalam bentuk yang memilih untuk berjalan di darat.", "Primordial Flood menurunkan DEF lawan 10 poin — sinergi sempurna dengan kartu high-ATK di deck yang sama. Kartu debuffer paling efisien di tier Rare."], 12: ["Bloodpact Rogue lahir dari perjanjian terlarang. Ia mengikat dirinya dengan kegelapan primordial untuk mendapatkan kemampuan bergerak di balik bayangan.", "Origin Stab memberikan 2× damage dari belakang — mekanik unik yang menggandakan efektivitasnya. Tipe Dark/Poison membuatnya lemah terhadap Fighting dan Bug, namun sangat kuat melawan Psychic."], 13: ["Earthborn Cavalry bergerak seperti gemetar bumi — pelan, tak terbendung. Kuda yang ditungganginya dibesarkan dari tanah liat yang dibentuk oleh tangan raksasa pertama.", "First Charge memberikan bonus +10 ATK pada turn pertama. Dengan tipe Ground/Normal, ia kebal terhadap Electric dan mendapat bonus +10% counter melawan Legendary."], 14: ["Stormcaller Shaman adalah manusia pertama yang belajar berbicara kepada badai. Petirnya menyalurkan energi dari awan pertama yang terbentuk saat langit pertama kali terbelah.", "Genesis Thunder menyerang dua target sekaligus — kemampuan terbaik untuk situasi 2v2. Namun tipe Electric memiliki satu kelemahan besar: ground immunity — kartu Ground type kebal total."], 15: ["Serpent of Knowing memakan buah dari pohon pengetahuan pertama. Pengetahuan itu adalah kutukan yang membuatnya memahami kelemahan semua makhluk.", "Forbidden Coil adalah skill kontrol terbaik di tier Rare: memaksa lawan skip 1 turn. Cooldown 1 ronde membuatnya bisa digunakan dua kali dalam 3 ronde standar."], 16: ["Glacier Warden adalah penjaga gletser pertama yang terbentuk saat suhu bumi turun untuk pertama kalinya. Ia tidak menyerang — ia menunggu.", "Permafrost Veil memperlambat ATK lawan 20% — efek yang bertumpuk dengan debuff lain. DEF 50 menjadikannya tank terbaik di tier Rare, dengan potensi memblokir 30% skill Legendary."], 17: ["Void Reaper of Genesis bukan kematian — ia adalah yang datang <em>setelah</em> kematian. Ia muncul di celah antara dunia yang hidup dan yang telah tiada.", "Soul Harvest mencuri 15 HP — dual efek: menyerang sekaligus menyembuhkan diri. Tipe Ghost/Dark memberinya keunggulan ×1.32 melawan Psychic, namun lemah terhadap Fighting dan Bug."], 18: ["Primarch Titan adalah konstruksi mekanis pertama yang dibuat oleh peradaban kuno GENESIS — sebelum peradaban itu sendiri runtuh.", "Overload Protocol memberikan DEF+20 tapi ATK-10 selama 3 turn — trade-off strategis yang harus dipertimbangkan. Dengan DEF 65 base + 20 dari skill, ia menjadi pertahanan paling solid di tier Epic."], 19: ["Lunaris the First Dancer menari di bawah bulan pertama yang pernah terbit. Gerakannya adalah seni bertarung yang diwariskan dari bulan itu sendiri.", "Crescent Slash dengan crit rate +35% di malam hari menjadikannya kartu dengan probabilitas crit tertinggi dalam set. Tipe Psychic/Fairy menutup kelemahan Dragon dan Dark secara bersamaan."], 20: ["Ancient Wyvern of Creation adalah naga paling tua yang tercatat. Ia <em>muncul</em> ketika konsep langit pertama kali terbentuk dan membutuhkan penjaga.", "Primal Sweep adalah satu-satunya skill area di tier Epic yang menarget seluruh baris depan lawan. Dual tipe Dragon/Flying membuatnya kuat melawan banyak tipe namun rentan terhadap Ice."], 21: ["Phantom of the First Veil hidup di sisi lain realitas. Ia bukan hantu yang mati — ia adalah hantu yang tidak pernah hidup sejak awal.", "Veil Strike mengabaikan 50% DEF lawan — efektif melawan tank seperti Primarch Titan atau Glacier Warden. Cooldown 1 ronde membatasi frekuensinya, tapi efeknya tetap game-changing."], 22: ["Magmaborn Colossus lahir dari letusan gunung berapi pertama. Ia adalah lava yang mendapat kesadaran.", "World Forge memberikan damage area 10 DMG/turn selama 3 turn — total 30 DMG pasif yang sulit dihindari. DEF 72 tertinggi di tier Epic, namun lemah terhadap Water dan Ground."], 23: ["Solarius the Firstborn adalah representasi matahari pertama. Ia tidak hanya membawa cahaya — ia membawa <em>kehidupan kembali</em>. Cooldown kebangkitannya 2 ronde.", "Sebagai Legendary, ia kena counter bonus +10% dari Rare/Common. Namun Light of Creation-nya bisa membalik pertarungan yang sudah hampir kalah — manajemen cooldown menjadi kunci."], 24: ["Abyssal Sovereign Null datang dari kekosongan sebelum penciptaan. Ia adalah sesuatu yang <em>seharusnya tidak ada</em>, namun berhasil eksis karena celah dalam hukum realitas.", "Unmaking menghancurkan semua buff lawan — efektif melawan deck yang bergantung pada stacking DEF atau ATK. Cooldown 2 ronde. Tipe Dark/Ghost memberikannya double super-efektif melawan Psychic."], 25: ["Zerath the First Chronomancer menemukan waktu sebelum waktu itu sendiri menyadari keberadaannya. Ia adalah pengamat pertama yang mencatat bahwa waktu bergerak.", "Genesis Rewind adalah skill paling langka: mengembalikan HP ke kondisi awal turn. Cooldown 2 ronde membuatnya hanya bisa digunakan sekali per duel standar. Tipe Psychic/Steel memberikannya resistensi luar biasa."], 26: ["Valdris the Bloodfather adalah pemimpin pasukan pertama yang berperang untuk membuktikan bahwa kekuatan bisa tumbuh dari pengorbanan.", "Blood Covenant men-stack ATK +5 per kill — dalam 3 ronde, ia bisa mencapai ATK 155+ jika berhasil mengalahkan kartu lawan. Kelemahannya: DEF hanya 60, rentan terhadap debuff ATK/DEF Down."], 27: ["Stormgod of the First Sky adalah dewa badai yang menguasai langit bahkan sebelum ada yang menyebut dirinya dewa. Hanya 10 eksemplar diterbitkan.", "Divine Tempest menyerang semua musuh + stun — namun cooldown 3 ronde membuatnya hanya bisa dipakai sekali dalam duel standar. Lawan yang mempersiapkan Skill Disable bisa menetralisirnya."], 28: ["Malgrath the Hollow King memerintah kerajaan bawah tanah yang tidak tercatat. Ia tidak bisa mati selama bentengnya masih berdiri — dan bentengnya adalah dirinya sendiri.", "Undying Throne aktif selama DEF > 100. Dengan DEF 130, ia butuh 30 poin DEF Down sebelum kerentanan ini hilang. Namun tipe Ghost lemah terhadap Ghost dan Dark lain — counter sesama tipe."], 29: ["Eclipse of the First Age adalah fenomena kosmik dari tabrakan matahari dan bulan pertama. Entitas ini tidak memiliki afiliasi cahaya maupun kegelapan.", "Void Nova mengabaikan semua modifikasi sebelum dealing true damage 80. Cooldown 3 ronde. Sebagai kartu Limited, ia menerima counter bonus +15% dari serangan Rare/Common — satu-satunya celah nyata."], 30: ["Frostborn Queen Eternal memerintah dari singgasana es di puncak dunia pertama. Ia tidak menaklukkan — ia membekukan, dan membiarkan waktu melakukan sisanya.", "Glacial Genesis membekukan seluruh pasukan lawan 2 turn penuh — window kontrol terluas dalam set. Cooldown 3 ronde membuatnya senjata satu kali pakai. Tipe Ice/Fairy menutup Dragon dan Fighting."] };
 
     const cards = [
+      // ── COMMON ──
       { id: 1, name: "Firstborn Soldier", role: "Warrior", icon: "🗡️", rarity: "Common", types: ["Normal", "Steel"], atk: 18, def: 14, skill: "First Guard: Kurangi incoming damage 5%", minted: 9800, total_supply: null, serial: null },
-      { id: 2, name: "Eden's Arrow", role: "Ranger", icon: "🏹", rarity: "Common", types: ["Normal", "Flying"], atk: 22, def: 8, skill: "Swiftshot: Tembak 2x jika musuh belum bergerak", minted: 8500, total_supply: null, serial: null },
-      { id: 3, name: "Primordial Stone", role: "Construct", icon: "🪨", rarity: "Common", types: ["Rock"], atk: 12, def: 28, skill: "Stone Skin: Setiap 3 turn DEF+8 permanen (max +24)", minted: 11200, total_supply: null, serial: null },
-      { id: 4, name: "Marshborn Toad", role: "Beast", icon: "🐸", rarity: "Common", types: ["Poison", "Water"], atk: 10, def: 10, skill: "Primal Venom: 3 DMG/turn selama 2 turn", minted: 9100, total_supply: null, serial: null },
-      { id: 5, name: "Spark Weaver", role: "Mage", icon: "🔮", rarity: "Common", types: ["Fire"], atk: 20, def: 6, skill: "First Flame: +5 bonus DMG sekali", minted: 7700, total_supply: null, serial: null },
+      { id: 2, name: "Eden's Arrow", role: "Ranger", icon: "🏹", rarity: "Common", types: ["Normal", "Flying"], atk: 22, def: 12, skill: "Swiftshot: Tembak 2x jika musuh belum bergerak", minted: 8500, total_supply: null, serial: null },
+      { id: 3, name: "Primordial Stone", role: "Construct", icon: "🪨", rarity: "Common", types: ["Rock"], atk: 14, def: 26, skill: "Stone Skin: DEF+5 permanen (NERF dari +8)", minted: 11200, total_supply: null, serial: null },
+      { id: 4, name: "Marshborn Toad", role: "Beast", icon: "🐸", rarity: "Common", types: ["Poison", "Water"], atk: 13, def: 13, skill: "Primal Venom: 3 DMG/turn selama 2 turn", minted: 9100, total_supply: null, serial: null },
+      { id: 5, name: "Spark Weaver", role: "Mage", icon: "🔮", rarity: "Common", types: ["Fire"], atk: 20, def: 10, skill: "First Flame: +10 bonus DMG sekali (BUFF dari +5)", minted: 7700, total_supply: null, serial: null },
       { id: 6, name: "Ashen Warden", role: "Warrior", icon: "🛡️", rarity: "Common", types: ["Fighting", "Steel"], atk: 15, def: 20, skill: "Iron Wall: Jika diserang balik 5 DMG ke penyerang", minted: 10300, total_supply: null, serial: null },
-      { id: 7, name: "Dawncrest Sentinel", role: "Beast", icon: "🦎", rarity: "Common", types: ["Ground"], atk: 8, def: 16, skill: "Camouflage: 20% chance hindari serangan", minted: 12400, total_supply: null, serial: null },
-      { id: 8, name: "Lantern of Origin", role: "Support", icon: "🔦", rarity: "Common", types: ["Normal", "Electric"], atk: 14, def: 12, skill: "First Light: Hapus efek stealth lawan", minted: 9600, total_supply: null, serial: null },
-      { id: 9, name: "Vanguard of the New Age", role: "Paladin", icon: "⚔️", rarity: "Rare", types: ["Fighting", "Steel"], atk: 38, def: 32, skill: "Genesis Shield: Blokir 1 serangan fatal", minted: 3200, total_supply: null, serial: null },
-      { id: 10, name: "Skywarden Eagle", role: "Avian", icon: "🦅", rarity: "Rare", types: ["Flying", "Normal"], atk: 45, def: 20, skill: "First Wind: +15 ATK jika menyerang duluan", minted: 2800, total_supply: null, serial: null },
-      { id: 11, name: "Tidecaller of the Deep", role: "Mage", icon: "🌊", rarity: "Rare", types: ["Water"], atk: 42, def: 18, skill: "Primordial Flood: Kurangi DEF lawan 10", minted: 3500, total_supply: null, serial: null },
-      { id: 12, name: "Bloodpact Rogue", role: "Assassin", icon: "🗡️", rarity: "Rare", types: ["Dark", "Poison"], atk: 50, def: 14, skill: "Origin Stab: 2x DMG dari belakang", minted: 2100, total_supply: null, serial: null },
+      { id: 7, name: "Dawncrest Sentinel", role: "Beast", icon: "🦎", rarity: "Common", types: ["Ground"], atk: 12, def: 18, skill: "Camouflage: 20% chance hindari serangan", minted: 12400, total_supply: null, serial: null },
+      { id: 8, name: "Lantern of Origin", role: "Support", icon: "🔦", rarity: "Common", types: ["Normal", "Electric"], atk: 16, def: 14, skill: "First Light: Hapus efek stealth lawan + 10 true DMG (BUFF)", minted: 9600, total_supply: null, serial: null },
+      // ── RARE ──
+      { id: 9, name: "Vanguard of the New Age", role: "Paladin", icon: "⚔️", rarity: "Rare", types: ["Fighting", "Steel"], atk: 38, def: 32, skill: "Genesis Shield: Blokir 1 serangan fatal (maks 5 turn, NERF)", minted: 3200, total_supply: null, serial: null },
+      { id: 10, name: "Skywarden Eagle", role: "Avian", icon: "🦅", rarity: "Rare", types: ["Flying", "Normal"], atk: 45, def: 25, skill: "First Wind: +15 ATK jika menyerang duluan", minted: 2800, total_supply: null, serial: null },
+      { id: 11, name: "Tidecaller of the Deep", role: "Mage", icon: "🌊", rarity: "Rare", types: ["Water"], atk: 42, def: 24, skill: "Primordial Flood: Kurangi DEF lawan 10 (3 turn, NERF dari permanen)", minted: 3500, total_supply: null, serial: null },
+      { id: 12, name: "Bloodpact Rogue", role: "Assassin", icon: "🗡️", rarity: "Rare", types: ["Dark", "Poison"], atk: 44, def: 18, skill: "Origin Stab: 1.5x DMG dari belakang (NERF dari 2x)", minted: 2100, total_supply: null, serial: null },
       { id: 13, name: "Earthborn Cavalry", role: "Mounted", icon: "🐴", rarity: "Rare", types: ["Ground", "Normal"], atk: 40, def: 35, skill: "First Charge: +10 ATK saat first turn", minted: 4000, total_supply: null, serial: null },
-      { id: 14, name: "Stormcaller Shaman", role: "Shaman", icon: "⚡", rarity: "Rare", types: ["Electric"], atk: 44, def: 22, skill: "Genesis Thunder: Hit 2 target sekaligus", minted: 1900, total_supply: null, serial: null },
-      { id: 15, name: "Serpent of Knowing", role: "Serpent", icon: "🐍", rarity: "Rare", types: ["Poison", "Dark"], atk: 47, def: 26, skill: "Forbidden Coil: Lawan skip 1 turn jika kena", minted: 2400, total_supply: null, serial: null },
-      { id: 16, name: "Glacier Warden", role: "Guardian", icon: "🧊", rarity: "Rare", types: ["Ice", "Water"], atk: 30, def: 50, skill: "Permafrost Veil: Lambatkan ATK lawan 20%", minted: 1750, total_supply: null, serial: null },
-      { id: 17, name: "Void Reaper of Genesis", role: "Specter", icon: "💀", rarity: "Epic", types: ["Ghost", "Dark"], atk: 72, def: 38, skill: "Soul Harvest: Curi 15 HP dari lawan", minted: 420, total_supply: null, serial: null },
+      { id: 14, name: "Stormcaller Shaman", role: "Shaman", icon: "⚡", rarity: "Rare", types: ["Electric"], atk: 44, def: 22, skill: "Genesis Thunder: 1.3x DMG nuke (NERF dari 1.5x)", minted: 1900, total_supply: null, serial: null },
+      { id: 15, name: "Serpent of Knowing", role: "Serpent", icon: "🐍", rarity: "Rare", types: ["Poison", "Dark"], atk: 44, def: 26, skill: "Forbidden Coil: Lawan skip 1 turn jika kena", minted: 2400, total_supply: null, serial: null },
+      { id: 16, name: "Glacier Warden", role: "Guardian", icon: "🧊", rarity: "Rare", types: ["Ice", "Water"], atk: 32, def: 42, skill: "Permafrost Veil: Lambatkan ATK lawan 20% (3 turn, NERF dari permanen)", minted: 1750, total_supply: null, serial: null },
+      // ── EPIC ──
+      { id: 17, name: "Void Reaper of Genesis", role: "Specter", icon: "💀", rarity: "Epic", types: ["Ghost", "Dark"], atk: 72, def: 38, skill: "Soul Harvest: Curi 25 HP dari lawan (BUFF dari 15)", minted: 420, total_supply: null, serial: null },
       { id: 18, name: "Primarch Titan", role: "Construct", icon: "🤖", rarity: "Epic", types: ["Steel", "Rock"], atk: 60, def: 65, skill: "Overload Protocol: DEF+20 ATK-10 selama 3 turn", minted: 310, total_supply: null, serial: null },
-      { id: 19, name: "Lunaris the First Dancer", role: "Duelist", icon: "🌙", rarity: "Epic", types: ["Psychic", "Fairy"], atk: 80, def: 28, skill: "Crescent Slash: Crit rate +35% di malam hari", minted: 280, total_supply: null, serial: null },
-      { id: 20, name: "Ancient Wyvern of Creation", role: "Dragon", icon: "🐲", rarity: "Epic", types: ["Dragon", "Flying"], atk: 68, def: 55, skill: "Primal Sweep: Hit semua musuh di baris depan", minted: 195, total_supply: null, serial: null },
-      { id: 21, name: "Phantom of the First Veil", role: "Specter", icon: "🌫️", rarity: "Epic", types: ["Ghost"], atk: 88, def: 22, skill: "Veil Strike: Ignore 50% DEF lawan", minted: 150, total_supply: null, serial: null },
-      { id: 22, name: "Magmaborn Colossus", role: "Elemental", icon: "🌋", rarity: "Epic", types: ["Fire", "Ground"], atk: 65, def: 72, skill: "World Forge: Bakar ground 10 DMG/turn selama 3 turn", minted: 205, total_supply: null, serial: null },
-      { id: 23, name: "Solarius the Firstborn", role: "Divine", icon: "☀️", rarity: "Legendary", types: ["Fire", "Fairy"], atk: 110, def: 90, skill: "Light of Creation: Bangkit sekali dengan 50% HP", minted: 48, total_supply: null, serial: null },
-      { id: 24, name: "Abyssal Sovereign Null", role: "Demon Lord", icon: "👁️", rarity: "Legendary", types: ["Dark", "Ghost"], atk: 130, def: 70, skill: "Unmaking: Hancurkan semua buff lawan", minted: 22, total_supply: null, serial: null },
-      { id: 25, name: "Zerath the First Chronomancer", role: "Arcane", icon: "⏳", rarity: "Legendary", types: ["Psychic", "Steel"], atk: 100, def: 95, skill: "Genesis Rewind: Kembalikan HP ke kondisi awal turn", minted: 35, total_supply: null, serial: null },
-      { id: 26, name: "Valdris the Bloodfather", role: "Warlord", icon: "🩸", rarity: "Legendary", types: ["Fighting", "Dark"], atk: 140, def: 60, skill: "Blood Covenant: ATK +5 setiap musuh dikalahkan", minted: 19, total_supply: null, serial: null },
+      { id: 19, name: "Lunaris the First Dancer", role: "Duelist", icon: "🌙", rarity: "Epic", types: ["Psychic", "Fairy"], atk: 80, def: 35, skill: "Crescent Slash: Crit rate +35% di malam hari", minted: 280, total_supply: null, serial: null },
+      { id: 20, name: "Ancient Wyvern of Creation", role: "Dragon", icon: "🐲", rarity: "Epic", types: ["Dragon", "Flying"], atk: 68, def: 55, skill: "Primal Sweep: 1.35x DMG hit semua (BUFF dari 1.2x)", minted: 195, total_supply: null, serial: null },
+      { id: 21, name: "Phantom of the First Veil", role: "Specter", icon: "🌫️", rarity: "Epic", types: ["Ghost"], atk: 85, def: 30, skill: "Veil Strike: Ignore 30% DEF lawan (NERF dari 50%)", minted: 150, total_supply: null, serial: null },
+      { id: 22, name: "Magmaborn Colossus", role: "Elemental", icon: "🌋", rarity: "Epic", types: ["Fire", "Ground"], atk: 65, def: 60, skill: "World Forge: Bakar 7 DMG/turn selama 3 turn (NERF dari 10)", minted: 205, total_supply: null, serial: null },
+      // ── LEGENDARY ──
+      { id: 23, name: "Solarius the Firstborn", role: "Divine", icon: "☀️", rarity: "Legendary", types: ["Fire", "Fairy"], atk: 95, def: 80, skill: "Light of Creation: Bangkit sekali dengan 25% HP (NERF dari 50%)", minted: 48, total_supply: null, serial: null },
+      { id: 24, name: "Abyssal Sovereign Null", role: "Demon Lord", icon: "👁️", rarity: "Legendary", types: ["Dark", "Ghost"], atk: 120, def: 70, skill: "Unmaking: Hancurkan 2 buff acak lawan (NERF dari semua)", minted: 22, total_supply: null, serial: null },
+      { id: 25, name: "Zerath the First Chronomancer", role: "Arcane", icon: "⏳", rarity: "Legendary", types: ["Psychic", "Steel"], atk: 90, def: 80, skill: "Genesis Rewind: Pulihkan 40% Max HP (NERF dari HP Penuh)", minted: 35, total_supply: null, serial: null },
+      { id: 26, name: "Valdris the Bloodfather", role: "Warlord", icon: "🩸", rarity: "Legendary", types: ["Fighting", "Dark"], atk: 125, def: 65, skill: "Blood Covenant: ATK +5 setiap musuh dikalahkan", minted: 19, total_supply: null, serial: null },
+      // ── LIMITED ──
       { id: 27, name: "Stormgod of the First Sky", role: "Divine", icon: "🌩️", rarity: "Limited", types: ["Electric", "Flying"], atk: 160, def: 75, skill: "Divine Tempest: Serang semua lawan + stun 1 turn", minted: 7, total_supply: 10, serial: "#7/10" },
-      { id: 28, name: "Malgrath the Hollow King", role: "Undead", icon: "💎", rarity: "Limited", types: ["Ghost", "Steel"], atk: 135, def: 130, skill: "Undying Throne: Tidak bisa di-KO jika DEF > 100", minted: 29, total_supply: 50, serial: "#29/50" },
-      { id: 29, name: "Eclipse of the First Age", role: "Celestial", icon: "🌑", rarity: "Limited", types: ["Dark", "Dragon"], atk: 145, def: 85, skill: "Void Nova: Hapus semua efek & deal 80 true DMG", minted: 17, total_supply: 25, serial: "#17/25" },
-      { id: 30, name: "Frostborn Queen Eternal", role: "Sovereign", icon: "❄️", rarity: "Limited", types: ["Ice", "Fairy"], atk: 120, def: 115, skill: "Glacial Genesis: Freeze semua musuh selama 2 turn", minted: 43, total_supply: 100, serial: "#43/100" }
+      { id: 28, name: "Malgrath the Hollow King", role: "Undead", icon: "💎", rarity: "Limited", types: ["Ghost", "Steel"], atk: 135, def: 115, skill: "Undying Throne: Tidak bisa di-KO jika DEF > 100", minted: 29, total_supply: 50, serial: "#29/50" },
+      { id: 29, name: "Eclipse of the First Age", role: "Celestial", icon: "🌑", rarity: "Limited", types: ["Dark", "Dragon"], atk: 145, def: 85, skill: "Void Nova: Hapus semua efek & deal 60 true DMG (NERF dari 80)", minted: 17, total_supply: 25, serial: "#17/25" },
+      { id: 30, name: "Frostborn Queen Eternal", role: "Sovereign", icon: "❄️", rarity: "Limited", types: ["Ice", "Fairy"], atk: 120, def: 115, skill: "Glacial Genesis: Freeze semua musuh selama 1 turn (NERF dari 2)", minted: 43, total_supply: 100, serial: "#43/100" }
     ];
 
     function tp(t, sm) { const s = sm ? 'font-size:.5rem;padding:.1rem .35rem' : ''; return `<span class="tp" style="background:${TB[t]};color:${TC[t]};border:1px solid ${TC[t]}55;${s}">${t}</span>`; }
@@ -2324,6 +3150,7 @@
       document.getElementById('rulesPage').classList.add('hidden');
       document.getElementById('wikiPage').classList.add('hidden');
       document.getElementById('arenaPage').classList.add('hidden');
+      document.getElementById('updatePage').classList.add('hidden');
     }
 
     function goHome() {
@@ -2339,6 +3166,23 @@
       document.getElementById('rulesPage').classList.remove('hidden');
       document.getElementById('sidebar').classList.remove('open');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goUpdate() {
+      hideAllPages();
+      setNav('nav-update');
+      document.getElementById('updatePage').classList.remove('hidden');
+      document.getElementById('sidebar').classList.remove('open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchTab(btn, tab) {
+      document.querySelectorAll('#updateTabs .fb').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.update-section').forEach(sec => {
+        const cat = sec.dataset.category;
+        sec.style.display = (tab === 'all' || cat === tab) ? '' : 'none';
+      });
     }
 
     function openCard(id) {
@@ -2551,259 +3395,259 @@
     }
 
     function executeCardSkill(session, actor, opponent) {
-    const cardId = actor.card.id;
-    let msgAction = `✨ *Skill: ${actor.card.skill.split(':')[0]}* — *${actor.name}*\n`;
-    actor.skillUsed = true;
-    actor.skillCooldown = COOLDOWN[actor.card.rarity] || 0;
+      const cardId = actor.card.id;
+      let msgAction = `✨ *Skill: ${actor.card.skill.split(':')[0]}* — *${actor.name}*\n`;
+      actor.skillUsed = true;
+      actor.skillCooldown = COOLDOWN[actor.card.rarity] || 0;
 
-    let dmg = 0;
+      let dmg = 0;
 
-    // Default damage modifier formulas
-    const baseAtkDmg = () => randInt(20, 28) + Math.round(actor.card.atk * 0.25);
-    const effMultiplier = getTypeMultiplier(actor.card.types, opponent.card.types);
-    const calcFinalDmg = (raw) => {
+      // Default damage modifier formulas
+      const baseAtkDmg = () => randInt(20, 28) + Math.round(actor.card.atk * 0.25);
+      const effMultiplier = getTypeMultiplier(actor.card.types, opponent.card.types);
+      const calcFinalDmg = (raw) => {
         let final = Math.round(raw * effMultiplier);
         if (effMultiplier > 0) {
-            const defRed = Math.round(opponent.card.def * 0.1);
-            final = Math.max(1, final - defRed);
+          const defRed = Math.round(opponent.card.def * 0.1);
+          final = Math.max(1, final - defRed);
         }
         if (opponent.defending) final = Math.round(final * 0.5);
         return final;
-    };
+      };
 
-    switch (cardId) {
+      switch (cardId) {
         case 1: // First Guard: Kurangi incoming damage 5% (Implemented as self DEF buff)
-            actor.buffs.push({ type: 'DEF_MULTI', value: 1.05, duration: 99 });
-            msgAction += `🛡️ Pertahanan meningkat 5% secara permanen!`;
-            break;
+          actor.buffs.push({ type: 'DEF_MULTI', value: 1.05, duration: 99 });
+          msgAction += `🛡️ Pertahanan meningkat 5% secara permanen!`;
+          break;
 
         case 2: // Swiftshot: Tembak 2x jika musuh belum bergerak (First turn check)
-            let hits = (session.round === 1) ? 2 : 1;
-            dmg = calcFinalDmg(baseAtkDmg() * hits);
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            msgAction += `🏹 Menembakkan ${hits} anak panah!\n💢 Damage: *${dmg}*`;
-            break;
+          let hits = (session.round === 1) ? 2 : 1;
+          dmg = calcFinalDmg(baseAtkDmg() * hits);
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          msgAction += `🏹 Menembakkan ${hits} anak panah!\n💢 Damage: *${dmg}*`;
+          break;
 
         case 3: // Stone Skin: Setiap 3 turn DEF+8 permanen
-            actor.buffs.push({ type: 'DEF', value: 8, duration: 99 });
-            msgAction += `🪨 Kulit mengeras! DEF bertambah +8 permanen.`;
-            break;
+          actor.buffs.push({ type: 'DEF', value: 8, duration: 99 });
+          msgAction += `🪨 Kulit mengeras! DEF bertambah +8 permanen.`;
+          break;
 
         case 4: // Primal Venom: 3 DMG/turn selama 2 turn
-            opponent.status.push({ type: 'POISON', value: 3, duration: 2 });
-            msgAction += `🐸 Menyemburkan racun! Lawan akan menerima 3 DMG selama 2 turn.`;
-            break;
+          opponent.status.push({ type: 'POISON', value: 3, duration: 2 });
+          msgAction += `🐸 Menyemburkan racun! Lawan akan menerima 3 DMG selama 2 turn.`;
+          break;
 
         case 5: // First Flame: +5 bonus DMG sekali
-            dmg = calcFinalDmg(baseAtkDmg() + 5);
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            msgAction += `🔥 Semburan api awal!\n💢 Damage: *${dmg}*`;
-            break;
+          dmg = calcFinalDmg(baseAtkDmg() + 5);
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          msgAction += `🔥 Semburan api awal!\n💢 Damage: *${dmg}*`;
+          break;
 
         case 6: // Iron Wall: Jika diserang balik 5 DMG ke penyerang
-            actor.buffs.push({ type: 'REFLECT', value: 5, duration: 1 });
-            msgAction += `🛡️ Mengaktifkan dinding besi! (Memantulkan 5 DMG turn ini)`;
-            break;
+          actor.buffs.push({ type: 'REFLECT', value: 5, duration: 1 });
+          msgAction += `🛡️ Mengaktifkan dinding besi! (Memantulkan 5 DMG turn ini)`;
+          break;
 
         case 7: // Camouflage: 20% chance hindari serangan
-            actor.buffs.push({ type: 'DODGE', value: 20, duration: 1 });
-            msgAction += `🦎 Berkamuflase! (Peluang menghindar +20% turn ini)`;
-            break;
+          actor.buffs.push({ type: 'DODGE', value: 20, duration: 1 });
+          msgAction += `🦎 Berkamuflase! (Peluang menghindar +20% turn ini)`;
+          break;
 
         case 8: // First Light: Hapus efek stealth lawan
-            opponent.buffs = opponent.buffs.filter(b => b.type !== 'DODGE' && b.type !== 'STEALTH');
-            msgAction += `🔦 Menyinari kebenaran! Semua efek sembunyi/menghindar lawan dihapus.`;
-            break;
+          opponent.buffs = opponent.buffs.filter(b => b.type !== 'DODGE' && b.type !== 'STEALTH');
+          msgAction += `🔦 Menyinari kebenaran! Semua efek sembunyi/menghindar lawan dihapus.`;
+          break;
 
         case 9: // Genesis Shield: Blokir 1 serangan fatal
-            actor.buffs.push({ type: 'IMMUNE_FATAL', duration: 99 });
-            msgAction += `⚔️ Mengangkat perisai perlindungan fatal!`;
-            break;
+          actor.buffs.push({ type: 'IMMUNE_FATAL', duration: 99 });
+          msgAction += `⚔️ Mengangkat perisai perlindungan fatal!`;
+          break;
 
         case 10: // First Wind: +15 ATK jika menyerang duluan
-            let bonusAtk = (session.round === 1) ? 15 : 0;
-            actor.buffs.push({ type: 'ATK', value: bonusAtk, duration: 1 });
-            dmg = calcFinalDmg(randInt(20, 28) + Math.round((actor.card.atk + bonusAtk) * 0.25));
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            msgAction += `🦅 Menukik super cepat!\n💢 Damage: *${dmg}*`;
-            break;
+          let bonusAtk = (session.round === 1) ? 15 : 0;
+          actor.buffs.push({ type: 'ATK', value: bonusAtk, duration: 1 });
+          dmg = calcFinalDmg(randInt(20, 28) + Math.round((actor.card.atk + bonusAtk) * 0.25));
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          msgAction += `🦅 Menukik super cepat!\n💢 Damage: *${dmg}*`;
+          break;
 
         case 11: // Primordial Flood: Kurangi DEF lawan 10
-            opponent.buffs.push({ type: 'DEF', value: -10, duration: 99 });
-            msgAction += `🌊 Banjir purba menerjang! DEF lawan turun 10 permanen.`;
-            break;
+          opponent.buffs.push({ type: 'DEF', value: -10, duration: 99 });
+          msgAction += `🌊 Banjir purba menerjang! DEF lawan turun 10 permanen.`;
+          break;
 
         case 12: // Origin Stab: 2x DMG dari belakang
-            dmg = calcFinalDmg(baseAtkDmg() * 2);
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            msgAction += `🗡️ Menusuk dari bayangan!\n💢 Damage: *${dmg}*`;
-            break;
+          dmg = calcFinalDmg(baseAtkDmg() * 2);
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          msgAction += `🗡️ Menusuk dari bayangan!\n💢 Damage: *${dmg}*`;
+          break;
 
         case 13: // First Charge: +10 ATK saat first turn
-            let chargeAtk = (session.round === 1) ? 10 : 0;
-            actor.buffs.push({ type: 'ATK', value: chargeAtk, duration: 1 });
-            dmg = calcFinalDmg(randInt(20, 28) + Math.round((actor.card.atk + chargeAtk) * 0.25));
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            msgAction += `🐴 Menyerbu dengan kekuatan penuh!\n💢 Damage: *${dmg}*`;
-            break;
+          let chargeAtk = (session.round === 1) ? 10 : 0;
+          actor.buffs.push({ type: 'ATK', value: chargeAtk, duration: 1 });
+          dmg = calcFinalDmg(randInt(20, 28) + Math.round((actor.card.atk + chargeAtk) * 0.25));
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          msgAction += `🐴 Menyerbu dengan kekuatan penuh!\n💢 Damage: *${dmg}*`;
+          break;
 
         case 14: // Genesis Thunder: Hit 2 target sekaligus
-            // In 1v1, acts as a 1.5x damage nuke
-            dmg = calcFinalDmg(baseAtkDmg() * 1.5);
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            msgAction += `⚡ Memanggil badai petir!\n💢 Damage: *${dmg}*`;
-            break;
+          // In 1v1, acts as a 1.5x damage nuke
+          dmg = calcFinalDmg(baseAtkDmg() * 1.5);
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          msgAction += `⚡ Memanggil badai petir!\n💢 Damage: *${dmg}*`;
+          break;
 
         case 15: // Forbidden Coil: Lawan skip 1 turn jika kena
-            opponent.status.push({ type: 'STUN', duration: 1 });
-            msgAction += `🐍 Lilitan kutukan! Lawan tidak bisa bergerak turn depan.`;
-            break;
+          opponent.status.push({ type: 'STUN', duration: 1 });
+          msgAction += `🐍 Lilitan kutukan! Lawan tidak bisa bergerak turn depan.`;
+          break;
 
         case 16: // Permafrost Veil: Lambatkan ATK lawan 20%
-            opponent.buffs.push({ type: 'ATK_MULTI', value: 0.8, duration: 99 });
-            msgAction += `🧊 Tabir es menyelimuti! ATK lawan melambat 20% permanen.`;
-            break;
+          opponent.buffs.push({ type: 'ATK_MULTI', value: 0.8, duration: 99 });
+          msgAction += `🧊 Tabir es menyelimuti! ATK lawan melambat 20% permanen.`;
+          break;
 
         case 17: // Soul Harvest: Curi 15 HP dari lawan
-            opponent.hp = Math.max(0, opponent.hp - 15);
-            actor.hp = Math.min(actor.maxHp, actor.hp + 15);
-            msgAction += `💀 Mencabut jiwa! Mencuri 15 HP dari lawan.`;
-            break;
+          opponent.hp = Math.max(0, opponent.hp - 15);
+          actor.hp = Math.min(actor.maxHp, actor.hp + 15);
+          msgAction += `💀 Mencabut jiwa! Mencuri 15 HP dari lawan.`;
+          break;
 
         case 18: // Overload Protocol: DEF+20 ATK-10 selama 3 turn
-            actor.buffs.push({ type: 'DEF', value: 20, duration: 3 });
-            actor.buffs.push({ type: 'ATK', value: -10, duration: 3 });
-            msgAction += `🤖 Overload aktif! DEF naik, ATK turun selama 3 turn.`;
-            break;
+          actor.buffs.push({ type: 'DEF', value: 20, duration: 3 });
+          actor.buffs.push({ type: 'ATK', value: -10, duration: 3 });
+          msgAction += `🤖 Overload aktif! DEF naik, ATK turun selama 3 turn.`;
+          break;
 
         case 19: // Crescent Slash: Crit rate +35% di malam hari
-            let slashDmg = baseAtkDmg();
-            // 50% chance forced crit implementation
-            if (Math.random() < 0.5) {
-                slashDmg *= 1.5;
-                msgAction += `💥 *CRITICAL STRIKE!*\n`;
-            }
-            dmg = calcFinalDmg(slashDmg);
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            msgAction += `🌙 Tebasan sabit bulan!\n💢 Damage: *${dmg}*`;
-            break;
+          let slashDmg = baseAtkDmg();
+          // 50% chance forced crit implementation
+          if (Math.random() < 0.5) {
+            slashDmg *= 1.5;
+            msgAction += `💥 *CRITICAL STRIKE!*\n`;
+          }
+          dmg = calcFinalDmg(slashDmg);
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          msgAction += `🌙 Tebasan sabit bulan!\n💢 Damage: *${dmg}*`;
+          break;
 
         case 20: // Primal Sweep: Hit semua musuh di baris depan
-            // 1v1 adaptation: slight damage boost + chance to bypass defend
-            dmg = calcFinalDmg(baseAtkDmg() * 1.2);
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            msgAction += `🐲 Sapuan naga purba!\n💢 Damage: *${dmg}*`;
-            break;
+          // 1v1 adaptation: slight damage boost + chance to bypass defend
+          dmg = calcFinalDmg(baseAtkDmg() * 1.2);
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          msgAction += `🐲 Sapuan naga purba!\n💢 Damage: *${dmg}*`;
+          break;
 
         case 21: // Veil Strike: Ignore 50% DEF lawan
-            let effDef = opponent.card.def;
-            if (opponent.buffs) opponent.buffs.forEach(b => { if (b.type === 'DEF') effDef += b.value; });
-            let halvedDef = Math.round(effDef * 0.5);
+          let effDef = opponent.card.def;
+          if (opponent.buffs) opponent.buffs.forEach(b => { if (b.type === 'DEF') effDef += b.value; });
+          let halvedDef = Math.round(effDef * 0.5);
 
-            let raw21 = baseAtkDmg() * effMultiplier;
-            if (effMultiplier > 0) raw21 = Math.max(1, raw21 - Math.round(halvedDef * 0.1));
-            if (opponent.defending) raw21 *= 0.5;
+          let raw21 = baseAtkDmg() * effMultiplier;
+          if (effMultiplier > 0) raw21 = Math.max(1, raw21 - Math.round(halvedDef * 0.1));
+          if (opponent.defending) raw21 *= 0.5;
 
-            dmg = Math.round(raw21);
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            msgAction += `🌫️ Menembus pertahanan lawan!\n💢 Damage: *${dmg}*`;
-            break;
+          dmg = Math.round(raw21);
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          msgAction += `🌫️ Menembus pertahanan lawan!\n💢 Damage: *${dmg}*`;
+          break;
 
         case 22: // World Forge: Bakar ground 10 DMG/turn selama 3 turn
-            opponent.status.push({ type: 'BURN', value: 10, duration: 3 });
-            msgAction += `🌋 Menciptakan lautan lava! Lawan akan menerima 10 DMG selama 3 turn.`;
-            break;
+          opponent.status.push({ type: 'BURN', value: 10, duration: 3 });
+          msgAction += `🌋 Menciptakan lautan lava! Lawan akan menerima 10 DMG selama 3 turn.`;
+          break;
 
         case 23: // Light of Creation: Bangkit sekali dengan 50% HP
-            actor.buffs.push({ type: 'REVIVE', value: 0.5, duration: 99 });
-            msgAction += `☀️ Cahaya penciptaan memberkati! Akan kembali dari kematian dengan 50% HP.`;
-            break;
+          actor.buffs.push({ type: 'REVIVE', value: 0.5, duration: 99 });
+          msgAction += `☀️ Cahaya penciptaan memberkati! Akan kembali dari kematian dengan 50% HP.`;
+          break;
 
         case 24: // Unmaking: Hancurkan semua buff lawan
-            opponent.buffs = [];
-            msgAction += `👁️ Kekosongan melahap segalanya! Semua status positif lawan dilenyapkan.`;
-            break;
+          opponent.buffs = [];
+          msgAction += `👁️ Kekosongan melahap segalanya! Semua status positif lawan dilenyapkan.`;
+          break;
 
         case 25: // Genesis Rewind: Kembalikan HP ke kondisi awal turn
-            actor.hp = actor.maxHp;
-            msgAction += `⏳ Memutar balik waktu! Kondisi tubuh kembali sempurna (HP Penuh).`;
-            break;
+          actor.hp = actor.maxHp;
+          msgAction += `⏳ Memutar balik waktu! Kondisi tubuh kembali sempurna (HP Penuh).`;
+          break;
 
         case 26: // Blood Covenant: ATK +5 setiap musuh dikalahkan
-            actor.buffs.push({ type: 'ATK', value: 5, duration: 99 });
-            // In 1v1 we simulate the immediate buff and deal slight damage
-            dmg = calcFinalDmg(baseAtkDmg());
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            msgAction += `🩸 Mengikat sumpah darah! ATK +5 permanen!\n💢 Damage: *${dmg}*`;
-            break;
+          actor.buffs.push({ type: 'ATK', value: 5, duration: 99 });
+          // In 1v1 we simulate the immediate buff and deal slight damage
+          dmg = calcFinalDmg(baseAtkDmg());
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          msgAction += `🩸 Mengikat sumpah darah! ATK +5 permanen!\n💢 Damage: *${dmg}*`;
+          break;
 
         case 27: // Divine Tempest: Serang semua lawan + stun 1 turn
-            dmg = calcFinalDmg(baseAtkDmg());
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            opponent.status.push({ type: 'STUN', duration: 1 });
-            msgAction += `🌩️ Badai langit pertama menyambar! Lawan terkena STUN!\n💢 Damage: *${dmg}*`;
-            break;
+          dmg = calcFinalDmg(baseAtkDmg());
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          opponent.status.push({ type: 'STUN', duration: 1 });
+          msgAction += `🌩️ Badai langit pertama menyambar! Lawan terkena STUN!\n💢 Damage: *${dmg}*`;
+          break;
 
         case 28: // Undying Throne: Tidak bisa di-KO jika DEF > 100
-            let tDef = actor.card.def;
-            if (actor.buffs) actor.buffs.forEach(b => { if (b.type === 'DEF') tDef += b.value; });
+          let tDef = actor.card.def;
+          if (actor.buffs) actor.buffs.forEach(b => { if (b.type === 'DEF') tDef += b.value; });
 
-            if (tDef > 100) {
-                actor.buffs.push({ type: 'IMMUNE_FATAL', duration: 1 });
-                msgAction += `💎 Tahta keabadian aktif (DEF > 100). Imun dari pukulan fatal turn ini!`;
-            } else {
-                msgAction += `💎 Gagal mengaktifkan Tahta Keabadian (Syarat DEF > 100).`;
-            }
-            break;
+          if (tDef > 100) {
+            actor.buffs.push({ type: 'IMMUNE_FATAL', duration: 1 });
+            msgAction += `💎 Tahta keabadian aktif (DEF > 100). Imun dari pukulan fatal turn ini!`;
+          } else {
+            msgAction += `💎 Gagal mengaktifkan Tahta Keabadian (Syarat DEF > 100).`;
+          }
+          break;
 
         case 29: // Void Nova: Hapus semua efek & deal 80 true DMG
-            opponent.buffs = [];
-            opponent.status = [];
-            actor.buffs = [];
-            actor.status = [];
-            dmg = 80;
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            msgAction += `🌑 Kekosongan menelan semua efek! True Damage Absolut!\n💢 Damage: *${dmg}*`;
-            break;
+          opponent.buffs = [];
+          opponent.status = [];
+          actor.buffs = [];
+          actor.status = [];
+          dmg = 80;
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          msgAction += `🌑 Kekosongan menelan semua efek! True Damage Absolut!\n💢 Damage: *${dmg}*`;
+          break;
 
         case 30: // Glacial Genesis: Freeze semua musuh selama 2 turn
-            opponent.status.push({ type: 'STUN', duration: 2 });
-            msgAction += `❄️ Embun beku absolut! Lawan terkena FREEZE selama 2 turn!`;
-            break;
+          opponent.status.push({ type: 'STUN', duration: 2 });
+          msgAction += `❄️ Embun beku absolut! Lawan terkena FREEZE selama 2 turn!`;
+          break;
 
         default:
-            // Fallback generic skill
-            dmg = calcFinalDmg(baseAtkDmg());
-            opponent.hp = Math.max(0, opponent.hp - dmg);
-            msgAction += `💥 Menyerang dengan skill!\n💢 Damage: *${dmg}*`;
-            break;
+          // Fallback generic skill
+          dmg = calcFinalDmg(baseAtkDmg());
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+          msgAction += `💥 Menyerang dengan skill!\n💢 Damage: *${dmg}*`;
+          break;
+      }
+
+      msgAction += `\n❤️ HP ${opponent.name}: *${opponent.hp}*`;
+      return msgAction;
     }
 
-    msgAction += `\n❤️ HP ${opponent.name}: *${opponent.hp}*`;
-    return msgAction;
-}
+    function calcDamageBot(actor, opponent, action) {
+      let baseDmg, dmg;
+      let effAtk = actor.card.atk;
+      let effDef = opponent.card.def;
+      if (actor.buffs) actor.buffs.forEach(b => { if (b.type === 'ATK') effAtk += b.value; if (b.type === 'ATK_MULTI') effAtk *= b.value; });
+      if (opponent.buffs) opponent.buffs.forEach(b => { if (b.type === 'DEF') effDef += b.value; if (b.type === 'DEF_MULTI') effDef *= b.value; });
+      effAtk = Math.max(1, Math.round(effAtk)); effDef = Math.max(1, Math.round(effDef));
+      if (action === 'attack') { baseDmg = randInt(15, 22); dmg = baseDmg + Math.round(effAtk * 0.15); }
+      else if (action === 'skill') { baseDmg = randInt(20, 28); dmg = baseDmg + Math.round(effAtk * 0.25); }
+      else return { damage: 0, isCrit: false, isMiss: false, multiplier: 1, te: { m: 1, labelText: '' } };
+      const isMiss = (Math.random() * 100) < (MISS_CHANCE[actor.card.rarity] || 0);
+      if (isMiss) return { damage: 0, isCrit: false, isMiss: true, multiplier: 1, te: { m: 1, labelText: '' } };
+      const isCrit = (Math.random() * 100) < (CRIT_CHANCE[actor.card.rarity] || 15);
+      if (isCrit) dmg = Math.round(dmg * 1.5);
+      const te = getTypeMultiplier(actor.card.types, opponent.card.types);
+      dmg = Math.round(dmg * te.m);
+      if (te.m > 0) dmg = Math.max(1, dmg - Math.round(effDef * 0.1));
+      return { damage: dmg, isCrit, isMiss, multiplier: te.m, te };
+    }
 
-function calcDamageBot(actor, opponent, action) {
-    let baseDmg, dmg;
-    let effAtk = actor.card.atk;
-    let effDef = opponent.card.def;
-    if (actor.buffs) actor.buffs.forEach(b => { if (b.type === 'ATK') effAtk += b.value; if (b.type === 'ATK_MULTI') effAtk *= b.value; });
-    if (opponent.buffs) opponent.buffs.forEach(b => { if (b.type === 'DEF') effDef += b.value; if (b.type === 'DEF_MULTI') effDef *= b.value; });
-    effAtk = Math.max(1, Math.round(effAtk)); effDef = Math.max(1, Math.round(effDef));
-    if (action === 'attack') { baseDmg = randInt(15, 22); dmg = baseDmg + Math.round(effAtk * 0.15); } 
-    else if (action === 'skill') { baseDmg = randInt(20, 28); dmg = baseDmg + Math.round(effAtk * 0.25); } 
-    else return { damage: 0, isCrit: false, isMiss: false, multiplier: 1, te: {m:1, labelText:''} };
-    const isMiss = (Math.random() * 100) < (MISS_CHANCE[actor.card.rarity] || 0);
-    if (isMiss) return { damage: 0, isCrit: false, isMiss: true, multiplier: 1, te: {m:1, labelText:''} };
-    const isCrit = (Math.random() * 100) < (CRIT_CHANCE[actor.card.rarity] || 15);
-    if (isCrit) dmg = Math.round(dmg * 1.5);
-    const te = getTypeMultiplier(actor.card.types, opponent.card.types);
-    dmg = Math.round(dmg * te.m);
-    if (te.m > 0) dmg = Math.max(1, dmg - Math.round(effDef * 0.1));
-    return { damage: dmg, isCrit, isMiss, multiplier: te.m, te };
-}
-
-function calcDamage(action, attackerCard, defenderCard) {
+    function calcDamage(action, attackerCard, defenderCard) {
       let baseDmg, dmg;
       if (action === 'attack') {
         baseDmg = randInt(15, 22);
@@ -3079,23 +3923,23 @@ function calcDamage(action, attackerCard, defenderCard) {
       const opponent = { userId: op, name: oName, card: oCard, hp: sim.hp[op], maxHp: sim.maxHP[op], defending: sim.defending[op], buffs: sim.buffs[op] || [], status: sim.status[op] || [], skillUsed: sim.skillUsed[op], skillCooldown: sim.skillCooldown[op] || 0 };
 
       if (action === 'skill') {
-         if (actor.skillCooldown > 0) { addLog('❌ <strong>' + actor.name + '</strong>, Skill cooldown! (' + actor.skillCooldown + ' turn).', logCls); sim.processing = false; return; }
+        if (actor.skillCooldown > 0) { addLog('❌ <strong>' + actor.name + '</strong>, Skill cooldown! (' + actor.skillCooldown + ' turn).', logCls); sim.processing = false; return; }
       }
 
       if (action === 'attack') {
-          const { damage: rawDamage, isCrit, isMiss, te } = calcDamageBot(actor, opponent, 'attack');
-          const teLbl = te && te.labelText ? ' <span style="color:' + (te.label === 'super' ? '#fbbf24' : te.label === 'noteff' ? '#60a5fa' : '#9ca3af') + ';font-size:.75rem">' + te.labelText + '</span>' : '';
-          if (isMiss) { addLog('⚔️ <strong>' + actor.name + '</strong> menyerang!<br>💨 <strong>MELESET!</strong>', logCls); } 
-          else {
-              let dmg = rawDamage;
-              if (opponent.defending) { const orig = dmg; dmg = Math.round(dmg * 0.5); opponent.defending = false; addLog('⚔️ <strong>' + actor.name + '</strong> menyerang!'+teLbl+'<br>Damage <span class="sim-log-dmg">'+orig+'</span> → <span class="sim-log-shield">🛡️ dikurangi 50%</span> = <span class="sim-log-dmg">'+dmg+'</span>', logCls); } 
-              else { let cri = isCrit ? '💥 <strong>CRIT!</strong> (×1.5)<br>' : ''; if (te.m === 0) addLog('⚔️ <strong>' + actor.name + '</strong>... Tidak berefek!<br>Damage: <span class="sim-log-dmg">0 HP</span>', logCls); else addLog('⚔️ <strong>' + actor.name + '</strong>!'+teLbl+'<br>'+cri+'Damage: <span class="sim-log-dmg">−'+dmg+' HP</span>', logCls); }
-              opponent.hp = Math.max(0, opponent.hp - dmg);
-          }
+        const { damage: rawDamage, isCrit, isMiss, te } = calcDamageBot(actor, opponent, 'attack');
+        const teLbl = te && te.labelText ? ' <span style="color:' + (te.label === 'super' ? '#fbbf24' : te.label === 'noteff' ? '#60a5fa' : '#9ca3af') + ';font-size:.75rem">' + te.labelText + '</span>' : '';
+        if (isMiss) { addLog('⚔️ <strong>' + actor.name + '</strong> menyerang!<br>💨 <strong>MELESET!</strong>', logCls); }
+        else {
+          let dmg = rawDamage;
+          if (opponent.defending) { const orig = dmg; dmg = Math.round(dmg * 0.5); opponent.defending = false; addLog('⚔️ <strong>' + actor.name + '</strong> menyerang!' + teLbl + '<br>Damage <span class="sim-log-dmg">' + orig + '</span> → <span class="sim-log-shield">🛡️ dikurangi 50%</span> = <span class="sim-log-dmg">' + dmg + '</span>', logCls); }
+          else { let cri = isCrit ? '💥 <strong>CRIT!</strong> (×1.5)<br>' : ''; if (te.m === 0) addLog('⚔️ <strong>' + actor.name + '</strong>... Tidak berefek!<br>Damage: <span class="sim-log-dmg">0 HP</span>', logCls); else addLog('⚔️ <strong>' + actor.name + '</strong>!' + teLbl + '<br>' + cri + 'Damage: <span class="sim-log-dmg">−' + dmg + ' HP</span>', logCls); }
+          opponent.hp = Math.max(0, opponent.hp - dmg);
+        }
       } else if (action === 'skill') {
-          const sessionWrapper = { round: sim.round || 1 };
-          const skillOutput = executeCardSkill(sessionWrapper, actor, opponent);
-          addLog(skillOutput.replace(/\*(.*?)\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>'), logCls);
+        const sessionWrapper = { round: sim.round || 1 };
+        const skillOutput = executeCardSkill(sessionWrapper, actor, opponent);
+        addLog(skillOutput.replace(/\*(.*?)\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>'), logCls);
       } else if (action === 'defend') { actor.defending = true; addLog('🛡️ <strong>' + actor.name + '</strong> bertahan!<br><em>(Damage -50% turn ini)</em>', logCls); }
 
       sim.hp[cp] = actor.hp; sim.defending[cp] = actor.defending; sim.buffs[cp] = actor.buffs; sim.status[cp] = actor.status; sim.skillUsed[cp] = actor.skillUsed; sim.skillCooldown[cp] = actor.skillCooldown;
@@ -3103,7 +3947,7 @@ function calcDamage(action, attackerCard, defenderCard) {
 
       const dots = sim.status[op].filter(s => s.type === 'POISON' || s.type === 'BURN');
       dots.forEach(dot => { sim.hp[op] = Math.max(0, sim.hp[op] - dot.value); addLog('☠️ <strong>' + opponent.name + '</strong> terkena efek ' + dot.type + '! HP -' + dot.value, 'log-system'); });
-      const tickDown = (arr) => arr.map(x => ({...x, duration: x.duration - 1})).filter(x => x.duration > 0);
+      const tickDown = (arr) => arr.map(x => ({ ...x, duration: x.duration - 1 })).filter(x => x.duration > 0);
       sim.buffs[op] = tickDown(sim.buffs[op]); sim.status[op] = tickDown(sim.status[op]); sim.buffs[cp] = tickDown(sim.buffs[cp]); sim.status[cp] = tickDown(sim.status[cp]);
       if (sim.skillCooldown[cp] > 0) sim.skillCooldown[cp]--;
 
@@ -3133,11 +3977,11 @@ function calcDamage(action, attackerCard, defenderCard) {
       }
       sim.turn = op;
       const isStunned = sim.status[op].some(s => s.type === 'STUN' || s.type === 'FREEZE');
-      if (isStunned) { addLog('❄️ <strong>' + opponent.name + '</strong> terkena Stun/Freeze! Skip giliran...', 'log-system'); sim.status[op].forEach(s => { if(s.type === 'STUN' || s.type === 'FREEZE') s.duration--; }); sim.status[op] = sim.status[op].filter(s => s.duration > 0); if (sim.skillCooldown[op] > 0) sim.skillCooldown[op]--; sim.turn = cp; }
+      if (isStunned) { addLog('❄️ <strong>' + opponent.name + '</strong> terkena Stun/Freeze! Skip giliran...', 'log-system'); sim.status[op].forEach(s => { if (s.type === 'STUN' || s.type === 'FREEZE') s.duration--; }); sim.status[op] = sim.status[op].filter(s => s.duration > 0); if (sim.skillCooldown[op] > 0) sim.skillCooldown[op]--; sim.turn = cp; }
       updateTurnUI(); addLog('Giliran <strong style="color:' + (sim.turn === 0 ? '#60a5fa' : '#f87171') + '">' + getName(sim.turn + 1) + '</strong>...', 'log-system');
       if (sim.turn === 1 && !sim.matchOver) { sim.processing = true; setTimeout(() => { if (!sim || sim.matchOver) return; sim.processing = false; doAction(aiAction()); }, 600); }
     }
-function resetArena() {
+    function resetArena() {
       simDecks = [Array(DECK_SIZE).fill(null), Array(DECK_SIZE).fill(null)];
       sim = null;
       initSlots();
