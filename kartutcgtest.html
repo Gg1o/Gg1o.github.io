@@ -26,10 +26,32 @@
       --accent: #fbbf24;
     }
 
+    :root.light {
+      --bg: #f0f0f5;
+      --surface: #ffffff;
+      --surface2: #f5f5fc;
+      --border: rgba(0, 0, 0, .08);
+      --border2: rgba(0, 0, 0, .14);
+      --text: #374151;
+      --text-dim: #9ca3af;
+      --text-bright: #111827;
+      --common: #6b7280;
+      --rare: #2563eb;
+      --epic: #7c3aed;
+      --legendary: #d97706;
+      --limited: #dc2626;
+      --accent: #d97706;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html,
+    body {
+      transition: background-color .3s, color .3s;
     }
 
     html {
@@ -53,6 +75,39 @@
       pointer-events: none;
       background: radial-gradient(ellipse 80% 60% at 15% 20%, rgba(15, 6, 40, .8) 0%, transparent 70%),
         radial-gradient(ellipse 60% 50% at 85% 80%, rgba(6, 13, 31, .6) 0%, transparent 70%), var(--bg);
+      transition: background .3s;
+    }
+
+    :root.light .bg-layer {
+      background: radial-gradient(ellipse 80% 60% at 15% 20%, rgba(220, 220, 245, .5) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 85% 80%, rgba(230, 230, 255, .4) 0%, transparent 70%), var(--bg);
+    }
+
+    /* ── THEME TOGGLE BUTTON ── */
+    .theme-toggle {
+      position: fixed;
+      bottom: 5.2rem;
+      right: 1.4rem;
+      z-index: 300;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border2);
+      background: var(--surface);
+      color: var(--text-bright);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .25);
+      transition: all .25s;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, .35);
+      border-color: var(--accent);
     }
 
     .app {
@@ -95,6 +150,7 @@
       font-weight: 900;
       background: linear-gradient(135deg, #f59e0b, #fde68a);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: 2px;
     }
@@ -238,6 +294,7 @@
       font-weight: 900;
       background: linear-gradient(135deg, #f59e0b, #fde68a, #f59e0b);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
@@ -854,7 +911,7 @@
 
     .counter-table td {
       padding: .38rem .6rem;
-      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      border-bottom: 1px solid var(--border);
       color: var(--text);
     }
 
@@ -919,7 +976,7 @@
 
     .deck-panel .name-input {
       width: 100%;
-      background: rgba(255, 255, 255, .05);
+      background: var(--surface2);
       border: 1px solid var(--border2);
       border-radius: 4px;
       padding: .35rem .6rem;
@@ -951,8 +1008,8 @@
       display: flex;
       align-items: center;
       gap: .6rem;
-      background: rgba(255, 255, 255, .03);
-      border: 1px dashed rgba(255, 255, 255, .1);
+      background: var(--surface2);
+      border: 1px dashed var(--border2);
       border-radius: 7px;
       padding: .55rem .7rem;
       min-height: 52px;
@@ -963,12 +1020,16 @@
 
     .deck-slot.filled {
       border-style: solid;
-      background: rgba(255, 255, 255, .05);
+      background: rgba(96, 165, 250, .04);
+    }
+
+    :root.light .deck-slot.filled {
+      background: rgba(37, 99, 235, .06);
     }
 
     .deck-slot:hover {
-      border-color: rgba(255, 255, 255, .2);
-      background: rgba(255, 255, 255, .07);
+      border-color: var(--accent);
+      background: rgba(251, 191, 36, .06);
     }
 
     .deck-slot .slot-icon {
@@ -1009,7 +1070,7 @@
       transform: translateY(-50%);
       background: none;
       border: none;
-      color: #4b5563;
+      color: var(--text-dim);
       cursor: pointer;
       font-size: .7rem;
       padding: .1rem .2rem;
@@ -1023,7 +1084,7 @@
 
     .deck-slot .slot-hint {
       font-size: .6rem;
-      color: #374151;
+      color: var(--text-dim);
       letter-spacing: 1.5px;
       text-transform: uppercase;
     }
@@ -1104,7 +1165,8 @@
       gap: 1rem;
       align-items: center;
       padding: 1rem 1.2rem;
-      background: rgba(0, 0, 0, .2);
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
     }
 
     .sim-score-side {
@@ -1168,7 +1230,7 @@
     }
 
     .sim-player-status {
-      background: rgba(255, 255, 255, .03);
+      background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: .7rem .9rem;
@@ -1200,7 +1262,7 @@
 
     .sim-hp-bar {
       height: 10px;
-      background: rgba(255, 255, 255, .06);
+      background: var(--border2);
       border-radius: 5px;
       overflow: hidden;
       margin-bottom: .3rem;
@@ -1440,7 +1502,7 @@
     }
 
     .formula-box {
-      background: rgba(0, 0, 0, .3);
+      background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: .6rem 1rem;
@@ -1516,6 +1578,136 @@
       .bstat-grid {
         grid-template-columns: 1fr;
       }
+
+      /* Mobile table scroll — update page tables */
+      .rule-body {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .rule-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: .62rem;
+        min-width: unset;
+      }
+
+      .rule-table th,
+      .rule-table td {
+        min-width: 56px;
+        padding: .28rem .35rem;
+        font-size: .6rem;
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      .rule-table td:first-child {
+        position: sticky;
+        left: 0;
+        background: var(--surface);
+        z-index: 2;
+        box-shadow: 2px 0 4px rgba(0, 0, 0, .15);
+        white-space: nowrap;
+      }
+
+      :root.light .rule-table td:first-child {
+        box-shadow: 2px 0 4px rgba(0, 0, 0, .08);
+      }
+
+      /* Update page table improvements — hide 'Alasan' column on mobile */
+      .update-section .rule-table th:nth-child(5),
+      .update-section .rule-table td:nth-child(5) {
+        display: none;
+      }
+
+      /* Rules page table — hide 4th col on small screens */
+      .rules-table-4col th:nth-child(4),
+      .rules-table-4col td:nth-child(4) {
+        display: none;
+      }
+    }
+
+    /* ── MOBILE TYPE EFF TABLE — card layout ── */
+    .type-eff-mobile-grid {
+      display: none;
+    }
+
+    @media(max-width:700px) {
+      .type-eff-desktop-table {
+        display: none;
+      }
+
+      .type-eff-mobile-grid {
+        display: flex;
+        flex-direction: column;
+        gap: .55rem;
+      }
+
+      .type-eff-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .type-eff-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: .55rem .85rem;
+        cursor: pointer;
+        background: var(--surface2);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .type-eff-card-header span {
+        font-family: 'Cinzel', serif;
+        font-size: .78rem;
+        font-weight: 600;
+      }
+
+      .type-eff-card-body {
+        padding: .55rem .85rem;
+        display: none;
+        flex-direction: column;
+        gap: .38rem;
+      }
+
+      .type-eff-card.open .type-eff-card-body {
+        display: flex;
+      }
+
+      .type-eff-card-body .tec-row {
+        display: flex;
+        align-items: flex-start;
+        gap: .4rem;
+      }
+
+      .type-eff-card-body .tec-lbl {
+        font-size: .58rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        min-width: 72px;
+        padding-top: .1rem;
+        flex-shrink: 0;
+      }
+
+      .type-eff-card-body .tec-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .2rem;
+      }
+
+      .type-eff-card-arrow {
+        font-size: .72rem;
+        color: var(--text-dim);
+        transition: transform .2s;
+      }
+
+      .type-eff-card.open .type-eff-card-arrow {
+        transform: rotate(90deg);
+      }
     }
 
     .mob-toggle {
@@ -1543,9 +1735,20 @@
       background: rgba(255, 255, 255, .02);
     }
 
+    :root.light .rule-table tr:nth-child(even) td,
+    :root.light .rule-table tr:nth-child(even) th {
+      background: rgba(0, 0, 0, .03);
+    }
+
     .rule-table td:first-child {
       font-weight: 600;
       white-space: nowrap;
+    }
+
+    /* Non-first columns in rule-table should wrap to avoid overflow */
+    .rule-table td:not(:first-child) {
+      white-space: normal;
+      word-break: break-word;
     }
 
     /* ── CARD PICKER OVERLAY ── */
@@ -1620,7 +1823,7 @@
 
     .picker-search input {
       width: 100%;
-      background: rgba(255, 255, 255, .05);
+      background: var(--surface2);
       border: 1px solid var(--border2);
       border-radius: 5px;
       padding: .45rem .75rem;
@@ -1645,7 +1848,7 @@
     }
 
     .picker-card {
-      background: rgba(255, 255, 255, .04);
+      background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: .65rem .5rem;
@@ -1655,7 +1858,7 @@
     }
 
     .picker-card:hover {
-      background: rgba(255, 255, 255, .09);
+      background: rgba(251, 191, 36, .08);
       border-color: rgba(251, 191, 36, .4);
       transform: translateY(-2px);
     }
@@ -1694,9 +1897,87 @@
     /* Slot hint text fix */
     .slot-hint {
       font-size: .6rem;
-      color: #4b5563;
+      color: var(--text-dim);
       letter-spacing: 1.5px;
       text-transform: uppercase;
+    }
+
+    /* ── LIGHT MODE BATTLE SIMULATION FIXES ── */
+    :root.light .sim-hp-bar {
+      background: rgba(0, 0, 0, .1);
+    }
+
+    :root.light .formula-box {
+      background: rgba(0, 0, 0, .04);
+      border-color: rgba(0, 0, 0, .12);
+      color: var(--text-dim);
+    }
+
+    :root.light .deck-slot {
+      background: #f5f5fd;
+      border-color: rgba(0, 0, 0, .14);
+    }
+
+    :root.light .deck-slot.filled {
+      background: rgba(37, 99, 235, .05);
+    }
+
+    :root.light .picker-modal {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .25);
+    }
+
+    :root.light .picker-search input {
+      background: #f5f5fc;
+    }
+
+    :root.light .picker-card {
+      background: #f5f5fc;
+    }
+
+    :root.light .sim-log-entry.log-p1 {
+      background: rgba(37, 99, 235, .06);
+    }
+
+    :root.light .sim-log-entry.log-p2 {
+      background: rgba(220, 38, 38, .06);
+    }
+
+    :root.light .sim-log-entry.log-system {
+      background: rgba(217, 119, 6, .06);
+    }
+
+    :root.light .sim-log-entry.log-round {
+      background: rgba(124, 58, 237, .07);
+    }
+
+    :root.light .sim-turn-indicator {
+      background: rgba(217, 119, 6, .06);
+    }
+
+    :root.light .sim-turn-indicator.p1-turn {
+      background: rgba(37, 99, 235, .07);
+      border-color: rgba(37, 99, 235, .25);
+    }
+
+    :root.light .sim-turn-indicator.p2-turn {
+      background: rgba(220, 38, 38, .07);
+      border-color: rgba(220, 38, 38, .25);
+    }
+
+    :root.light .sim-action-btn.atk-btn {
+      background: rgba(220, 38, 38, .1);
+    }
+
+    :root.light .sim-action-btn.skill-btn {
+      background: rgba(124, 58, 237, .1);
+    }
+
+    :root.light .sim-action-btn.def-btn {
+      background: rgba(37, 99, 235, .1);
+    }
+
+    :root.light .winner-banner {
+      background: rgba(217, 119, 6, .05);
     }
   </style>
 </head>
@@ -1716,7 +1997,7 @@
       </div>
       <div class="sidebar-nav">
         <div class="sidebar-nav-item active" id="nav-home" onclick="goHome()">🏠 Beranda</div>
-        <div class="sidebar-nav-item" id="nav-rules" onclick="goRules()">📖 Sistem Battle</div>
+        <div class="sidebar-nav-item" id="nav-rules" onclick="goRules()">📖 Panduan</div>
         <div class="sidebar-nav-item" id="nav-arena" onclick="goArena()">⚔️ Battle Simulation</div>
         <div class="sidebar-nav-item" id="nav-update" onclick="goUpdate()">📢 Update Lengkap</div>
       </div>
@@ -1759,12 +2040,12 @@
         <div class="rule-section">
           <div class="rule-section-header">
             <span class="rule-num">①</span>
-            <span class="rule-section-title">Cara Bermain — 5 Kartu per Deck</span>
+            <span class="rule-section-title">Cara Bermain — 3 Kartu per Deck</span>
           </div>
           <div class="rule-body">
-            <p>Setiap pemain memilih <strong>5 kartu</strong> sebelum battle dimulai. Kartu bertarung satu per satu
+            <p>Setiap pemain memilih <strong>3 kartu</strong> sebelum battle dimulai. Kartu bertarung satu per satu
               secara berurutan — kartu Slot 1 maju duluan, lalu Slot 2 ketika Slot 1 kalah, dan seterusnya. Pemain yang
-              berhasil mengalahkan semua 5 kartu lawan adalah pemenangnya.</p>
+              berhasil mengalahkan <strong>3 kartu lawan</strong> lebih dulu adalah pemenangnya.</p>
             <table class="rule-table">
               <tr>
                 <th>Fase</th>
@@ -1772,11 +2053,11 @@
               </tr>
               <tr>
                 <td style="color:#60a5fa">🃏 Pilih Deck</td>
-                <td>Isi 5 slot kartu di panel Player 1 &amp; Player 2 sebelum menekan ▶ Mulai Battle</td>
+                <td>Isi 3 slot kartu di panel Player 1 &amp; Player 2 sebelum menekan ▶ Mulai Battle</td>
               </tr>
               <tr>
                 <td style="color:#fbbf24">⚔ Battle</td>
-                <td>Kartu aktif bertarung bergantian. Setiap giliran, pilih satu dari 3 aksi</td>
+                <td>Kartu aktif bertarung bergantian. <strong>1 Ronde = aksi kamu + respons lawan</strong></td>
               </tr>
               <tr>
                 <td style="color:#f87171">💀 Kartu Kalah</td>
@@ -1784,11 +2065,11 @@
               </tr>
               <tr>
                 <td style="color:#4ade80">🏆 Menang</td>
-                <td>Habiskan semua 5 kartu lawan untuk memenangkan pertandingan</td>
+                <td>Kumpulkan <strong>3 poin</strong> (3 kartu lawan dikalahkan) untuk memenangkan pertandingan</td>
               </tr>
             </table>
             <div class="example-box"><strong>Tips urutan slot:</strong> Tempatkan kartu pembuka (cepat / ATK tinggi) di
-              Slot 1, kartu debuffer di Slot 2–3, dan kartu terkuat (Legendary/Limited) di Slot 4–5 sebagai finisher.
+              Slot 1, kartu debuffer di Slot 2, dan kartu terkuat (Legendary/Limited) di Slot 3 sebagai finisher.
             </div>
           </div>
         </div>
@@ -1933,7 +2214,7 @@
             <span class="rule-section-title">Strategi Deck — Urutan & Komposisi</span>
           </div>
           <div class="rule-body">
-            <p>Dengan 5 slot kartu, susunan deck sangat menentukan. Kartu yang kalah digantikan oleh kartu berikutnya,
+            <p>Dengan 3 slot kartu, susunan deck sangat menentukan. Kartu yang kalah digantikan oleh kartu berikutnya,
               dan <strong>pemenang duel tetap giliran menyerang lebih dulu</strong> — ini keuntungan besar yang bisa
               dimanfaatkan.</p>
             <table class="rule-table">
@@ -1950,21 +2231,15 @@
                 <td>Baca tipe lawan, habiskan HP awal, korbankan untuk info</td>
               </tr>
               <tr>
-                <td style="color:#60a5fa">Slot 2–3</td>
+                <td style="color:#60a5fa">Slot 2</td>
                 <td>Core Attacker</td>
                 <td>Rare / Epic</td>
                 <td>Tulang punggung damage, manfaatkan tipe counter</td>
               </tr>
               <tr>
-                <td style="color:#60a5fa">Slot 4</td>
-                <td>Wildcard / Counter</td>
-                <td>Epic</td>
-                <td>Keluar saat lawan sudah lemah atau untuk counter tipe spesifik</td>
-              </tr>
-              <tr>
-                <td style="color:#fbbf24">Slot 5</td>
+                <td style="color:#fbbf24">Slot 3</td>
                 <td>Finisher</td>
-                <td>Legendary / Limited</td>
+                <td>Epic / Legendary / Limited</td>
                 <td>Kartu terkuat keluar terakhir saat lawan sudah habis kartu counter-nya</td>
               </tr>
             </table>
@@ -1973,13 +2248,13 @@
                 Opener cepat = info tipe gratis</span>
               <span class="rule-pill"
                 style="background:rgba(192,132,252,.12);color:#c084fc;border:1px solid #c084fc44">✓ Simpan Skill untuk
-                HP lawan < 50%</span>
-                  <span class="rule-pill"
-                    style="background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid #fbbf2444">✓ Legendary/Limited
-                    sebagai closers</span>
-                  <span class="rule-pill"
-                    style="background:rgba(74,222,128,.12);color:#4ade80;border:1px solid #4ade8044">✓ Defend saat HP <
-                      30%</span>
+                HP lawan &lt; 50%</span>
+              <span class="rule-pill" style="background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid #fbbf2444">✓
+                Legendary/Limited
+                di Slot 3 sebagai closers</span>
+              <span class="rule-pill" style="background:rgba(74,222,128,.12);color:#4ade80;border:1px solid #4ade8044">✓
+                Defend saat HP &lt;
+                30%</span>
             </div>
           </div>
         </div>
@@ -2081,38 +2356,35 @@
             <p>Setiap serangan dihitung berdasarkan tipe penyerang vs tipe target. Multiplier ×1.25 untuk Super Efektif,
               ×0.75 untuk Tidak Efektif, ×0.30 untuk matchup yang seharusnya Immune (dimodifikasi agar battle tidak
               stuck).</p>
-            <table class="rule-table">
-              <tr>
-                <th>Efektivitas</th>
-                <th>Multiplier</th>
-                <th>Tampilan di Battle</th>
-                <th>Keterangan</th>
-              </tr>
-              <tr>
-                <td style="color:#fbbf24">⚡ Super Efektif</td>
-                <td style="color:#fbbf24">×1.25</td>
-                <td>Label kuning + bonus DMG</td>
-                <td>Tipe menyerang efektif vs tipe target — wajib dieksploitasi</td>
-              </tr>
-              <tr>
-                <td style="color:#60a5fa">💨 Tidak Efektif</td>
-                <td style="color:#60a5fa">×0.75</td>
-                <td>Label biru + penalty DMG</td>
-                <td>Hindari matchup ini — damage berkurang signifikan</td>
-              </tr>
-              <tr>
-                <td style="color:#9ca3af">🛡️ Hampir Immune</td>
-                <td style="color:#9ca3af">×0.30</td>
-                <td>Label abu — damage sangat kecil</td>
-                <td>Tipe target sangat resisten — ganti kartu jika memungkinkan</td>
-              </tr>
-              <tr>
-                <td>Normal</td>
-                <td>×1.00</td>
-                <td>—</td>
-                <td>Tidak ada modifikasi — damage sesuai formula dasar</td>
-              </tr>
-            </table>
+            <div style="overflow-x:auto">
+              <table class="rule-table">
+                <tr>
+                  <th>Efektivitas</th>
+                  <th>Multiplier</th>
+                  <th>Keterangan</th>
+                </tr>
+                <tr>
+                  <td style="color:#fbbf24">⚡ Super Efektif</td>
+                  <td style="color:#fbbf24">×1.25</td>
+                  <td>Tipe menyerang efektif vs tipe target — wajib dieksploitasi</td>
+                </tr>
+                <tr>
+                  <td style="color:#60a5fa">💨 Tidak Efektif</td>
+                  <td style="color:#60a5fa">×0.75</td>
+                  <td>Hindari matchup ini — damage berkurang signifikan</td>
+                </tr>
+                <tr>
+                  <td style="color:#9ca3af">🛡️ Hampir Immune</td>
+                  <td style="color:#9ca3af">×0.30</td>
+                  <td>Tipe target sangat resisten — ganti kartu jika memungkinkan</td>
+                </tr>
+                <tr>
+                  <td>Normal</td>
+                  <td>×1.00</td>
+                  <td>Tidak ada modifikasi — damage sesuai formula dasar</td>
+                </tr>
+              </table>
+            </div>
             <div class="example-box"><strong>Combo tipe terkuat:</strong> Kartu dual-type Ghost/Dark menyerang Psychic →
               Super Efektif ganda ×1.25 × ×1.25 = total ×1.56 damage. Void Reaper of Genesis memanfaatkan ini secara
               penuh.</div>
@@ -2123,7 +2395,9 @@
             <p style="font-size:.82rem;color:var(--text-dim);margin-bottom:.9rem">Tabel berikut mencakup semua 18 tipe.
               Gunakan sebagai referensi saat membangun deck atau memilih kartu di Battle Simulation.</p>
 
-            <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--border)">
+            <!-- Desktop table -->
+            <div class="type-eff-desktop-table"
+              style="overflow-x:auto;border-radius:8px;border:1px solid var(--border)">
               <table class="rule-table" style="min-width:680px;border:none;border-radius:0">
                 <tr>
                   <th style="width:90px">Tipe</th>
@@ -2260,6 +2534,9 @@
                 </tr>
               </table>
             </div>
+
+            <!-- Mobile accordion card layout -->
+            <div class="type-eff-mobile-grid" id="typeEffMobileGrid"></div>
 
           </div>
         </div>
@@ -2891,13 +3168,13 @@
       <!-- BATTLE ARENA SIMULATION -->
       <div class="arena-page hidden" id="arenaPage">
         <div class="arena-title">⚔ Battle Simulation</div>
-        <div class="arena-sub">5 Kartu per Player · Turn-Based · Eliminasi Semua Kartu Lawan</div>
+        <div class="arena-sub">3 Kartu per Player · Turn-Based · First to 3 Kills Menang · 1 Ronde = Aksi Player +
+          Respons Lawan</div>
 
         <div class="formula-box">
-          Pilih 5 kartu per player &nbsp;|&nbsp; Kartu bertarung satu per satu &nbsp;|&nbsp; HP = 80 + DEF &nbsp;|&nbsp;
-          ⚡ Type Counter System
+          Pilih 3 kartu per player &nbsp;|&nbsp; HP = 80 + DEF &nbsp;|&nbsp; ⚡ Type Counter System
           &nbsp;|&nbsp; 1️⃣ Attack (20-30) &nbsp;|&nbsp; 2️⃣ Skill (35-45, 1×) &nbsp;|&nbsp; 3️⃣ Defend (−50%)
-          &nbsp;|&nbsp; 🤖 AI Opponent
+          &nbsp;|&nbsp; 🤖 AI Opponent &nbsp;|&nbsp; 🏆 3 Poin = Menang
         </div>
 
         <!-- Deck Builder -->
@@ -2909,7 +3186,7 @@
               <span class="deck-panel-title" style="color:#60a5fa">Player 1</span>
               <span id="p1deckcount"
                 style="margin-left:auto;font-size:.6rem;color:#4b5563;font-family:'Cinzel',serif;letter-spacing:1px">0 /
-                5</span>
+                3</span>
             </div>
             <div style="padding:.5rem .7rem 0">
               <input class="name-input" id="p1name" placeholder="Nama Player 1..." value="Player 1">
@@ -2923,7 +3200,7 @@
               <span class="deck-panel-title" style="color:#f87171">Player 2</span>
               <span id="p2deckcount"
                 style="margin-left:auto;font-size:.6rem;color:#4b5563;font-family:'Cinzel',serif;letter-spacing:1px">0 /
-                5</span>
+                3</span>
             </div>
             <div style="padding:.5rem .7rem 0">
               <input class="name-input" id="p2name" placeholder="Nama Player 2..." value="Player 2">
@@ -2947,17 +3224,34 @@
             <div class="sim-score-side">
               <div class="sim-score-name" style="color:#60a5fa" id="sb-name1">Player 1</div>
               <div class="sim-score-card" id="sb-card1">—</div>
+              <div id="sb-types1" style="display:flex;gap:.2rem;justify-content:center;flex-wrap:wrap;margin:.25rem 0">
+              </div>
               <div class="sim-score-points" style="color:#60a5fa" id="sb-pts1">0</div>
-              <div style="font-size:.58rem;color:#374151;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem"
-                id="sb-rem1">5 kartu tersisa</div>
+              <div
+                style="font-size:.55rem;color:var(--text-dim);font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.15rem">
+                / 3 POIN</div>
+              <div
+                style="font-size:.58rem;color:var(--text-dim);font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem"
+                id="sb-rem1">3 kartu tersisa</div>
             </div>
-            <div class="sim-vs">VS</div>
+            <div style="text-align:center">
+              <div class="sim-vs">VS</div>
+              <div id="sb-round"
+                style="font-family:'Cinzel',serif;font-size:.65rem;color:var(--text-dim);letter-spacing:2px;margin-top:.4rem">
+                RONDE 1</div>
+            </div>
             <div class="sim-score-side">
               <div class="sim-score-name" style="color:#f87171" id="sb-name2">Player 2</div>
               <div class="sim-score-card" id="sb-card2">—</div>
+              <div id="sb-types2" style="display:flex;gap:.2rem;justify-content:center;flex-wrap:wrap;margin:.25rem 0">
+              </div>
               <div class="sim-score-points" style="color:#f87171" id="sb-pts2">0</div>
-              <div style="font-size:.58rem;color:#374151;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem"
-                id="sb-rem2">5 kartu tersisa</div>
+              <div
+                style="font-size:.55rem;color:var(--text-dim);font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.15rem">
+                / 3 POIN</div>
+              <div
+                style="font-size:.58rem;color:var(--text-dim);font-family:'Cinzel',serif;letter-spacing:1px;margin-top:.2rem"
+                id="sb-rem2">3 kartu tersisa</div>
             </div>
           </div>
 
@@ -3028,6 +3322,8 @@
   </div>
 
   <button class="mob-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle Mode">🌙</button>
+
 
   <script>
     const RC = { Common: '#9ca3af', Rare: '#60a5fa', Epic: '#c084fc', Legendary: '#fbbf24', Limited: '#f87171' };
@@ -3406,8 +3702,8 @@
       const baseAtkDmg = () => randInt(20, 28) + Math.round(actor.card.atk * 0.25);
       const effMultiplier = getTypeMultiplier(actor.card.types, opponent.card.types);
       const calcFinalDmg = (raw) => {
-        let final = Math.round(raw * effMultiplier);
-        if (effMultiplier > 0) {
+        let final = Math.round(raw * effMultiplier.m);
+        if (effMultiplier.m > 0) {
           const defRed = Math.round(opponent.card.def * 0.1);
           final = Math.max(1, final - defRed);
         }
@@ -3508,10 +3804,10 @@
           msgAction += `🧊 Tabir es menyelimuti! ATK lawan melambat 20% permanen.`;
           break;
 
-        case 17: // Soul Harvest: Curi 15 HP dari lawan
-          opponent.hp = Math.max(0, opponent.hp - 15);
-          actor.hp = Math.min(actor.maxHp, actor.hp + 15);
-          msgAction += `💀 Mencabut jiwa! Mencuri 15 HP dari lawan.`;
+        case 17: // Soul Harvest: Curi 25 HP dari lawan
+          opponent.hp = Math.max(0, (isNaN(opponent.hp) ? 0 : opponent.hp) - 25);
+          actor.hp = Math.min(actor.maxHp, (isNaN(actor.hp) ? 0 : actor.hp) + 25);
+          msgAction += `💀 Mencabut jiwa! Mencuri 25 HP dari lawan.`;
           break;
 
         case 18: // Overload Protocol: DEF+20 ATK-10 selama 3 turn
@@ -3539,13 +3835,13 @@
           msgAction += `🐲 Sapuan naga purba!\n💢 Damage: *${dmg}*`;
           break;
 
-        case 21: // Veil Strike: Ignore 50% DEF lawan
+        case 21: // Veil Strike: Ignore 30% DEF lawan (def reduction)
           let effDef = opponent.card.def;
           if (opponent.buffs) opponent.buffs.forEach(b => { if (b.type === 'DEF') effDef += b.value; });
           let halvedDef = Math.round(effDef * 0.5);
 
-          let raw21 = baseAtkDmg() * effMultiplier;
-          if (effMultiplier > 0) raw21 = Math.max(1, raw21 - Math.round(halvedDef * 0.1));
+          let raw21 = baseAtkDmg() * effMultiplier.m;
+          if (effMultiplier.m > 0) raw21 = Math.max(1, raw21 - Math.round(halvedDef * 0.1));
           if (opponent.defending) raw21 *= 0.5;
 
           dmg = Math.round(raw21);
@@ -3776,6 +4072,9 @@
       const c2 = simDecks[1].find(Boolean);
       document.getElementById('sb-card1').textContent = c1 ? `${c1.icon} ${c1.name}` : '—';
       document.getElementById('sb-card2').textContent = c2 ? `${c2.icon} ${c2.name}` : '—';
+      const t1 = document.getElementById('sb-types1'); if (t1) t1.innerHTML = c1 ? c1.types.map(t => `<span class="tp" style="background:${TB[t]};color:${TC[t]};border:1px solid ${TC[t]}44;font-size:.45rem;padding:.08rem .3rem">${t}</span>`).join('') : '';
+      const t2 = document.getElementById('sb-types2'); if (t2) t2.innerHTML = c2 ? c2.types.map(t => `<span class="tp" style="background:${TB[t]};color:${TC[t]};border:1px solid ${TC[t]}44;font-size:.45rem;padding:.08rem .3rem">${t}</span>`).join('') : '';
+      const rd = document.getElementById('sb-round'); if (rd) rd.textContent = 'RONDE 0';
       document.getElementById('sb-rem1').textContent = '3 kartu tersisa';
       document.getElementById('sb-rem2').textContent = '3 kartu tersisa';
       sim = null;
@@ -3795,10 +4094,11 @@
     function updateHP() {
       [0, 1].forEach(pi => {
         const p = pi + 1;
-        const maxHP = sim.maxHP[pi];
-        const hp = Math.max(0, sim.hp[pi]);
-        const pct = (hp / maxHP) * 100;
-        document.getElementById(`ps${p}-hp`).textContent = `${hp} / ${maxHP}`;
+        const maxHP = sim.maxHP[pi] || 1;
+        const rawHp = sim.hp[pi];
+        const hp = Math.max(0, isNaN(rawHp) ? 0 : rawHp);
+        const pct = Math.min(100, Math.max(0, (hp / maxHP) * 100));
+        document.getElementById(`ps${p}-hp`).textContent = `${hp} / ${sim.maxHP[pi] || '?'}`;
         const bar = document.getElementById(`ps${p}-bar`);
         bar.style.width = pct + '%';
         bar.style.background = pct > 50 ? (pi === 0 ? '#60a5fa' : '#f87171') : pct > 25 ? '#fbbf24' : '#ef4444';
@@ -3820,11 +4120,15 @@
         const c = currentCard(pi);
         const p = pi + 1;
         document.getElementById(`sb-card${p}`).textContent = c ? `${c.icon} ${c.name}` : '—';
+        const typeEl = document.getElementById(`sb-types${p}`);
+        if (typeEl) typeEl.innerHTML = c ? c.types.map(t => `<span class="tp" style="background:${TB[t]};color:${TC[t]};border:1px solid ${TC[t]}44;font-size:.45rem;padding:.08rem .3rem">${t}</span>`).join('') : '';
         const rem = sim.deckQueue[pi].length - sim.deckIdx[pi];
         document.getElementById(`sb-rem${p}`).textContent = `${Math.max(0, rem)} kartu tersisa`;
       });
       document.getElementById('sb-pts1').textContent = sim.kills[0];
       document.getElementById('sb-pts2').textContent = sim.kills[1];
+      const rondeEl = document.getElementById('sb-round');
+      if (rondeEl) rondeEl.textContent = `RONDE ${sim.round || 1}`;
     }
 
     function updateTurnUI() {
@@ -3881,7 +4185,7 @@
         defending: [false, false],
         buffs: [[], []],
         status: [[], []],
-        round: 1,
+        round: 0,
         matchOver: false,
         processing: false
       };
@@ -3919,6 +4223,14 @@
       const pCard = currentCard(cp), oCard = currentCard(op);
       const logCls = cp === 0 ? 'log-p1' : 'log-p2';
 
+      // 1 Ronde = aksi Player 1 + respons lawan. Hanya naik saat Player 1 (cp===0) beraksi.
+      if (cp === 0) {
+        sim.round++;
+        const rondeEl = document.getElementById('sb-round');
+        if (rondeEl) rondeEl.textContent = `RONDE ${sim.round}`;
+        addLog(`─── Ronde ${sim.round} ───`, 'log-round');
+      }
+
       const actor = { userId: cp, name: pName, card: pCard, hp: sim.hp[cp], maxHp: sim.maxHP[cp], defending: sim.defending[cp], buffs: sim.buffs[cp] || [], status: sim.status[cp] || [], skillUsed: sim.skillUsed[cp], skillCooldown: sim.skillCooldown[cp] || 0 };
       const opponent = { userId: op, name: oName, card: oCard, hp: sim.hp[op], maxHp: sim.maxHP[op], defending: sim.defending[op], buffs: sim.buffs[op] || [], status: sim.status[op] || [], skillUsed: sim.skillUsed[op], skillCooldown: sim.skillCooldown[op] || 0 };
 
@@ -3940,7 +4252,7 @@
         const sessionWrapper = { round: sim.round || 1 };
         const skillOutput = executeCardSkill(sessionWrapper, actor, opponent);
         addLog(skillOutput.replace(/\*(.*?)\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>'), logCls);
-      } else if (action === 'defend') { actor.defending = true; addLog('🛡️ <strong>' + actor.name + '</strong> bertahan!<br><em>(Damage -50% turn ini)</em>', logCls); }
+      } else if (action === 'defend') { actor.defending = true; addLog('🛡️ <strong>' + actor.name + '</strong> bertahan! [Ronde ' + sim.round + ']<br><em>(Damage -50% turn ini)</em>', logCls); }
 
       sim.hp[cp] = actor.hp; sim.defending[cp] = actor.defending; sim.buffs[cp] = actor.buffs; sim.status[cp] = actor.status; sim.skillUsed[cp] = actor.skillUsed; sim.skillCooldown[cp] = actor.skillCooldown;
       sim.hp[op] = opponent.hp; sim.defending[op] = opponent.defending; sim.buffs[op] = opponent.buffs; sim.status[op] = opponent.status; sim.skillUsed[op] = opponent.skillUsed; sim.skillCooldown[op] = opponent.skillCooldown;
@@ -3998,8 +4310,74 @@
       resetSimDisplay();
     }
 
+    /* ── Theme Toggle ── */
+    function toggleTheme() {
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      if (root.classList.contains('light')) {
+        root.classList.remove('light');
+        btn.textContent = '🌙';
+        btn.title = 'Mode Gelap Aktif — Klik untuk Mode Terang';
+      } else {
+        root.classList.add('light');
+        btn.textContent = '☀️';
+        btn.title = 'Mode Terang Aktif — Klik untuk Mode Gelap';
+      }
+    }
+
     buildSidebar(cards);
     buildGrid(cards);
+
+    /* ── Mobile Type Effectiveness Accordion ── */
+    const TYPE_EFF_DATA = [
+      { name: 'Normal', color: '#9fa19f', superEff: [], notEff: ['Rock', 'Steel'], weakTo: ['Fighting'], resistTo: [] },
+      { name: 'Fire', color: '#e8554e', superEff: ['Grass', 'Ice', 'Bug', 'Steel'], notEff: ['Fire', 'Water', 'Rock', 'Dragon'], weakTo: ['Water', 'Rock', 'Ground'], resistTo: ['Grass', 'Ice', 'Bug', 'Steel'] },
+      { name: 'Water', color: '#4d90d5', superEff: ['Fire', 'Ground', 'Rock'], notEff: ['Water', 'Grass', 'Dragon'], weakTo: ['Electric', 'Grass'], resistTo: ['Fire', 'Ground', 'Rock'] },
+      { name: 'Electric', color: '#f3d23b', superEff: ['Water', 'Flying'], notEff: ['Electric', 'Grass', 'Dragon', 'Ground(immune)'], weakTo: ['Ground'], resistTo: ['Water', 'Flying'] },
+      { name: 'Grass', color: '#5fbd58', superEff: ['Water', 'Ground', 'Rock'], notEff: ['Fire', 'Grass', 'Poison', 'Flying', 'Bug', 'Dragon', 'Steel'], weakTo: ['Fire', 'Ice', 'Poison', 'Flying', 'Bug'], resistTo: ['Water', 'Ground', 'Rock'] },
+      { name: 'Ice', color: '#75d0c1', superEff: ['Grass', 'Ground', 'Flying', 'Dragon'], notEff: ['Fire', 'Water', 'Ice', 'Steel'], weakTo: ['Fire', 'Fighting', 'Rock', 'Steel'], resistTo: ['Grass', 'Ground', 'Flying', 'Dragon'] },
+      { name: 'Fighting', color: '#ce4265', superEff: ['Normal', 'Ice', 'Rock', 'Dark', 'Steel'], notEff: ['Poison', 'Flying', 'Psychic', 'Bug', 'Fairy'], weakTo: ['Psychic', 'Flying', 'Fairy'], resistTo: ['Normal', 'Ice', 'Rock', 'Dark', 'Steel'] },
+      { name: 'Poison', color: '#ab6ac8', superEff: ['Grass', 'Fairy'], notEff: ['Poison', 'Ground', 'Rock', 'Ghost'], weakTo: ['Ground', 'Psychic'], resistTo: ['Grass', 'Fairy'] },
+      { name: 'Ground', color: '#d97845', superEff: ['Fire', 'Electric', 'Poison', 'Rock', 'Steel'], notEff: ['Grass', 'Bug'], weakTo: ['Water', 'Ice', 'Grass'], resistTo: ['Fire', 'Electric', 'Poison', 'Rock', 'Steel'] },
+      { name: 'Flying', color: '#8fa8dd', superEff: ['Grass', 'Fighting', 'Bug'], notEff: ['Electric', 'Rock', 'Steel'], weakTo: ['Electric', 'Ice', 'Rock'], resistTo: ['Grass', 'Fighting', 'Bug'] },
+      { name: 'Psychic', color: '#f97176', superEff: ['Fighting', 'Poison'], notEff: ['Psychic', 'Steel'], weakTo: ['Bug', 'Ghost', 'Dark'], resistTo: ['Fighting', 'Poison'] },
+      { name: 'Bug', color: '#91c12f', superEff: ['Grass', 'Psychic', 'Dark'], notEff: ['Fire', 'Fighting', 'Flying', 'Ghost', 'Steel', 'Fairy'], weakTo: ['Fire', 'Flying', 'Rock'], resistTo: ['Grass', 'Psychic', 'Dark'] },
+      { name: 'Rock', color: '#c5b78c', superEff: ['Fire', 'Ice', 'Flying', 'Bug'], notEff: ['Fighting', 'Ground', 'Steel'], weakTo: ['Water', 'Grass', 'Fighting', 'Ground', 'Steel'], resistTo: ['Fire', 'Ice', 'Flying', 'Bug'] },
+      { name: 'Ghost', color: '#5269ac', superEff: ['Psychic', 'Ghost'], notEff: ['Dark', 'Normal(immune)'], weakTo: ['Ghost', 'Dark'], resistTo: ['Psychic', 'Ghost'] },
+      { name: 'Dragon', color: '#0f6ac0', superEff: ['Dragon'], notEff: ['Steel'], weakTo: ['Ice', 'Dragon', 'Fairy'], resistTo: ['Dragon'] },
+      { name: 'Dark', color: '#595761', superEff: ['Psychic', 'Ghost'], notEff: ['Fighting', 'Dark', 'Fairy'], weakTo: ['Fighting', 'Bug', 'Fairy'], resistTo: ['Psychic', 'Ghost'] },
+      { name: 'Steel', color: '#5a8ea2', superEff: ['Ice', 'Rock', 'Fairy'], notEff: ['Fire', 'Water', 'Electric', 'Steel'], weakTo: ['Fire', 'Fighting', 'Ground'], resistTo: ['Ice', 'Rock', 'Fairy'] },
+      { name: 'Fairy', color: '#ec8fe6', superEff: ['Fighting', 'Dragon', 'Dark'], notEff: ['Fire', 'Poison', 'Steel'], weakTo: ['Poison', 'Steel'], resistTo: ['Fighting', 'Dragon', 'Dark'] }
+    ];
+
+    function buildTypeEffMobile() {
+      const el = document.getElementById('typeEffMobileGrid');
+      if (!el) return;
+      const pills = (arr, col) => arr.length
+        ? arr.map(t => `<span style="font-size:.55rem;padding:.1rem .4rem;border-radius:20px;background:rgba(255,255,255,.1);color:${col || 'var(--text)'};border:1px solid ${col || 'var(--border)'}55">${t}</span>`).join('')
+        : `<span style="color:var(--text-dim);font-size:.6rem">—</span>`;
+      el.innerHTML = TYPE_EFF_DATA.map((t, i) => `
+        <div class="type-eff-card" id="tec${i}">
+          <div class="type-eff-card-header" onclick="toggleTEC(${i})">
+            <span style="color:${t.color}">${t.name}</span>
+            <span class="type-eff-card-arrow">›</span>
+          </div>
+          <div class="type-eff-card-body">
+            <div class="tec-row"><span class="tec-lbl" style="color:#fbbf24">⚡ Super vs</span><div class="tec-pills">${pills(t.superEff, '#fbbf24')}</div></div>
+            <div class="tec-row"><span class="tec-lbl" style="color:#60a5fa">💨 Not Eff</span><div class="tec-pills">${pills(t.notEff, '#60a5fa')}</div></div>
+            <div class="tec-row"><span class="tec-lbl" style="color:#f87171">💥 Lemah</span><div class="tec-pills">${pills(t.weakTo, '#f87171')}</div></div>
+            <div class="tec-row"><span class="tec-lbl" style="color:#4ade80">🛡️ Kuat</span><div class="tec-pills">${pills(t.resistTo, '#4ade80')}</div></div>
+          </div>
+        </div>`).join('');
+    }
+
+    function toggleTEC(i) {
+      const el = document.getElementById('tec' + i);
+      if (el) el.classList.toggle('open');
+    }
+
+    buildTypeEffMobile();
+
   </script>
 </body>
 
